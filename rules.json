@@ -13,9 +13,34 @@
   "firstPartImage": "warn",
   "placeholder": "fail",
   "generatedImages": "warn",
+  "hooks": "warn",
+  "seo": "warn",
+  "email": "fail",
+  "sources": "fail",
   "allowNumbers": [],
   "claims": {
-    "ko": ["최고", "최초", "1위", "유일한", "보장", "완벽", "100%", "무조건 돈", "누구나 쉽게", "평생"],
-    "en": ["best", "first ever", "#1", "number one", "guaranteed", "proven", "the only", "100%", "never fails"]
+    "ko": [
+      "최고",
+      "최초",
+      "1위",
+      "유일한",
+      "보장",
+      "완벽",
+      "100%",
+      "무조건 돈",
+      "누구나 쉽게",
+      "평생"
+    ],
+    "en": [
+      "best",
+      "first ever",
+      "#1",
+      "number one",
+      "guaranteed",
+      "proven",
+      "the only",
+      "100%",
+      "never fails"
+    ]
   }
 }

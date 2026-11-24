@@ -252,6 +252,8 @@ else {
 {
   const {naverTests} = await import(path.join(KIT, 'tests', 'naver.mjs'));
   await naverTests({ok, assert, imp, tmp});
+  const {skillTests} = await import(path.join(KIT, 'tests', 'skills.mjs'));
+  await skillTests({ok, skip, assert, imp, tmp, KIT, findChrome});
 }
 if (!hasFfmpeg()) skip('frames from a video (no ffmpeg)');
 else {

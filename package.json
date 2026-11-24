@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-writer",
-  "version": "0.1.0",
-  "description": "Your AI writing employee. Give it something you made (a video, its subtitles, your notes or your own page) and it writes a post for every text platform in your own voice, with pictures made from your real material: Threads, Naver blog, X, LinkedIn, Instagram and more. It checks every number against your source, shows a preview, and can put the draft in the editor through Ego Lite, stopping before the post button.",
+  "version": "0.2.0",
+  "description": "Your AI writing employee, with every skill a writer needs: research with sources and a fact sheet, trends (Google Trends, search suggestions, Wikipedia views), titles and first lines, posts for Threads, Naver blog, X, LinkedIn, Instagram, newsletters and long articles in your own voice with pictures from your real material, children's picture books with code-made illustrations, a humanizer for AI-sounding text, and a fact check that traces every number to its source. Saves drafts through Ego Lite and never posts by itself.",
   "type": "module",
   "license": "MIT",
   "author": "CONNECT AI LAB",
@@ -31,6 +31,7 @@
     "platforms.json",
     "rules.json",
     "banned.json",
+    "humanize.json",
     "docs/guide.md",
     "docs/guide.ko.md",
     "NOTICE.md",
@@ -50,6 +51,13 @@
     "ego-browser",
     "agent-skill",
     "claude-code",
-    "codex"
+    "codex",
+    "research",
+    "trends",
+    "fact-check",
+    "humanizer",
+    "picture-book",
+    "newsletter",
+    "storytelling"
   ]
 }

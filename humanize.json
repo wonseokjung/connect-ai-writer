@@ -1,0 +1,241 @@
+{
+  "_about": "What `humanize` marks. Our own list (CONNECT AI LAB, MIT). Ideas, not text, came from: blader/humanizer (MIT) for the families and the mark -> rewrite -> audit -> final process; nathankim0/humanize-korean (MIT) for the eight kinds of Korean translationese; coreyhaines31/marketingskills (MIT) for the copy tells. Severity: strong = almost always a tell, medium = a tell when it piles up. Copy this file into your project folder to change it. Your voice sheet wins: a phrase you really say is fine.",
+  "ko": [
+    {
+      "id": "ko-about",
+      "family": "번역투",
+      "severity": "strong",
+      "re": "에\\s?대(해|한|하여)(서)?",
+      "hint": "~에 대해 → 무엇을 하는지 바로 말해요. '바이브코딩에 대해 이야기' → '바이브코딩 이야기'"
+    },
+    {
+      "id": "ko-through",
+      "family": "번역투",
+      "severity": "strong",
+      "re": "(을|를)\\s?통(해|하여)(서)?",
+      "hint": "~을 통해 → ~로, ~해서. '영상을 통해 배웠어요' → '영상 보고 배웠어요'"
+    },
+    {
+      "id": "ko-in-regard",
+      "family": "번역투",
+      "severity": "strong",
+      "re": "에\\s?있어(서)?|와\\s?관련하여|과\\s?관련하여|에\\s?관하여",
+      "hint": "덜어 내고 바로 말해요"
+    },
+    {
+      "id": "ko-double-particle",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "(에서의|으로부터의|로부터의|에의|으로의)\\s",
+      "hint": "~에서의 → 문장을 풀어서. '현장에서의 경험' → '현장에서 해 본 경험'"
+    },
+    {
+      "id": "ko-double-passive",
+      "family": "번역투",
+      "severity": "strong",
+      "re": "되어지|되어진|되어져|되어졌|지어지|보여지|보여진",
+      "hint": "이중 피동이에요. '되어집니다' → '돼요', '보여지는' → '보이는'"
+    },
+    {
+      "id": "ko-by-agent",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "에\\s?의(해|하여|하면|한)(서)?",
+      "hint": "누가 했는지를 주어로. 'AI에 의해 만들어진' → 'AI가 만든', '보고서에 의하면' → '보고서를 보면'"
+    },
+    {
+      "id": "ko-light-verb",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "(회의|대화|논의|시간|관심|검토|분석)(을|를)\\s?(가지|수행|진행)",
+      "hint": "명사 + 가지다/수행하다 → 동사 하나로. '검토를 진행했어요' → '검토했어요'"
+    },
+    {
+      "id": "ko-possible",
+      "family": "번역투",
+      "severity": "strong",
+      "re": "는\\s?것이\\s?(가능|필요|중요)(합니다|해요|하다)",
+      "hint": "'하는 것이 가능합니다' → '할 수 있어요'"
+    },
+    {
+      "id": "ko-pronoun",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "그녀|그것은|그것이|그들은|그들이",
+      "hint": "대명사를 빼거나 이름으로"
+    },
+    {
+      "id": "ko-lead-to",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "(으로|로)\\s?이어(집니다|진다|져요|졌습니다|졌다)",
+      "hint": "무엇이 무엇을 바꿨는지 직접 말해요"
+    },
+    {
+      "id": "ko-thing-says",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "(데이터|결과|숫자|연구|기술|도구)(는|가|이)\\s?[^.。\\n]{0,12}(말해\\s?줍|말해\\s?주|보여\\s?줍|가능하게\\s?하|가능케)",
+      "hint": "사물이 말하게 하지 말고 사람이 주어로. '데이터가 보여 줍니다' → '데이터를 보면'"
+    },
+    {
+      "id": "ko-not-but",
+      "family": "연출",
+      "severity": "strong",
+      "re": "(단순히|그저|단지)\\s?[^.。\\n]{0,24}(이|가)?\\s?아니라",
+      "hint": "'단순히 X가 아니라 Y' 연출이에요. Y만 바로 말해요"
+    },
+    {
+      "id": "ko-not-x-y",
+      "family": "연출",
+      "severity": "medium",
+      "re": "(이|가)\\s?아닙니다\\.\\s?\\S+[^.]{0,30}(입니다|이에요|예요)\\.",
+      "hint": "'X가 아닙니다. Y입니다.' 반전 연출이에요"
+    },
+    {
+      "id": "ko-self-q",
+      "family": "연출",
+      "severity": "medium",
+      "re": "(왜일까요|무엇일까요|어떨까요)\\?|그렇다면\\s[^.?\\n]{0,30}(까요|나요)\\?",
+      "hint": "혼자 묻고 답하는 연출이에요. 답부터 말해요"
+    },
+    {
+      "id": "ko-colon-reveal",
+      "family": "연출",
+      "severity": "medium",
+      "re": "(정답은|비밀은|핵심은|이유는|결론은)\\s?(바로)?\\s?:",
+      "hint": "'핵심은: ...' 대신 바로 말해요"
+    },
+    {
+      "id": "ko-opener",
+      "family": "상투 문구",
+      "severity": "strong",
+      "re": "오늘은\\s?[^.\\n]{0,20}(알아보|살펴보)|지금까지\\s?[^.\\n]{0,24}(알아보|살펴보)|도움이\\s?되셨(길|으면)|마무리하며|결론적으로|정리하자면|요약하자면",
+      "hint": "글 시작이나 끝의 상투 문구예요. 빼도 돼요"
+    },
+    {
+      "id": "ko-hype",
+      "family": "부풀리기",
+      "severity": "strong",
+      "re": "혁신적|획기적|게임\\s?체인저|패러다임|새로운\\s?지평|무궁무진|차원이\\s?다른|놀라운|극대화|시너지|여정",
+      "hint": "부풀린 말이에요. 실제로 뭐가 됐는지 숫자나 장면으로"
+    },
+    {
+      "id": "ko-vague-many",
+      "family": "부풀리기",
+      "severity": "medium",
+      "re": "다양한|많은\\s?분들이|전문가들은|업계에서는|일각에서는",
+      "hint": "누가, 몇 명인지 말하거나 빼요"
+    },
+    {
+      "id": "ko-hedge",
+      "family": "흐리기",
+      "severity": "medium",
+      "re": "(것\\s?같습니다|수도\\s?있습니다|할\\s?수\\s?있을\\s?것|(이라고|라고)\\s?할\\s?수\\s?있습니다)",
+      "hint": "흐리는 말이 겹치면 AI 같아요. 아는 건 아는 대로"
+    },
+    {
+      "id": "ko-connector",
+      "family": "리듬",
+      "severity": "medium",
+      "re": "(^|[.!?]\\s)(또한|뿐만\\s?아니라|더불어|아울러|나아가|특히),?\\s",
+      "hint": "문장 첫머리 접속어가 잦아요. 빼도 뜻이 통해요"
+    },
+    {
+      "id": "ko-comma-after-ending",
+      "family": "리듬",
+      "severity": "medium",
+      "re": "(지만|는데|면서|어서|아서),\\s",
+      "hint": "한국어는 '~지만,' 처럼 쉼표를 잘 안 찍어요"
+    },
+    {
+      "id": "ko-turned-out",
+      "family": "번역투",
+      "severity": "medium",
+      "re": "(인\\s?것으로|한\\s?것으로)\\s?(나타났|드러났|확인됐|보입)",
+      "hint": "'~인 것으로 나타났습니다' → '~예요'. 기사체 말고 말로"
+    }
+  ],
+  "en": [
+    {
+      "id": "en-stock",
+      "family": "stock words",
+      "severity": "strong",
+      "re": "\\b(delve|tapestry|testament to|ever-evolving|game[- ]changer|revolutioni[sz]e|unlock(ing)? the|supercharge|seamless(ly)?|cutting-edge|harness the power|embark on|realm of|elevate your)\\b",
+      "hint": "Stock AI words. Say the plain thing."
+    },
+    {
+      "id": "en-opener",
+      "family": "stock openers",
+      "severity": "strong",
+      "re": "\\b(in today's (fast-paced|digital)|let's dive in|in this (article|post),? (we|I) will|without further ado|in conclusion|i hope this helps|great question)\\b",
+      "hint": "Cut the opener or closer; start with the point."
+    },
+    {
+      "id": "en-not-just",
+      "family": "staging",
+      "severity": "strong",
+      "re": "\\b(not (just|only|merely) [^.]{1,40}(but|it's|it is))|(it's not [^.]{1,30}, it's)\\b",
+      "hint": "Contrast reveal. Say the second half only."
+    },
+    {
+      "id": "en-signpost",
+      "family": "rhythm",
+      "severity": "medium",
+      "re": "(^|[.!?]\\s)(Moreover|Furthermore|Additionally|Ultimately|Importantly),\\s",
+      "hint": "Signposting at the start of a sentence."
+    },
+    {
+      "id": "en-inflate",
+      "family": "inflation",
+      "severity": "medium",
+      "re": "\\b(plays? a (crucial|pivotal|vital) role|crucial|pivotal|robust|leverage|landscape|navigate the|journey|empower)\\b",
+      "hint": "Inflated or vague. Name what actually happened."
+    },
+    {
+      "id": "en-vague-experts",
+      "family": "inflation",
+      "severity": "medium",
+      "re": "\\b(experts (say|believe|agree)|studies show|many people (say|believe))\\b",
+      "hint": "Who? Name them or cut it."
+    },
+    {
+      "id": "en-hedge",
+      "family": "hedging",
+      "severity": "medium",
+      "re": "\\b(it'?s (important|worth) (to note|noting)|arguably|it could be said)\\b",
+      "hint": "Stacked hedges read as a model."
+    },
+    {
+      "id": "en-ai-residue",
+      "family": "chat residue",
+      "severity": "strong",
+      "re": "\\b(as an ai|as of my (last|knowledge)|certainly!|here's (a|the) (revised|rewritten))\\b",
+      "hint": "Chat leftovers. Delete."
+    }
+  ],
+  "any": [
+    {
+      "id": "emdash",
+      "family": "punctuation",
+      "severity": "strong",
+      "re": "[—―]",
+      "hint": "Long dash. Use a comma, a period or a colon."
+    },
+    {
+      "id": "emoji",
+      "family": "punctuation",
+      "severity": "medium",
+      "re": "(?![©®™])\\p{Extended_Pictographic}",
+      "hint": "Emoji in the text."
+    },
+    {
+      "id": "bold-pile",
+      "family": "formatting",
+      "severity": "medium",
+      "re": "\\*\\*[^*]{1,40}\\*\\*",
+      "hint": "Bold used for decoration. Keep one at most.",
+      "minCount": 3
+    }
+  ]
+}

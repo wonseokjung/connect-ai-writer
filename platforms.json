@@ -9,14 +9,25 @@
     "maxImages": 10,
     "minImages": 1,
     "maxParts": 10,
-    "image": {"w": 1080, "h": 1350, "ratio": "4:5"},
-    "tags": {"max": 1, "style": "topic"},
+    "image": {
+      "w": 1080,
+      "h": 1350,
+      "ratio": "4:5"
+    },
+    "tags": {
+      "max": 1,
+      "style": "topic"
+    },
     "post": "ego",
     "compose": "https://www.threads.com/",
     "tone": "Short spoken lines. The first post is the hook and has the best image. One idea per post in the chain. A link, if any, goes in the last post.",
     "verified": true,
     "checked": "2026-11-24",
-    "source": "500 characters: Meta Threads API docs (developers.facebook.com/docs/threads/posts). Images: the API allows 20 in a carousel; in the app 10 is the safe number, so 10 here."
+    "source": "500 characters: Meta Threads API docs (developers.facebook.com/docs/threads/posts). Images: the API allows 20 in a carousel; in the app 10 is the safe number, so 10 here.",
+    "hook": {
+      "firstLineMax": 60
+    },
+    "hookSource": "First lines that show before \"more\": our own guide, after coreyhaines31/marketingskills (MIT) platform notes."
   },
   "naver": {
     "name": "Naver blog",
@@ -27,14 +38,26 @@
     "minChars": 800,
     "maxImages": 30,
     "minImages": 3,
-    "image": {"w": 1600, "h": 900, "ratio": "16:9"},
-    "tags": {"max": 30, "style": "words"},
+    "image": {
+      "w": 1600,
+      "h": 900,
+      "ratio": "16:9"
+    },
+    "tags": {
+      "max": 30,
+      "style": "words"
+    },
     "post": "ego",
     "compose": "https://blog.naver.com/{blogId}/postwrite",
     "tone": "Long form. A clear title with the search words. Short paragraphs with a heading every few paragraphs, a picture between paragraphs. Tags at the end.",
     "verified": false,
     "checked": "2026-11-24",
-    "source": "No official page found for the tag or image limits (help.naver.com did not come up). 30 tags is what the editor is commonly reported to take. minChars is our own guide, not Naver's."
+    "source": "No official page found for the tag or image limits (help.naver.com did not come up). 30 tags is what the editor is commonly reported to take. minChars is our own guide, not Naver's.",
+    "seo": {
+      "titleMin": 12,
+      "titleMax": 40,
+      "minHeadings": 3
+    }
   },
   "x": {
     "name": "X",
@@ -45,14 +68,25 @@
     "maxImages": 4,
     "minImages": 1,
     "maxParts": 8,
-    "image": {"w": 1600, "h": 900, "ratio": "16:9"},
-    "tags": {"max": 2, "style": "hashtag"},
+    "image": {
+      "w": 1600,
+      "h": 900,
+      "ratio": "16:9"
+    },
+    "tags": {
+      "max": 2,
+      "style": "hashtag"
+    },
     "post": "ego",
     "compose": "https://x.com/compose/post",
     "tone": "Very short. Korean letters count 2 and every link counts 23 (weighted length), so a Korean post holds about 140 letters.",
     "verified": true,
     "checked": "2026-11-24",
-    "source": "280 weighted characters and the weights: X's open twitter-text v3 config. 4 images per post: X help center."
+    "source": "280 weighted characters and the weights: X's open twitter-text v3 config. 4 images per post: X help center.",
+    "hook": {
+      "firstLineMax": 70
+    },
+    "hookSource": "First lines that show before \"more\": our own guide, after coreyhaines31/marketingskills (MIT) platform notes."
   },
   "linkedin": {
     "name": "LinkedIn",
@@ -62,14 +96,25 @@
     "maxChars": 3000,
     "maxImages": 20,
     "minImages": 1,
-    "image": {"w": 1200, "h": 1200, "ratio": "1:1"},
-    "tags": {"max": 3, "style": "hashtag"},
+    "image": {
+      "w": 1200,
+      "h": 1200,
+      "ratio": "1:1"
+    },
+    "tags": {
+      "max": 3,
+      "style": "hashtag"
+    },
     "post": "handoff",
     "compose": "https://www.linkedin.com/feed/?shareActive=true",
     "tone": "First person, plain, a little more work-like. The first two lines show before 'see more', so the point goes there.",
     "verified": true,
     "checked": "2026-11-24",
-    "source": "3,000 characters and 20 photos: LinkedIn Help answer 100983 (linkedin.com/help/linkedin/answer/100983)."
+    "source": "3,000 characters and 20 photos: LinkedIn Help answer 100983 (linkedin.com/help/linkedin/answer/100983).",
+    "hook": {
+      "firstLineMax": 150
+    },
+    "hookSource": "First lines that show before \"more\": our own guide, after coreyhaines31/marketingskills (MIT) platform notes."
   },
   "instagram": {
     "name": "Instagram",
@@ -79,14 +124,25 @@
     "maxChars": 2200,
     "maxImages": 20,
     "minImages": 1,
-    "image": {"w": 1080, "h": 1350, "ratio": "4:5"},
-    "tags": {"max": 5, "style": "hashtag"},
+    "image": {
+      "w": 1080,
+      "h": 1350,
+      "ratio": "4:5"
+    },
+    "tags": {
+      "max": 5,
+      "style": "hashtag"
+    },
     "post": "handoff",
     "compose": "https://www.instagram.com/",
     "tone": "The pictures carry the post: slide 1 is the hook, the last slide says what to do. The caption is short; the first line shows in the feed.",
     "verified": false,
     "checked": "2026-11-24",
-    "source": "2,200 characters and 20 slides: widely reported, not read on an Instagram page. 5 hashtags: reported from Instagram's December 2025 change; some sites still say 30, so 5 is the safe number."
+    "source": "2,200 characters and 20 slides: widely reported, not read on an Instagram page. 5 hashtags: reported from Instagram's December 2025 change; some sites still say 30, so 5 is the safe number.",
+    "hook": {
+      "firstLineMax": 60
+    },
+    "hookSource": "First lines that show before \"more\": our own guide, after coreyhaines31/marketingskills (MIT) platform notes."
   },
   "tistory": {
     "name": "Tistory",
@@ -97,14 +153,26 @@
     "minChars": 800,
     "maxImages": 30,
     "minImages": 3,
-    "image": {"w": 1600, "h": 900, "ratio": "16:9"},
-    "tags": {"max": 10, "style": "words"},
+    "image": {
+      "w": 1600,
+      "h": 900,
+      "ratio": "16:9"
+    },
+    "tags": {
+      "max": 10,
+      "style": "words"
+    },
     "post": "handoff",
     "optional": true,
     "tone": "Like the Naver blog post, with headings people search for.",
     "verified": false,
     "checked": "2026-11-24",
-    "source": "No official limits found. Our own guide numbers."
+    "source": "No official limits found. Our own guide numbers.",
+    "seo": {
+      "titleMin": 12,
+      "titleMax": 40,
+      "minHeadings": 3
+    }
   },
   "brunch": {
     "name": "Brunch",
@@ -115,13 +183,79 @@
     "minChars": 800,
     "maxImages": 30,
     "minImages": 2,
-    "image": {"w": 1600, "h": 900, "ratio": "16:9"},
-    "tags": {"max": 3, "style": "words"},
+    "image": {
+      "w": 1600,
+      "h": 900,
+      "ratio": "16:9"
+    },
+    "tags": {
+      "max": 3,
+      "style": "words"
+    },
     "post": "handoff",
     "optional": true,
     "tone": "An essay. Fewer headings, longer thought, still your spoken voice.",
     "verified": false,
     "checked": "2026-11-24",
     "source": "No official limits found. Our own guide numbers."
+  },
+  "newsletter": {
+    "name": "Newsletter",
+    "lang": "ko",
+    "kind": "article",
+    "count": "chars",
+    "maxChars": 8000,
+    "minChars": 500,
+    "maxImages": 10,
+    "minImages": 1,
+    "image": {
+      "w": 1200,
+      "h": 630,
+      "ratio": "1.91:1"
+    },
+    "tags": {
+      "max": 0,
+      "style": "words"
+    },
+    "email": {
+      "subjectMax": 40,
+      "previewMax": 90
+    },
+    "post": "handoff",
+    "tone": "One mail, one job. 'subject:' and 'preview:' lines first. Short paragraphs of one to three sentences, the most useful thing first, one clear next step at the end, signed like a person.",
+    "verified": false,
+    "checked": "2026-11-24",
+    "source": "Our own guide. Subject and preview lengths follow common phone inbox widths (a Korean subject of about 40 characters, a preview of about 90); not a mail provider's limit.",
+    "optional": true
+  },
+  "article": {
+    "name": "Long-form article",
+    "lang": "ko",
+    "kind": "article",
+    "count": "chars",
+    "maxChars": 40000,
+    "minChars": 2500,
+    "maxImages": 30,
+    "minImages": 2,
+    "image": {
+      "w": 1600,
+      "h": 900,
+      "ratio": "16:9"
+    },
+    "tags": {
+      "max": 10,
+      "style": "words"
+    },
+    "seo": {
+      "titleMin": 12,
+      "titleMax": 60,
+      "minHeadings": 4
+    },
+    "post": "handoff",
+    "optional": true,
+    "tone": "A lead that stands alone (what, why it matters, the key points), then one section per question, every fact with its source, and a sources section at the end.",
+    "verified": false,
+    "checked": "2026-11-24",
+    "source": "Our own guide (structure after stanford-oval/storm: lead, sections with citations, sources)."
   }
 }

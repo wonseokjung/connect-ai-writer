@@ -10,7 +10,7 @@ process.removeAllListeners('warning');
 process.on('warning', (w) => { if (w.name !== 'ExperimentalWarning') console.error(w.message); });
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = ['for', 'voice', 'srt', 'video', 'out', 'title', 'slug', 'theme', 'only', 'to', 'name', 'blog-id', 'frames', 'writer', 'agent', 'dir'];
+const VALUE_FLAGS = ['for', 'voice', 'srt', 'video', 'out', 'title', 'slug', 'theme', 'only', 'to', 'name', 'blog-id', 'frames', 'writer', 'agent', 'dir', 'age', 'pages', 'lang', 'geo', 'listen', 'screens', 'after', 'by', 'kw', 'from'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -64,6 +64,8 @@ function summary(r) {
 }
 
 const HELP = `
+  skills    research · trends · plan · write · story · humanize · check (fact-check) · repurpose
+
   npx ${KIT_NAME} demo                       try it on the example notes (no video, no AI, no account)
   npx ${KIT_NAME} start <source> --for threads,naver,x
                                              read your source, make out/<date>_<name>/ with a brief and one post.md per platform
@@ -71,6 +73,14 @@ const HELP = `
   npx ${KIT_NAME} check [run]                only the text checks, fast
   npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in Ego Lite and stop before the post button
   npx ${KIT_NAME} voice <your transcripts...> --out voice.md   a voice sheet from your own words
+  npx ${KIT_NAME} research "topic" [links or files...]   sources with dates + a fact sheet (research add | research check)
+  npx ${KIT_NAME} trends "words" ["more words"]           what people search and post now, with sources and dates
+  npx ${KIT_NAME} plan [run] (--score)        titles and first lines to choose from, scored
+  npx ${KIT_NAME} story "7살, 공룡, 잠자리 동화" --age 7   a picture book: story.md -> book.html, pages, PDF
+  npx ${KIT_NAME} humanize <file> [--after rewrite.md]  what sounds like an AI; with --after, proves facts were kept
+  npx ${KIT_NAME} check [run] --trace         where every number in your posts comes from
+  npx ${KIT_NAME} motion [run] --from threads (--render)   a motion graphics video from the post, made by connect-ai-motion
+  npx ${KIT_NAME} engines                    our other AI employees it works with, found or not
   npx ${KIT_NAME} install-skill              add the agent skill (Claude Code, Codex, Antigravity, Cursor)
   npx ${KIT_NAME} platforms | themes | doctor
 
@@ -81,6 +91,10 @@ const HELP = `
   build     --theme default|paper|my-theme.json   --only threads,x
   post      --to threads|x|naver  --blog-id <naver id>  --leave-open (keep the filled editor open for you)
             --no-save (do not press the draft save)  --publish (asks you to type the platform name first)
+  research  start a run from it: start <research folder> --for naver,newsletter (posts are checked against the fact sheet)
+  trends    --geo KR  --lang ko  --listen x,threads,youtube (Ego Lite, read only)  --no-google
+            Naver DataLab turns on with your own NAVER_CLIENT_ID and NAVER_CLIENT_SECRET
+  story     --age 3..8  --pages 12  --lang ko|en   then: build <story folder>
 `;
 
 async function main() {
@@ -135,13 +149,25 @@ async function main() {
     }
     case 'build': {
       hello();
+      const target = latestRun(pos[1]);
+      if (JSON.parse(fs.readFileSync(path.join(target, 'run.json'), 'utf8')).kind === 'story') {
+        const {buildStory} = await import('../lib/story.mjs');
+        const r = await buildStory(target, {log});
+        const fails = r.findings.filter((f) => f.level === 'fail');
+        log(`  ${r.story.meta.title || 'story'}: ${r.story.pages.length} pages, ${r.files.length} pictures`);
+        for (const f of r.findings.slice(0, 16)) log(`  ${f.level === 'fail' ? 'FIX ' : dimmed('LOOK')} ${f.message}`);
+        if (r.files.length) { log(''); log(`  book     ${path.join(r.dir, 'book.html')}`); log(`  pages    ${path.join(r.dir, 'pages')}`); log(`  sheet    ${r.sheet}`); if (r.pdf) log(`  pdf      ${r.pdf}`); openFile(path.join(r.dir, 'book.html')); }
+        if (fails.length) process.exitCode = 2;
+        return;
+      }
       const {build} = await import('../lib/run.mjs');
-      const r = await build(latestRun(pos[1]), {theme: opt('theme'), only: opt('only'), log});
+      const r = await build(target, {theme: opt('theme'), only: opt('only'), log});
       summary(r);
       openFile(path.join(r.runDir, 'index.html'));
       if (r.findings.some((f) => f.level === 'fail')) process.exitCode = 2;
       return;
     }
+    case 'factcheck':
     case 'check': {
       const runDir = latestRun(pos[1]);
       const {loadConfig} = await import('../lib/config.mjs');
@@ -157,7 +183,160 @@ async function main() {
         all.push(...checkPost({key, post: parsePost(fs.readFileSync(f, 'utf8'), cfg.platforms[key]), platform: cfg.platforms[key], source: src, rules: cfg.rules, banned: cfg.banned}));
       }
       log(reportText(all));
+      if (flag('trace') || cmd === 'factcheck') {
+        const {traceNumbers} = await import('../lib/check.mjs');
+        log('\n  where every number comes from');
+        for (const key of run.platforms) {
+          const f = path.join(runDir, key, 'post.md');
+          if (!fs.existsSync(f)) continue;
+          for (const t of traceNumbers(parsePost(fs.readFileSync(f, 'utf8'), cfg.platforms[key]), src)) log(`  ${key.padEnd(10)} ${String(t.num).padEnd(8)} ${t.from ? gold(t.from.padEnd(10)) + ' ' + dimmed(t.line) : 'NOT FOUND in your source'}`);
+        }
+      }
       if (all.some((f) => f.level === 'fail')) process.exitCode = 2;
+      return;
+    }
+    case 'research': {
+      hello();
+      const R = await import('../lib/research.mjs');
+      const sub = pos[1];
+      if (sub === 'add') {
+        const dir = path.resolve(pos[2] || '.');
+        if (!R.isResearch(dir)) throw new Error(`${dir} is not a research folder (no research.json).`);
+        const r = await R.addSources(dir, pos.slice(3), {log});
+        log(`  added ${r.added.length}${r.failed.length ? `, could not read ${r.failed.length}` : ''}. Sources now: ${r.research.sources.length}. Next: fill facts.md, then  research check ${show(dir)}`);
+        return;
+      }
+      if (sub === 'check') {
+        const dir = path.resolve(pos[2] || '.');
+        if (!R.isResearch(dir)) throw new Error(`${dir} is not a research folder (no research.json).`);
+        const r = R.researchCheck(dir);
+        const bad = r.facts.filter((f) => !f.ok);
+        log(`  ${r.facts.length - bad.length}/${r.facts.length} facts trace to their source, ${r.sources.length} sources (${r.sources.filter((x) => x.used).length} used)`);
+        for (const f of bad) for (const p of f.problems) log(`  FIX ${f.text.slice(0, 50)}...  ${p}`);
+        log(`  fact sheet ${path.join(dir, 'research.html')}`);
+        if (!bad.length && r.facts.length) log(dimmed(`  Next: npx ${KIT_NAME} start ${show(dir)} --for naver,threads,newsletter`));
+        if (bad.length || !r.facts.length) process.exitCode = 2;
+        openFile(path.join(dir, 'research.html'));
+        return;
+      }
+      const topic = sub;
+      const r = await R.startResearch({topic, inputs: pos.slice(2), out: opt('out', 'out'), lang: opt('lang', 'ko'), log});
+      log(`  research ${r.dir}`);
+      log(`  sources  ${r.added.length} read${r.failed.length ? `, ${r.failed.length} could not be read` : ''}`);
+      log(`  next     questions.md (who asks what) -> research add ${show(r.dir)} <links> -> facts.md -> research check ${show(r.dir)}`);
+      return;
+    }
+    case 'trends': {
+      hello();
+      const T = await import('../lib/trends.mjs');
+      const seeds = pos.slice(1);
+      const listen = opt('listen');
+      log(`  reading signals${seeds.length ? ' for ' + seeds.join(', ') : ''} (${opt('geo', 'KR')})`);
+      const t = await T.collectTrends({seeds, geo: opt('geo', 'KR'), lang: opt('lang', 'ko'), listenSites: listen ? listen.split(',') : null, screens: Number(opt('screens', '1')), google: !flag('no-google'), log});
+      const w = await T.writeTrends(t, {out: opt('out', 'out'), log});
+      log('');
+      if (t.trendingNow?.length) log(`  trending now  ${t.trendingNow.slice(0, 6).map((x) => x.title).join(', ')}`);
+      for (const [q, s] of Object.entries(t.suggest)) log(`  "${q}"  ${[...s.naver.slice(0, 3), ...s.youtube.slice(0, 3)].join(', ')}`);
+      for (const a of Object.values(t.wiki)) log(`  wikipedia     ${a.title} (${a.lang}) last month ${a.views.slice(-1)[0]?.views ?? '-'} views`);
+      for (const n of t.notes) log(dimmed('  note  ' + n));
+      log('');
+      log(`  trends   ${path.join(w.dir, 'trends.html')}`);
+      log(`  notes    ${path.join(w.dir, 'trends.md')}   (ideas.md for your agent)`);
+      for (const f of w.png) log(`  chart    ${f}`);
+      openFile(path.join(w.dir, 'trends.html'));
+      return;
+    }
+    case 'plan': {
+      hello();
+      const runDir = latestRun(pos[1]);
+      const P = await import('../lib/plan.mjs');
+      const f = path.join(runDir, 'plan.md');
+      if (flag('score') || (fs.existsSync(f) && !flag('new'))) {
+        if (!fs.existsSync(f)) throw new Error('No plan.md yet. Run: plan <run> first.');
+        const r = P.scorePlan(runDir);
+        for (const [g, rows] of Object.entries(r.groups)) {
+          log(`  ${gold(g)}`);
+          for (const x of rows.slice(0, 6)) log(`  ${String(x.score).padStart(3)}  ${x.line}  ${dimmed(x.why.join(', '))}`);
+        }
+        log(`\n  scores   ${path.join(runDir, 'plan-scores.md')}`);
+        return;
+      }
+      const {loadConfig} = await import('../lib/config.mjs');
+      const run = JSON.parse(fs.readFileSync(path.join(runDir, 'run.json'), 'utf8'));
+      fs.writeFileSync(f, P.planTemplate({title: run.title, keys: run.platforms, platforms: loadConfig(path.dirname(runDir)).platforms}));
+      log(`  plan     ${f}\n  Fill titles and first lines (or let your agent), then: plan ${show(runDir)} --score`);
+      return;
+    }
+    case 'engines': {
+      hello();
+      const {engineTable} = await import('../lib/engines.mjs');
+      log('  Our other AI employees the writer works with (optional, never installed for you):\n');
+      for (const e of engineTable()) log(`  ${e.found ? gold('found ') : dimmed('  -   ')} ${e.pkg.padEnd(26)} ${e.what}${e.found ? dimmed('  ' + e.found.where) : dimmed('  get it: ' + e.get)}`);
+      log(dimmed('\n  A kit folder of your own works too: CAIW_MOTION_KIT=/path/to/connect-ai-motion (and CAIW_VIDEO_MOTION_KIT, CAIW_PRODUCT_PHOTO_KIT, CAIW_MARKETER_KIT).'));
+      return;
+    }
+    case 'motion': {
+      hello();
+      const runDir = latestRun(pos[1]);
+      const E = await import('../lib/engines.mjs');
+      const {loadConfig} = await import('../lib/config.mjs');
+      const run = JSON.parse(fs.readFileSync(path.join(runDir, 'run.json'), 'utf8'));
+      const key = opt('from', run.platforms[0]);
+      const cfg = loadConfig(path.dirname(runDir));
+      const src = JSON.parse(fs.readFileSync(path.join(runDir, 'source', 'source.json'), 'utf8'));
+      const m = E.motionProject(runDir, key, {platform: cfg.platforms[key], source: src});
+      log(`  script   ${m.script}  (${m.lines.length} beats from your ${cfg.platforms[key].name} post; change it, one line = one scene)`);
+      for (const l of m.lines) log(dimmed('    ' + l));
+      if (m.bad.length) { for (const b of m.bad) log(`  FIX the number ${b.num} in "${b.line}" is not in your source.`); process.exitCode = 2; return; }
+      const eng = E.findEngine('motion');
+      if (!eng) { log(`\n  connect-ai-motion is not on this computer. Get it: ${E.ENGINES[0].get}  (${E.ENGINES[0].repo})\n  Then run this again. Nothing else was done.`); return; }
+      const short = !flag('wide');
+      log(`\n  connect-ai-motion ${dimmed(eng.where)}`);
+      if (!fs.existsSync(path.join(m.dir, 'storyboard.json')) || flag('redraft')) {
+        const d = await E.runEngine(eng, ['draft', m.script, m.dir], {cwd: m.dir, log});
+        if (d.code) { log(`  draft stopped: ${d.out.split('\n').slice(-4).join(' ')}`); process.exitCode = 1; return; }
+      } else log(dimmed('    keeping your storyboard.json (--redraft makes a new one from script.md)'));
+      for (const mv of E.keepExactNumbers(path.join(m.dir, 'storyboard.json'))) log(`    ${mv.id}: ${mv.value} moved from ${mv.from} to ${mv.to} (that scene would round it)`);
+      const c = await E.runEngine(eng, ['check', m.dir, ...(short ? ['--short'] : [])], {cwd: m.dir, log});
+      if (!flag('render')) { log(`\n  storyboard ${path.join(m.dir, 'storyboard.json')}\n  Next: motion ${show(runDir)} --from ${key} --render   (renders ${short ? '16:9 and 9:16' : '16:9'}; it takes a few minutes)`); return; }
+      const r = await E.runEngine(eng, ['run', m.dir, ...(short ? ['--short'] : [])], {cwd: m.dir, log, env: {CONNECT_AI_MOTION_CONCURRENCY: process.env.CONNECT_AI_MOTION_CONCURRENCY || '2'}});
+      const sbTime = fs.statSync(path.join(m.dir, 'storyboard.json')).mtimeMs;
+      const films = E.motionFilms(runDir, key).filter((f) => fs.statSync(f.file).mtimeMs >= sbTime);
+      for (const f of films) log(`  video    ${f.file}  (${f.ratio})`);
+      log(films.length ? dimmed(`  build ${show(runDir)} puts the video in the preview and in handoff/ for the marketer.`) : `  render stopped: ${r.out.split('\n').slice(-5).join(' ')}`);
+      if (!films.length) process.exitCode = 1;
+      return;
+    }
+    case 'story': {
+      hello();
+      const S = await import('../lib/story.mjs');
+      const idea = pos.slice(1).join(' ');
+      const r = S.startStory({idea, age: Number(opt('age', '6')), pages: opt('pages'), lang: opt('lang', 'ko'), out: opt('out', 'out'), title: opt('title')});
+      log(`  story    ${r.file}`);
+      log(`  brief    ${path.join(r.dir, 'brief.md')}`);
+      log(`  Next: your agent writes story.md page by page (one [scene: ...] line each), then  npx ${KIT_NAME} build ${show(r.dir)}`);
+      return;
+    }
+    case 'humanize': {
+      hello();
+      const file = pos[1];
+      if (!file) throw new Error('Give a text file: humanize draft.md   (or a run\'s post.md)');
+      const H = await import('../lib/humanize.mjs');
+      const text = fs.readFileSync(path.resolve(file), 'utf8');
+      let never = [];
+      if (opt('voice')) { const m = fs.readFileSync(path.resolve(opt('voice')), 'utf8').match(/<!--\s*never:\s*([\s\S]*?)-->/); never = m ? m[1].split(',').map((x) => x.trim()) : []; }
+      const patterns = H.loadPatterns(path.dirname(path.resolve(file)));
+      const result = H.analyze(text, {patterns, never});
+      let cmp = null, afterText = null;
+      if (opt('after')) { afterText = fs.readFileSync(path.resolve(opt('after')), 'utf8'); cmp = H.compare(text, afterText, {patterns, never}); }
+      for (const l of H.reportLines(result).slice(0, 24)) log('  ' + l);
+      log('');
+      log(`  score    ${result.score} per 1,000 letters (${result.grade})${cmp ? `  ->  after ${cmp.after.score} (${cmp.after.grade})` : ''}`);
+      if (cmp) log(cmp.kept ? `  facts    ${gold('kept')}: every number, quote and name is still there, nothing new added` : `  facts    CHANGED: ${cmp.lost.map((l) => l.kind + ' ' + l.value).join(', ')}`);
+      const out = path.resolve(opt('out', path.join(path.dirname(path.resolve(file)), path.basename(file).replace(/\.[^.]+$/, '') + '.humanize.html')));
+      fs.writeFileSync(out, H.humanizeHtml({file, text, result, afterText, cmp}));
+      log(`  report   ${out}`);
+      if (cmp && !cmp.kept) process.exitCode = 2;
       return;
     }
     case 'voice': {
