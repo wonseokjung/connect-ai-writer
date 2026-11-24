@@ -107,9 +107,10 @@ export async function naverTests({ok, assert, imp, tmp}) {
   {
     const ed = fakeEditor();
     const r = await drive(wrap(NAVER, {...params, publish: true}), ed);
-    assert.equal(r.status, 'error');
-    assert.ok(!ed.log.some((x) => x[0] === 'saved' || (x[0] === 'click' && /publish|발행/i.test(x[1] + x[2]))));
-    ok('naver (mocked editor): --publish still never publishes; it fills and tells you to do that step yourself');
+    assert.equal(r.status, 'saved-as-draft', 'a publish flag in the params changes nothing: there is no publish branch');
+    assert.doesNotMatch(NAVER, /P\.publish/);
+    assert.ok(!ed.log.some((x) => x[0] === 'click' && /publish|발행/i.test(x[1] + x[2])));
+    ok('naver (mocked editor): there is no publish branch; even a publish flag only saves a draft');
   }
   {
     const ed = fakeEditor({loggedOut: true});
@@ -119,13 +120,16 @@ export async function naverTests({ok, assert, imp, tmp}) {
     const pop = '작성 중인 글이 있습니다.\n이어서 작성하시겠습니까?';
     const ed2 = fakeEditor({popup: pop, popupTitle: '손으로 쓰던 다른 글'});
     const r2 = await drive(wrap(NAVER, params), ed2);
-    assert.equal(r2.status, 'error'); assert.ok(r2.restorePopup);
-    assert.ok(!ed2.log.some((x) => x[0] === 'type' || x[0] === 'saved' || (x[0] === 'click' && x[1] === '.se-popup-button-cancel')), 'another unfinished post: only looked at (확인), never thrown away, nothing typed');
+    assert.equal(r2.status, 'needs-you'); assert.ok(r2.restorePopup);
+    assert.ok(!ed2.log.some((x) => x[0] === 'type' || x[0] === 'saved' || x[0] === 'click'), 'an unfinished post: nothing pressed (not 확인, not 취소), nothing typed');
+    assert.deepEqual(ed2.finished, {keep: ['p1']}, 'the editor stays open for you to choose');
+    // same title as ours, different body: still yours, still untouched
     const ed3 = fakeEditor({popup: pop, popupTitle: '제목이에요'});
-    const r3 = await drive(wrap(NAVER, params), ed3);
-    assert.equal(r3.status, 'saved-as-draft');
-    assert.ok(ed3.log.some((x) => x[0] === 'click' && x[1] === '.se-popup-button-cancel'), 'same post from an earlier run: start fresh');
-    ok('naver (mocked editor): logged out stops; an unfinished post of yours is left alone; the same post from an earlier run starts fresh');
+    const r3 = await drive(wrap(NAVER, {...params, blocks: [{type: 'text', text: '완전히 다른 본문'}]}), ed3);
+    assert.equal(r3.status, 'needs-you');
+    assert.ok(!ed3.log.some((x) => x[0] === 'click' || x[0] === 'type' || x[0] === 'saved'), 'same title, different body: nothing pressed');
+    assert.deepEqual(ed3.finished, {keep: ['p1']});
+    ok('naver (mocked editor): logged out stops; on the unfinished-post popup it presses nothing, leaves the editor open and asks you (same title, different body too)');
   }
 
   // post(): a run folder -> blocks with the right picture files, handed to a fake ego-browser on PATH
@@ -137,21 +141,47 @@ export async function naverTests({ok, assert, imp, tmp}) {
   fs.writeFileSync(path.join(dir, 'post.md'), '# 테스트 제목\n\n[image: frame 00:01]\n\n첫 문단이에요.\n\n## 소제목\n\n둘째 문단이에요.\n\n[image: quote "한 줄" 00:02]\n\n끝 문단이에요.\n\ntags: 하나, 둘\n');
   fs.writeFileSync(path.join(dir, 'post.json'), JSON.stringify({platform: 'naver', title: '테스트 제목', tags: ['하나', '둘'], parts: [{text: '', images: ['images/01_frame_0001.jpg', 'images/02_quote.png']}]}));
   fs.writeFileSync(path.join(dir, 'check.md'), 'Ready to post\n');
+  const {writeSeal} = await imp('lib/seal.mjs');
+  // no check.json: refused
+  await assert.rejects(() => post(run, 'naver', {log: () => {}}), /no check result/);
+  writeSeal(dir, []);
   const bin = path.join(tmp, 'fake-bin');
   fs.mkdirSync(bin, {recursive: true});
   const got = path.join(tmp, 'ego-script.js');
   fs.writeFileSync(path.join(bin, 'ego-browser'), `#!/bin/sh\ncat > "${got}"\necho '${MARK}{"status":"saved-as-draft","space":1}'\n`, {mode: 0o755});
   const oldPath = process.env.PATH;
   process.env.PATH = bin + path.delimiter + oldPath;
+  const said = [];
   try {
-    const r = await post(run, 'naver', {log: () => {}});
+    const r = await post(run, 'naver', {log: (l) => said.push(l)});
     assert.equal(r.status, 'saved-as-draft');
+    assert.deepEqual(r.summary, {platform: 'naver', account: 'the naver account logged in to Ego Lite', title: '테스트 제목', parts: 1, attachments: 2});
+    assert.ok(said.some((l) => /platform\s+naver/.test(l)) && said.some((l) => /title\s+테스트 제목/.test(l)) && said.some((l) => /pictures 2/.test(l)), 'shows platform, account, title, pictures first');
   } finally { process.env.PATH = oldPath; }
   const sent = fs.readFileSync(got, 'utf8');
   const P = JSON.parse(sent.split('\n')[0].replace(/^const P = /, '').replace(/;$/, ''));
   assert.equal(P.title, '테스트 제목'); assert.deepEqual(P.tags, ['하나', '둘']);
-  assert.equal(P.publish, false); assert.equal(P.saveDraft, true); assert.equal(P.blogId, null);
-  assert.match(P.listShot, /-drafts\.png$/);
+  assert.equal(P.saveDraft, true); assert.equal(P.blogId, null);
+  assert.equal(P.listShot, null, 'the drafts-list screenshot is opt-in (--drafts-shot)');
+  assert.equal(P.publish, undefined);
   assert.deepEqual(P.blocks.map((b) => (b.type === 'image' ? 'img:' + path.basename(b.file) : b.type)), ['img:01_frame_0001.jpg', 'text', 'h2', 'text', 'img:02_quote.png', 'text']);
   ok('naver post(): run folder -> blocks in order with the right pictures, sent to Ego Lite as a draft job (fake ego-browser)');
+  // a picture changed after the check: refused; a failed check: refused
+  fs.writeFileSync(path.join(dir, 'images', '02_quote.png'), 'changed');
+  await assert.rejects(() => post(run, 'naver', {log: () => {}}), /changed after the check/);
+  writeSeal(dir, [{level: 'fail', rule: 'numbersInSource', message: 'x'}]);
+  fs.writeFileSync(path.join(dir, 'check.md'), 'ok\n');
+  await assert.rejects(() => post(run, 'naver', {log: () => {}}), /did not pass its check/);
+  ok('post(): needs build\'s check.json; refuses a failed check and a draft whose post.md, post.json or picture changed after it');
+  // Ego bridge: early exit, bad JSON, logged out exit codes
+  const EGO = await imp('lib/ego.mjs');
+  const fake = (body) => { const f = path.join(bin, 'ego-x-' + Math.random().toString(36).slice(2)); fs.writeFileSync(f, '#!/bin/sh\n' + body + '\n', {mode: 0o755}); return {file: f, shell: false}; };
+  await assert.rejects(() => EGO.run('x', {command: fake('exit 3')}), /exited 3 before it finished/);
+  await assert.rejects(() => EGO.run('x'.repeat(4 * 1024 * 1024), {command: fake('exit 0')}), /exited 0 before it finished/, 'EPIPE on a closed pipe is a plain error, not a crash');
+  await assert.rejects(() => EGO.run('x', {command: fake(`cat >/dev/null; echo '${MARK}{not json'`)}), /not readable/);
+  await assert.rejects(() => EGO.run('x', {command: {file: path.join(bin, 'no-such-ego'), shell: false}}), /not installed/);
+  const lo = await EGO.run('x', {command: fake(`cat >/dev/null; echo '${MARK}{"status":"logged-out"}'`)});
+  const {EXIT} = await imp('lib/post.mjs');
+  assert.equal(lo.status, 'logged-out'); assert.equal(EXIT['logged-out'], 3); assert.equal(EXIT['no-composer'], 4); assert.equal(EXIT['needs-you'], 5);
+  ok('ego bridge: early exit, a closed pipe (EPIPE), bad JSON and no ego-browser are plain errors; logged out = exit 3, no post box = 4, waiting for you = 5');
 }

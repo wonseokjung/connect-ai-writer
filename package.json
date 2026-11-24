@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-writer",
-  "version": "0.2.0",
-  "description": "Your AI writing employee, with every skill a writer needs: research with sources and a fact sheet, trends (Google Trends, search suggestions, Wikipedia views), titles and first lines, posts for Threads, Naver blog, X, LinkedIn, Instagram, newsletters and long articles in your own voice with pictures from your real material, children's picture books with code-made illustrations, a humanizer for AI-sounding text, and a fact check that traces every number to its source. Saves drafts through Ego Lite and never posts by itself.",
+  "version": "0.3.0",
+  "description": "Your AI writing employee, with every skill a writer needs: research with sources and a fact sheet, trends (Google Trends, search suggestions, Wikipedia views), titles and first lines, posts for Threads, Naver blog, X, LinkedIn, Instagram, newsletters and long articles in your own voice with pictures from your real material, children's picture books with code-made illustrations, a humanizer for AI-sounding text, and a check that traces every number, quote and up/down word to its source. Saves drafts through Ego Lite and never posts by itself.",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
   "author": "CONNECT AI LAB",
@@ -10,10 +10,11 @@
   },
   "scripts": {
     "demo": "node bin/cli.mjs demo",
-    "test": "node tests/run.mjs"
+    "test": "node tests/run.mjs",
+    "dogfood": "node scripts/dogfood.mjs dogfood-out"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": ">=20.19"
   },
   "dependencies": {
     "@mozilla/readability": "0.6.0",
@@ -35,6 +36,7 @@
     "docs/guide.md",
     "docs/guide.ko.md",
     "NOTICE.md",
+    "package-lock.json",
     "README.md",
     "README.ko.md",
     "LICENSE"

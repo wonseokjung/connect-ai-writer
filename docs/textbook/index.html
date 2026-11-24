@@ -166,7 +166,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
       <p class="kicker" lang="en"><i aria-hidden="true"></i>CONNECT AI LAB · THE WRITING EMPLOYEE · TEXTBOOK</p>
       <p class="serif-en" lang="en">One sentence in. A post out.</p>
       <h1 data-i="h1">한 문장이면<br><em>글이 나와요</em></h1>
-      <p class="lead" data-i="lead">블로그 글 하나 쓰려면 할 게 많잖아요. 요즘 뭐가 뜨는지 찾아야 되고, 자료 찾아야 되고, 내 말투로 써야 되고, 사진도 만들어야 되거든요. 이걸 AI 글쓰기 직원 하나한테 다 넣어 놨어요. 아래 프롬프트 8개를 순서대로 복사해서 에이전트한테 붙여 넣기만 하시면 돼요.</p>
+      <p class="lead" data-i="lead">1인 사업가, 유튜버 여러분들, 영상 하나 찍으면 블로그도 써야 되고 쓰레드도 인스타도 써야 되잖아요. 사진도 만들어야 되고요. 이걸 AI 글쓰기 직원 하나한테 다 넣어 놨어요. 아래 프롬프트를 순서대로 복사해서 에이전트한테 붙여 넣기만 하시면 돼요.</p>
       <ul class="toc">
         <li><a href="#make"><i>01</i><span data-i="t1">오늘 만들 것</span></a></li>
         <li><a href="#steps"><i>02</i><span data-i="t2">따라 하기</span></a></li>
@@ -187,11 +187,11 @@ html:lang(en) .head h2{letter-spacing:-.025em}
         <h2 id="make-t" data-i="h_make">오늘 <em>만들 것</em></h2>
       </div>
       <ol class="make">
-        <li><i>1</i><span data-i="m1">내 영상 자막으로 만든 내 말투표</span></li>
-        <li><i>2</i><span data-i="m2">요즘 뜨는 주제, 그리고 출처가 하나하나 붙은 자료 정리</span></li>
-        <li><i>3</i><span data-i="m3">쓰레드, 네이버 블로그, 인스타 글이랑 사진. 같은 글로 모션그래픽 영상까지</span></li>
-        <li><i>4</i><span data-i="m4">우리 아이 그림책 동화 한 권, 인쇄용 PDF로</span></li>
-        <li><i>5</i><span data-i="m5">AI 티 안 나게 고친 글, 그리고 네이버 블로그 임시저장</span></li>
+        <li><i>1</i><span data-i="m1">내 영상 하나로 네이버 블로그, 쓰레드, 인스타 글. 내 말투로, 사진까지</span></li>
+        <li><i>2</i><span data-i="m2">내 영상 자막으로 만든 내 말투표, 그리고 글 기획서 한 장</span></li>
+        <li><i>3</i><span data-i="m3">요즘 뜨는 주제, 그리고 숫자마다 출처가 붙은 자료 정리. 같은 글로 모션그래픽 영상까지</span></li>
+        <li><i>4</i><span data-i="m4">AI 티 안 나게 고친 글, 그리고 네이버 블로그 임시저장</span></li>
+        <li><i>5</i><span data-i="m5">보너스 (선택): 우리 아이 그림책 동화 한 권, 인쇄용 PDF로</span></li>
       </ol>
     </div>
   </section>
@@ -205,24 +205,31 @@ html:lang(en) .head h2{letter-spacing:-.025em}
       <div class="prep">
         <h3 data-i="prep_h">준비물</h3>
         <ul>
-          <li data-i="prep1">Node.js 20.9 이상 (터미널에 <code>node -v</code> 쳐 보시면 돼요)</li>
+          <li data-i="prep1">Node.js 20.19 이상. <a href="https://nodejs.org">nodejs.org</a> 에서 LTS(오래 쓰는 안정 버전) 버튼 눌러서 받으시면 돼요. 이미 깔려 있는지 모르겠으면 에이전트한테 "내 컴퓨터에 Node.js 깔려 있는지 확인해 줘" 라고 먼저 물어보세요</li>
           <li data-i="prep2">코딩 에이전트 하나: Claude Code, Codex, Antigravity, Cursor 중에 아무거나</li>
-          <li data-i="prep3">크롬 (그림 만들 때 써요. 따로 받는 건 없어요)</li>
-          <li data-i="prep4">Ego Lite (8단계 임시저장할 때만. 없어도 나머지는 다 돼요)</li>
+          <li data-i="prep3">크롬. 사진 카드 만들 때 써요. 없어도 글이랑 미리보기는 다 나와요</li>
+          <li data-i="prep4">Ego Lite (3단계에서 X, 쓰레드 글 읽을 때랑 8단계 임시저장할 때만). AI 직원이 내 로그인 그대로 옆에서 같이 쓰는 브라우저예요. <a href="https://lite.ego.app">lite.ego.app</a> 에서 받아요. 없어도 나머지는 다 돼요</li>
         </ul>
+        <p class="note" data-i="prep_words">터미널은 명령어 치는 검은 창인데, 몰라도 돼요. 에이전트가 대신 쳐 주거든요. API 키(돈 내고 받는 서비스 열쇠)도 필요 없어요. 그리고 프롬프트 안에 있는 영어 단어(voice, research check 같은 거)는 에이전트가 기능을 정확히 찾게 붙인 이름표예요. 외우실 필요 없이 그대로 복사해서 쓰시면 돼요.</p>
       </div>
 
       <div class="step">
         <div class="step-n"><b>1</b><small lang="en">STEP 01</small></div>
         <div class="step-body">
           <h3 data-i="s1_h">AI 글쓰기 직원 데려오기</h3>
-          <p data-i="s1_n">자, 그러면 여러분들 에이전트한테 이렇게 한번 말해 보세요.</p>
+          <p data-i="s1_n">에이전트 채팅창에 아래 한 줄을 그대로 붙여 넣으세요. 설치가 끝나면 새 채팅을 하나 여시면 돼요.</p>
           <div class="pc" data-copy>
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p1">npx github:wonseokjung/connect-ai-writer install-skill 실행해 줘</pre>
           </div>
-          <p class="note" data-i="s1_after">"Ok to proceed?" 하고 물어보면 <code>y</code> 라고 답하시면 돼요. 다 끝나면 새 대화를 한번 열어 보세요.</p>
-          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/install.jpg" width="1280" height="960" alt="install-skill 실행 화면" data-ia="a1"></div><figcaption><b>REAL OUTPUT</b><span data-i="c1">실제로 깔아 본 화면이에요. 스킬 파일 10개가 같이 들어가요.</span></figcaption></figure>
+          <p class="note" data-i="s1_after">에이전트가 설치해도 되는지 ("Ok to proceed?") 물어보면 된다고 (<code>y</code>) 답하시면 돼요. 도구는 내 컴퓨터 사용자 폴더 안 <code>.connect-ai/connect-ai-writer</code> 에 한 번 깔리면 계속 그 자리에 있거든요.</p>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/install.jpg" width="1280" height="960" alt="install-skill 실행 화면" data-ia="a1"></div><figcaption><b>REAL OUTPUT</b><span data-i="c1">실제로 깔아 본 화면이에요. 스킬 파일이 같이 들어가요.</span></figcaption></figure>
+          <p data-i="s1_demo">새 채팅에서 예제로 한번 돌려 보세요. 크롬이 없어도 돼요.</p>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 1-2 · DEMO</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p1b">connect-ai-writer demo 돌려 줘. 크롬이 없으면 그림 카드는 빼고 해 줘. 다 되면 결과 폴더에서 index.html 열어 줘.</pre>
+          </div>
+          <p class="note" data-i="s1_where">결과는 항상 <code>out/날짜_제목</code> 폴더에 생겨요. 어디 있는지 모르겠으면 "방금 만든 결과 폴더에서 index.html 열어 줘" 라고 하시면 돼요.</p>
         </div>
       </div>
 
@@ -230,10 +237,15 @@ html:lang(en) .head h2{letter-spacing:-.025em}
         <div class="step-n"><b>2</b><small lang="en">STEP 02</small></div>
         <div class="step-body">
           <h3 data-i="s2_h">내 말투표 만들기</h3>
-          <p data-i="s2_n">AI가 쓴 글이 어색한 이유가 내 말투가 아니라서거든요. 그래서 제일 먼저 내 영상 자막으로 내가 실제로 어떻게 말하는지 세어 봐요.</p>
+          <p data-i="s2_n">AI가 쓴 글이 어색한 이유가 내 말투가 아니라서거든요. 그래서 제일 먼저 내 영상 자막에서 제가 자주 쓰는 말끝이랑 말버릇을 뽑아 봐요.</p>
+          <p class="note" data-i="s2_prep">먼저 폴더 하나 만드세요(예: 바탕화면에 내글쓰기). 거기에 내 영상 자막 파일(.srt)을 넣고, 에이전트를 그 폴더에서 여시면 돼요. 유튜브에 올린 영상이면 YouTube Studio > 자막 > 언어 > 점 세 개 > 다운로드 > .srt 로 받을 수 있어요.</p>
           <div class="pc" data-copy>
-            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 2-1</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p2">이 폴더에 있는 내 영상 자막(.srt) 전부로 내 말투표 만들어 줘. connect-ai-writer voice 로 하고 voice.md 로 저장해 줘.</pre>
+          </div>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 2-2 · NO FILE YET</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p2b">아직 내 자막이 없어. connect-ai-writer 에 들어 있는 예제 자막(sample.srt)으로 말투표 만들어서 voice.md 로 저장해 줘.</pre>
           </div>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/voice.jpg" width="1280" height="960" alt="말투표" data-ia="a2"></div><figcaption><b>REAL OUTPUT</b><span data-i="c2">제 강의랑 라이브 자막 5개로 만든 거예요. 2,161줄에서 문장 623개를 셌어요. 어미, 첫마디, 자주 쓰는 말까지 다 나와요.</span></figcaption></figure>
         </div>
@@ -247,7 +259,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p3">요즘 뜨는 주제 찾아 줘. "바이브코딩" 이랑 "AI 1인 기업" 으로. 출처랑 날짜 꼭 붙이고, 글감 후보도 뽑아 줘.</pre>
           </div>
-          <p data-i="s3_after">구글 트렌드, 구글이랑 유튜브랑 네이버 검색어 자동완성, 위키백과 조회수를 키 없이 다 보는 거예요. Ego Lite가 있으면 X, 쓰레드도 읽기만 해서 같이 보고요. 네이버 데이터랩은 내가 키를 넣었을 때만 켜지거든요.</p>
+          <p data-i="s3_after">구글 트렌드, 구글이랑 유튜브랑 네이버 검색어 자동완성, 위키백과 조회수를 가입이나 API 키 없이 바로 봐요. Ego Lite가 있으면 X랑 쓰레드에 올라온 글도 읽어서 같이 봐요. 읽기만 하고 아무것도 안 올려요. 네이버 데이터랩까지 보고 싶으신 분만 네이버 무료 키를 넣으면 켜져요.</p>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/trends.jpg" width="1280" height="960" alt="트렌드 화면" data-ia="a3"></div><figcaption><b>REAL OUTPUT</b><span data-i="c3">11월 24일에 돌린 거예요. 위키백과 바이브 코딩 문서 조회수가 올해 3월에 제일 높았어요.</span></figcaption></figure>
         </div>
       </div>
@@ -260,7 +272,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT 4-1</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p4a">바이브코딩 자료 찾아서 정리해 줘. 기사랑 보고서로 찾고, 사실마다 어느 출처에서 왔는지 붙여 줘. 다 하면 research check 로 확인까지.</pre>
           </div>
-          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/research.jpg" width="1280" height="960" alt="자료 정리 화면" data-ia="a4a"></div><figcaption><b>REAL OUTPUT</b><span data-i="c4a">출처 6개, 사실 16개. 16개 전부 출처 문장이랑 이어졌어요. 숫자가 출처랑 다르면 여기서 바로 빨간색으로 떠요.</span></figcaption></figure>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/research.jpg" width="1280" height="960" alt="자료 정리 화면" data-ia="a4a"></div><figcaption><b>REAL OUTPUT</b><span data-i="c4a">출처 6개, 사실 16개. 16개 전부 원문 어느 문장에서 나왔는지 붙었어요. 숫자가 출처랑 다르거나, 늘었다 줄었다가 반대면 여기서 바로 빨간색으로 떠요.</span></figcaption></figure>
           <div class="pc" data-copy>
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT 4-2</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p4b">방금 정리한 자료로 네이버 블로그 글이랑 쓰레드 글 써 줘. 내 말투표(voice.md) 보고 쓰고, 숫자는 자료에 있는 그대로만.</pre>
@@ -273,18 +285,25 @@ html:lang(en) .head h2{letter-spacing:-.025em}
         <div class="step-n"><b>5</b><small lang="en">STEP 05</small></div>
         <div class="step-body">
           <h3 data-i="s5_h">영상 하나로 쓰레드, 블로그, 인스타. 모션그래픽 영상까지</h3>
+          <p class="note" data-i="s5_prep">2단계 폴더에 영상 파일이랑 그 영상 자막을 같은 이름으로 넣어 주세요. 예를 들면 강의2.mp4 랑 강의2.srt 요. 영상이 없으시면 자막만 있어도 글은 나오고, 사진은 카드로 만들어요.</p>
           <div class="pc" data-copy>
-            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-1</span><button class="copy" type="button" data-i="copy">복사</button></div>
-            <pre class="pc-body" tabindex="0" data-i="p5a">이 영상으로 쓰레드, 네이버 블로그, 인스타 글 써 줘. 사진은 영상에서 뽑아서 같이 만들고, 내 말투표 보고 써 줘.</pre>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-1 · BRIEF</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p5brief">강의2.mp4 로 글 쓸 거야. 자막은 강의2.srt 야. 쓰기 전에 글 기획서부터 만들어 줘. 누가 읽는지, 뭘 위한 글인지, 꼭 지킬 내용, 공개해도 되는 것, 다음 행동. 다 채우면 brief --check 로 확인까지.</pre>
           </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/brief.jpg" width="1280" height="960" alt="글 기획서" data-ia="a5brief"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5brief">제 2강 영상으로 만든 기획서예요. 꼭 지킬 내용에 숫자가 있으면 영상에서 제가 한 말이랑 맞춰 봐요. 제목이랑 글이 전부 이걸 따라가요.</span></figcaption></figure>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-2</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p5a">그 기획서대로 강의2.mp4 로 쓰레드, 네이버 블로그, 인스타 글 써 줘. 사진은 영상에서 뽑아서 같이 만들고, 내 말투표(voice.md) 보고 써 줘.</pre>
+          </div>
+          <p class="note" data-i="s5_pics">사진은 이런 걸로 만들어요. 영상에서 고른 선명한 장면, 내가 한 말 그대로 넣은 인용 카드, 출처에 있는 숫자로 만든 숫자 카드, 내 페이지 캡처, 코드로 그린 그림이요. 없는 사람, 없는 화면, 없는 숫자는 안 만들어요.</p>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/posts.jpg" width="1280" height="960" alt="영상 하나로 만든 글과 사진" data-ia="a5a"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5a">제 비주얼 바이브코딩 2강 영상 하나로 나온 글이랑 사진이에요. 사진은 전부 그 영상에서 가져왔어요.</span></figcaption></figure>
           <div class="pc" data-copy>
-            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-2 · WITH CONNECT-AI-MOTION</span><button class="copy" type="button" data-i="copy">복사</button></div>
-            <pre class="pc-body" tabindex="0" data-i="p5b">이 쓰레드 글로 모션그래픽 영상도 만들어 줘. connect-ai-writer motion --render 로 하고, 세로랑 가로 둘 다.</pre>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-3 · WITH CONNECT-AI-MOTION</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p5b">방금 쓴 쓰레드 글로 모션그래픽 영상도 만들어 줘. 세로랑 가로 둘 다 (connect-ai-writer motion).</pre>
           </div>
           <p class="note" data-i="s5_note">이건 우리 다른 AI 직원 connect-ai-motion 이 만들어요. 안 깔려 있으면 <code>npx github:wonseokjung/connect-ai-writer engines</code> 하면 받는 법이 나와요.</p>
           <div class="pair">
-            <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/motion.jpg" width="1280" height="960" alt="모션그래픽 영상 장면들" data-ia="a5b"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5b">4단계 자료로 쓴 쓰레드 글로 만든 20초 영상이에요. 84.6% 는 반올림 안 하고 84.6% 그대로 나와요.</span></figcaption></figure>
+            <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/motion.jpg" width="1280" height="960" alt="모션그래픽 영상 장면들" data-ia="a5b"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5b">앞에서 자료 조사해서 쓴 쓰레드 글로 만든 20초 예시 영상이에요. 84.6% 같은 숫자도 반올림 안 하고 84.6% 그대로 나와요.</span></figcaption></figure>
             <figure class="screen v916"><div class="frame"><video src="../showcase/v02/motion_9x16.mp4" poster="../showcase/v02/motion_9x16_poster.jpg" width="540" height="960" muted loop playsinline autoplay preload="metadata"></video><span class="chip">9:16</span></div></figure>
           </div>
         </div>
@@ -293,12 +312,12 @@ html:lang(en) .head h2{letter-spacing:-.025em}
       <div class="step">
         <div class="step-n"><b>6</b><small lang="en">STEP 06</small></div>
         <div class="step-body">
-          <h3 data-i="s6_h">우리 아이 그림책 동화</h3>
+          <h3 data-i="s6_h">보너스 (선택): 우리 아이 그림책 동화</h3>
           <div class="pc" data-copy>
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p6">우리 아이 잠자리 동화 써 줘. 7살이고 공룡 좋아해. 그림책으로 만들어서 PDF까지.</pre>
           </div>
-          <p data-i="s6_after">한 쪽에 한 장면, 글에 나온 건 그림에도 나오게, 마지막은 교훈이 아니라 첫 장면으로 돌아오게 하는 거예요. 이런 그림책 규칙을 직원이 알아서 다 검사해 주거든요. 그림은 코드로 그린 동물이랑 물건만 써요. 사람은 안 그려요.</p>
+          <p data-i="s6_after">한 쪽에는 한 장면만, 글에 나온 건 그림에도 꼭 나오게, 마지막 장은 교훈 대신 첫 장면으로 돌아오게 해요. 이런 그림책 규칙은 직원이 알아서 검사해요. 그림은 코드로 그린 동물이랑 물건만 쓰고, 사람은 안 그려요. 인쇄용 PDF는 크롬이 있어야 만들어지고요. 크롬이 없어도 바로 열어 볼 수 있는 그림책 파일(book.html)은 나와요.</p>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/story_pages.jpg" width="1824" height="912" alt="그림책 쪽들" data-ia="a6"></div><figcaption><b>REAL OUTPUT</b><span data-i="c6">"토토와 졸린 작은 별", 12쪽짜리예요. 표지, 본문, 끝 쪽까지 이렇게 나와요.</span></figcaption></figure>
         </div>
       </div>
@@ -309,9 +328,10 @@ html:lang(en) .head h2{letter-spacing:-.025em}
           <h3 data-i="s7_h">AI가 쓴 티 지우기</h3>
           <div class="pc" data-copy>
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
-            <pre class="pc-body" tabindex="0" data-i="p7">이 글 AI가 쓴 티 안 나게 고쳐 줘. 내 말투표대로 쓰고, 숫자는 하나도 바꾸지 마. 고친 다음에 humanize --after 로 전후 비교까지.</pre>
+            <pre class="pc-body" tabindex="0" data-i="p7">방금 쓴 네이버 블로그 글(naver/post.md) AI가 쓴 티 안 나게 고쳐 줘. 내 말투표(voice.md)대로 쓰고, 숫자는 하나도 바꾸지 마. 검사할 때는 내 말투표도 같이 줘 (humanize --voice voice.md). 고친 다음에 전후 비교까지 (--after).</pre>
           </div>
-          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/humanize.jpg" width="1280" height="960" alt="고치기 전과 후" data-ia="a7"></div><figcaption><b>REAL OUTPUT</b><span data-i="c7">"~에 대해 알아보겠습니다", "단순히 ~가 아니라", "혁신적인" 같은 말을 찾아서 표시해요. 고친 글은 18개에서 0개가 됐고, 숫자는 하나도 안 바뀌었어요.</span></figcaption></figure>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/humanize.jpg" width="1280" height="960" alt="고치기 전과 후" data-ia="a7"></div><figcaption><b>REAL OUTPUT</b><span data-i="c7">"~에 대해 알아보겠습니다", "단순히 ~가 아니라", "혁신적인" 같은 말을 찾아서 표시해요. 고친 글은 18개에서 0개가 됐고, 숫자는 하나도 안 바뀌었어요. 늘었다를 줄었다로 바꾸면 그것도 잡아요.</span></figcaption></figure>
+          <p class="note" data-i="s7_voice">말투표를 같이 주는 게 중요하거든요. 제가 진짜 자주 쓰는 말은 AI 티가 아니잖아요. 저는 영상에서 "무궁무진" 이라는 말을 진짜로 써요. 말투표를 주면 그건 안 잡아요. 그리고 따옴표 안에 든 말은 예시나 인용이라서 화면에 표시만 하고 고칠 개수에는 안 넣거든요.</p>
         </div>
       </div>
 
@@ -323,7 +343,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p8">네이버 블로그 글 Ego Lite로 글쓰기 화면에 넣고 임시저장까지만 해 줘. 발행은 내가 할게.</pre>
           </div>
-          <p data-i="s8_after">이 직원은 절대 혼자 글을 안 올려요. 로그인도 안 하고, 비밀번호도 안 치거든요. 로그아웃돼 있으면 여러분들이 Ego Lite에서 직접 로그인하시면 돼요.</p>
+          <p data-i="s8_after">이 직원은 절대 혼자 글을 안 올려요. 발행하는 기능이 아예 없거든요. 검사를 통과한 뒤에 따로 손대지 않은 글만 넣어요. 넣기 전에 플랫폼, 계정, 제목, 사진 수를 먼저 보여 주고요. 로그인도 안 하고 비밀번호도 안 쳐요. 로그아웃돼 있으면 Ego Lite에서 직접 로그인하시면 돼요.</p>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/naver_editor.jpg" alt="네이버 블로그 글쓰기 화면에 들어간 글" data-ia="a8"></div><figcaption><b>REAL OUTPUT</b><span data-i="c8">제 계정 네이버 블로그 글쓰기 화면이에요. 제목, 소제목, 문단 사이 사진, 태그까지 들어가고 임시저장에서 멈춰요.</span></figcaption></figure>
         </div>
       </div>
@@ -337,10 +357,11 @@ html:lang(en) .head h2{letter-spacing:-.025em}
         <h2 id="stuck-t" data-i="h_stuck"><em>막히면</em></h2>
       </div>
       <dl class="faq">
-        <div><dt data-i="q1">그림이 하나도 안 나와요</dt><dd data-i="a1t">크롬이 있어야 그림을 만들어요. <code>npx github:wonseokjung/connect-ai-writer doctor</code> 해 보시면 뭐가 빠졌는지 나와요.</dd></div>
-        <div><dt data-i="q2">검사에서 숫자 때문에 막혀요</dt><dd data-i="a2t">출처에 없는 숫자라서 그렇거든요. 규칙을 끄는 게 아니라 글을 고치셔야 돼요. <code>check --trace</code> 한번 해 보시면 숫자마다 어디서 왔는지 다 보여 줘요.</dd></div>
-        <div><dt data-i="q3">트렌드에 구글 관심도가 비어 있어요</dt><dd data-i="a3t">구글이 잠깐 막을 때가 있거든요. 조금 있다가 다시 한번 해 보세요. 나머지 신호는 그대로 다 나와요.</dd></div>
-        <div><dt data-i="q4">네이버가 작성 중인 글을 이어서 쓸지 물어봐요</dt><dd data-i="a4t">그건 여러분들 글이라서 직원이 대신 안 고르거든요. Ego Lite 열어서 확인이나 취소를 직접 누르시고 다시 한번 시켜 보세요.</dd></div>
+        <div><dt data-i="q1">그림이 하나도 안 나와요</dt><dd data-i="a1t">사진 카드는 크롬이 있어야 만들어요. 크롬이 없어도 글이랑 미리보기는 나오고, 못 만든 사진은 이유랑 같이 검사 결과에 떠요. 에이전트한테 "doctor 돌려서 뭐가 빠졌는지 알려 줘" 라고 해 보세요.</dd></div>
+        <div><dt data-i="q0">영상에 자막이 없대요</dt><dd data-i="a0t">글은 자막에서 내가 한 말을 읽어서 써요. 영상 옆에 같은 이름의 .srt 를 두시거나, 유튜브에 올린 영상이면 YouTube Studio > 자막 > 언어 > 점 세 개 > 다운로드 > .srt 로 받아서 넣어 주세요.</dd></div>
+        <div><dt data-i="q2">검사에서 숫자 때문에 막혀요</dt><dd data-i="a2t">출처에 없는 숫자거나, 같은 숫자인데 늘었다 줄었다가 출처랑 반대라서 그렇거든요. 규칙을 끄는 게 아니라 글을 고치셔야 돼요. "숫자마다 어디서 왔는지 보여 줘" 라고 하시면 다 보여 줘요. 이 검사는 숫자랑 인용, 그리고 늘었는지 줄었는지를 보는 거거든요. 문장 뜻이 다 맞는지는 마지막에 직접 한 번 읽어 주세요.</dd></div>
+        <div><dt data-i="q3">트렌드에 구글 관심도가 비어 있어요</dt><dd data-i="a3t">짧은 시간에 여러 번 찾으면 구글이 잠깐 막을 때가 있거든요. 조금 있다가 다시 해 보세요. 그동안에도 자동완성, 위키백과 조회수 같은 나머지 트렌드 자료는 그대로 다 나와요.</dd></div>
+        <div><dt data-i="q4">네이버가 작성 중인 글을 이어서 쓸지 물어봐요</dt><dd data-i="a4t">그건 여러분들 글이라서 직원이 아무것도 안 누르고, 편집 화면을 열어 둔 채로 멈춰요. Ego Lite에서 확인이나 취소를 직접 누르시고 다시 한번 시켜 보세요.</dd></div>
         <div><dt data-i="q5">모션그래픽 영상이 안 만들어져요</dt><dd data-i="a5t">connect-ai-motion 이 깔려 있어야 돼요. <code>npx github:wonseokjung/connect-ai-writer engines</code> 로 확인해 보세요.</dd></div>
       </dl>
     </div>
@@ -354,7 +375,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
       </div>
       <div class="hw">
         <p data-i="hw1">내 영상 하나로 말투표 만들고, 요즘 뜨는 주제 하나 골라서 자료 조사부터 네이버 블로그 임시저장까지 해 보세요. 아이가 있으시면 동화도 한 권 만들어 주시고요.</p>
-        <p class="hint" data-i="hw2">다 하시면 결과 폴더의 index.html 이랑 sheet.jpg 를 캡처해 두세요. 내 말투로 나왔는지, 숫자가 다 출처에 있는지 그 두 개만 보시면 돼요.</p>
+        <p class="hint" data-i="hw2">다 하시면 에이전트한테 "방금 만든 결과 폴더에서 index.html 열어 줘" 라고 하세요. 플랫폼별 글이랑 사진이 한 화면에 열려요. 네 가지만 보시면 돼요. 검색어가 제목 앞에 있는지, 플랫폼 글자 수에 맞는지, 숫자가 출처랑 똑같은지, 내 말투로 나왔는지. 그리고 결과 폴더에 같이 생기는 한 장짜리 요약 사진(sheet.jpg)이랑 index.html 화면을 캡처해 두세요.</p>
       </div>
     </div>
   </section>
@@ -374,7 +395,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
 <footer>
   <div class="shell">
     <p class="brand">CONNECT AI LAB · <em data-i="f1">모두를 위한 AI 교육</em></p>
-    <p class="fine" lang="en">CONNECT-AI-WRITER · MIT · MADE BY AI MENTOR JAY</p>
+    <p class="fine" lang="en">CONNECT-AI-WRITER · MIT + COMMONS CLAUSE · MADE BY AI MENTOR JAY</p>
   </div>
 </footer>
 <div class="toast" role="status" aria-live="polite"></div>
@@ -384,60 +405,72 @@ html:lang(en) .head h2{letter-spacing:-.025em}
   var EN = {
     title: 'One sentence in, a post out · connect-ai-writer textbook',
     h1: 'One sentence.<br><em>A post.</em>',
-    lead: 'Writing one blog post takes a lot. You find what is trending, you dig up sources, you write it in your own voice, you make the pictures. I put all of that into one AI writing employee. Copy the eight prompts below, in order, and paste them to your agent.',
+    lead: 'Solo founders and YouTubers: one video means a blog post, a Threads post and an Instagram post, with pictures. I put all of that into one AI writing employee. Copy the prompts below, in order, and paste them to your agent.',
     t1: 'What you make', t2: 'Step by step', t3: 'If you get stuck', t4: 'Assignment',
     hero_alt: 'One sentence in: trends, research, a blog post, pictures, a picture book, a motion video',
     hero_cap: 'Every screen on this page is a real run. Nothing is mocked up.',
     h_make: 'What you <em>make today</em>',
-    m1: 'Your own voice sheet, from your video subtitles',
-    m2: 'What is trending now, and research where every fact has its source',
-    m3: 'Threads, Naver blog and Instagram posts with pictures, and a motion graphics video of the same post',
-    m4: 'A picture book for your kid, as a printable PDF',
-    m5: 'A rewrite with no AI tells, and a Naver blog draft',
+    m1: 'Naver blog, Threads and Instagram posts from one of your videos, in your voice, with pictures',
+    m2: 'Your own voice sheet from your video subtitles, and a one-page editorial brief',
+    m3: 'What is trending now, and research with a source on every number. A motion graphics video of the same post',
+    m4: 'A rewrite with no AI tells, and a Naver blog draft',
+    m5: 'Bonus (optional): a picture book for your kid, as a printable PDF',
     h_steps: 'Step <em>by step</em>', prep_h: 'What you need',
-    prep1: 'Node.js 20.9 or newer (type <code>node -v</code> in a terminal)',
+    prep1: 'Node.js 20.19 or newer. Get it at <a href="https://nodejs.org">nodejs.org</a> (the LTS button, the long-term stable version). Not sure you have it? First ask your agent "check if Node.js is installed on my computer"',
     prep2: 'One coding agent: Claude Code, Codex, Antigravity or Cursor',
-    prep3: 'Chrome (for the pictures; nothing is downloaded)',
-    prep4: 'Ego Lite (only for step 8 drafts; everything else works without it)',
+    prep3: 'Chrome, for the picture cards. Without it the posts and previews still come out',
+    prep4: 'Ego Lite (only to read X and Threads in step 3 and to save drafts in step 8): a browser the AI employee uses next to you, with your own logins. Get it at <a href="https://lite.ego.app">lite.ego.app</a>. Everything else works without it',
+    prep_words: 'The terminal is the black window where you type commands; you do not need it, your agent types for you. No API key (a paid service key) is needed. The English words in the prompts (voice, research check) are name tags that help the agent find the right feature. No need to learn them; copy the prompts as they are.',
     copy: 'Copy', copied: 'Copied. Paste it to your agent.',
-    s1_h: 'Bring in the writing employee', s1_n: 'Say this to your agent.',
+    s1_h: 'Bring in the writing employee', s1_n: 'Paste this line into your agent\'s chat. When the install is done, open a new chat.',
     p1: 'Run npx github:wonseokjung/connect-ai-writer install-skill',
-    s1_after: 'If it asks "Ok to proceed?", answer <code>y</code>. Then open a new chat.',
-    a1: 'install-skill output', c1: 'A real install. Ten skill files come with it.',
-    s2_h: 'Make your voice sheet', s2_n: 'AI writing reads wrong because it is not your voice. So first it counts how you really talk, from your own subtitles.',
+    s1_after: 'If your agent asks whether it may install ("Ok to proceed?"), say yes (<code>y</code>). The tool is installed once in <code>.connect-ai/connect-ai-writer</code> inside your home folder and stays there.',
+    a1: 'install-skill output', c1: 'A real install. The skill files come with it.',
+    s1_demo: 'In the new chat, try the example once. No Chrome needed.',
+    p1b: 'Run connect-ai-writer demo. If there is no Chrome, skip the picture cards. When done, open index.html in the result folder.',
+    s1_where: 'Results always go to an <code>out/date_title</code> folder. Not sure where? Say "open index.html in the result folder you just made".',
+    s2_h: 'Make your voice sheet', s2_n: 'AI writing reads wrong because it is not your voice. So first it pulls out the endings and habits you really use, from your own subtitles.',
+    s2_prep: 'First make a folder (for example "my-writing" on your desktop), put your video subtitle files (.srt) in it, and open your agent in that folder. For a video on YouTube: YouTube Studio > Subtitles > the language > the three dots > Download > .srt.',
     p2: 'Make my voice sheet from all my video subtitles (.srt) in this folder. Use connect-ai-writer voice and save it as voice.md.',
+    p2b: 'I do not have my own subtitles yet. Make a voice sheet from the example subtitles that come with connect-ai-writer (sample.srt) and save it as voice.md.',
     a2: 'Voice sheet', c2: 'Made from five of my lesson and live subtitles: 623 sentences out of 2,161 lines. Endings, first words and favourite words, all counted.',
     s3_h: 'Find what is trending', p3: 'Find what is trending for "vibe coding" and "AI one-person company". Put a source and a date on everything, and give me post ideas.',
-    s3_after: 'It reads Google Trends, Google, YouTube and Naver search suggestions and Wikipedia views with no key. With Ego Lite it also reads X and Threads, read only. Naver DataLab turns on only with your own key.',
+    s3_after: 'It reads Google Trends, Google, YouTube and Naver search suggestions and Wikipedia views with no sign-up and no API key. With Ego Lite it also reads posts on X and Threads; it only reads and never posts. If you also want Naver DataLab, add your own free Naver key.',
     a3: 'Trends page', c3: 'Run on November 24. Views of the Korean Wikipedia page on vibe coding peaked this March.',
     s4_h: 'Research with sources, then a blog post from it',
     p4a: 'Research vibe coding. Use articles and reports, and put the source on every fact. When done, confirm with research check.',
-    a4a: 'Fact sheet', c4a: 'Six sources, sixteen facts, all sixteen tied to a source sentence. A number that differs from its source shows up red right here.',
+    a4a: 'Fact sheet', c4a: 'Six sources, sixteen facts, each with the source sentence it came from. A number that differs from its source, or goes the other way (up vs down), shows up red right here.',
     p4b: 'Write a Naver blog post and a Threads post from that research. Follow my voice sheet (voice.md), and use numbers only as the research has them.',
     a4b: 'Naver blog preview', c4b: 'A number that is not in the research, or a link it never read, fails the check. The sources go at the end on their own.',
     s5_h: 'One video to Threads, blog and Instagram. And a motion video',
-    p5a: 'Write a Threads post, a Naver blog post and an Instagram post from this video. Make the pictures from the video, and follow my voice sheet.',
+    s5_prep: 'Put the video and its subtitles in the step 2 folder with the same name, for example lesson2.mp4 and lesson2.srt. No video? The subtitles alone give you the posts, with cards for pictures.',
+    p5brief: 'I will write from lesson2.mp4; its subtitles are lesson2.srt. Before writing, make the editorial brief: who reads it, what it is for, the claims to keep, what may be public, the next action. When it is filled, confirm with brief --check.',
+    a5brief: 'Editorial brief', c5brief: 'The brief from my lesson 2 video. Numbers in the claims are checked against what I said in the video. Titles and posts all follow it.',
+    p5a: 'Following that brief, write a Threads post, a Naver blog post and an Instagram post from lesson2.mp4. Make the pictures from the video, and follow my voice sheet (voice.md).',
+    s5_pics: 'The pictures are: sharp frames picked from your video, quote cards with your exact words, number cards from numbers in the source, captures of your own page, and pictures drawn in code. Never a made-up person, screen or number.',
     a5a: 'Posts and pictures from one video', c5a: 'Posts and pictures from one video, lesson 2 of my Visual Vibe Coding course. Every picture comes from that video.',
-    p5b: 'Make a motion graphics video from this Threads post too. Use connect-ai-writer motion --render, vertical and landscape.',
+    p5b: 'Make a motion graphics video from the Threads post you just wrote, vertical and landscape (connect-ai-writer motion).',
     s5_note: 'Our other AI employee, connect-ai-motion, makes this one. If it is not installed, <code>npx github:wonseokjung/connect-ai-writer engines</code> tells you how to get it.',
-    a5b: 'Scenes of the motion video', c5b: 'A 20-second video from the Threads post written in step 4. 84.6% shows as 84.6%, never rounded.',
-    s6_h: 'A picture book for your kid', p6: 'Write a bedtime story for my kid. Age 7, loves dinosaurs. Make it a picture book, with a PDF.',
-    s6_after: 'One scene per page, anything the words name is in the picture, and the end comes back to the first scene instead of a lesson. The employee checks these picture-book rules itself. Pictures use code-made animals and things only, never people.',
+    a5b: 'Scenes of the motion video', c5b: 'A 20-second example video from the Threads post written from the research earlier. 84.6% shows as 84.6%, never rounded.',
+    s6_h: 'Bonus (optional): a picture book for your kid', p6: 'Write a bedtime story for my kid. Age 7, loves dinosaurs. Make it a picture book, with a PDF.',
+    s6_after: 'One scene per page, anything the words name is in the picture, and the last page comes back to the first scene instead of a lesson. The employee checks these picture-book rules itself. Pictures use code-made animals and things only, never people. The printable PDF needs Chrome; without Chrome you still get the picture book as a page you can open (book.html).',
     a6: 'Picture book pages', c6: '"Toto and the Sleepy Little Star", 12 pages. Cover, pages and the end page come out like this.',
-    s7_h: 'Take out the AI tells', p7: 'Rewrite this so it does not sound like an AI wrote it. Follow my voice sheet and do not change a single number. Then compare before and after with humanize --after.',
-    a7: 'Before and after', c7: 'It marks stock openers, "not just X but Y" and hype words. The rewrite went from 18 marks to 0, and every number stayed the same.',
+    s7_h: 'Take out the AI tells', p7: 'Rewrite the Naver blog post you just wrote (naver/post.md) so it does not sound like an AI wrote it. Follow my voice sheet (voice.md) and do not change a single number. Give my voice sheet to the check too (humanize --voice voice.md). Then compare before and after (--after).',
+    a7: 'Before and after', c7: 'It marks stock openers, "not just X but Y" and hype words. The rewrite went from 18 marks to 0, and every number stayed the same. Turning "went up" into "went down" is caught too.',
+    s7_voice: 'Giving it your voice sheet matters. A word you really say a lot is not an AI tell. I really say "무궁무진" in my videos. With my voice sheet it is not marked. Words inside double quotes are examples or quotes, so they are shown but not counted as things to fix.',
     s8_h: 'Save a draft with Ego Lite, nothing more', p8: 'Put the Naver blog post into the editor with Ego Lite and save it as a draft. I will publish it myself.',
-    s8_after: 'The employee never posts on its own. It does not log in or type a password. If you are logged out, log in yourself inside Ego Lite.',
+    s8_after: 'The employee never posts on its own: there is no publish feature at all. It only takes a post that passed the check and has not changed since, and shows the platform, account, title and picture count first. It does not log in or type a password. If you are logged out, log in yourself inside Ego Lite.',
     a8: 'The post inside the Naver blog editor', c8: 'My own Naver blog editor: title, headings, pictures between paragraphs, tags, and it stops at the draft.',
     h_stuck: '<em>If you get stuck</em>',
-    q1: 'No pictures come out', a1t: 'Pictures need Chrome. Run <code>npx github:wonseokjung/connect-ai-writer doctor</code> to see what is missing.',
-    q2: 'The check stops on a number', a2t: 'That number is not in the source. Fix the words, not the rule. <code>check --trace</code> shows where every number comes from.',
-    q3: 'Google interest is empty in trends', a3t: 'Google sometimes blocks for a while. Try again a bit later. The other signals still come in.',
-    q4: 'Naver asks whether to continue an unfinished post', a4t: 'That is your post, so the employee does not choose for you. Open Ego Lite, pick confirm or cancel yourself, and ask again.',
+    q1: 'No pictures come out', a1t: 'Picture cards need Chrome. Without it the posts and previews still come out, and each missing picture is listed with why. Ask your agent: "run doctor and tell me what is missing".',
+    q0: 'It says the video has no subtitles', a0t: 'The posts are written from what you said, read from the subtitles. Put a .srt with the same name next to the video, or for a YouTube video: YouTube Studio > Subtitles > the language > the three dots > Download > .srt.',
+    q2: 'The check stops on a number', a2t: 'That number is not in the source, or it goes the other way (up vs down) from the source. Fix the words, not the rule. Say "show me where every number comes from". The check covers numbers, quotes and direction, not every meaning, so read it once yourself.',
+    q3: 'Google interest is empty in trends', a3t: 'Google blocks for a while when you ask many times in a short time. Try again a bit later. Meanwhile the search suggestions and Wikipedia views still come in.',
+    q4: 'Naver asks whether to continue an unfinished post', a4t: 'That is your post, so the employee presses nothing and leaves the editor open. Pick confirm or cancel yourself in Ego Lite, then ask again.',
     q5: 'The motion video is not made', a5t: 'connect-ai-motion has to be installed. Check with <code>npx github:wonseokjung/connect-ai-writer engines</code>.',
     h_hw: '<em>Assignment</em>',
     hw1: 'Make your voice sheet from one of your videos, pick one trending topic, and go from research all the way to a Naver blog draft. If you have kids, make them a picture book too.',
-    hw2: 'When you are done, keep a screenshot of index.html and sheet.jpg in the run folder. Look at just two things: does it sound like you, and is every number in a source.',
+    hw2: 'When you are done, say to your agent "open index.html in the result folder you just made". Every platform\'s post and pictures open on one page. Look at four things: the search words at the front of the title, each platform\'s length, every number matching its source, and your own voice. Keep the one-picture summary (sheet.jpg) made in the result folder, and a screenshot of index.html.',
     b1: 'See it on GitHub', b2: 'See every output', b3: 'Visual Vibe Coding course', f1: 'AI education for everyone'
   };
   var KO = {}, nodes = document.querySelectorAll('[data-i]'), alts = document.querySelectorAll('[data-ia]');

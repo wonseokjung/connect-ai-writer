@@ -1,9 +1,9 @@
 # Skill: write for each platform (from a video, subtitles, notes, a page, or a research folder)
 
-1. Start: `CW start <source> --for threads,naver,x --voice <voice.md>`. Sources: a video (its .srt next to it, or `--srt my.srt`), `.srt`/`.vtt`/`.txt`/`.md`, a YouTube link (needs yt-dlp), the user's own page, or a research folder. It prints the run folder `out/<date>_<name>/`.
+1. Start: `CW start <source> --for threads,naver,x --voice <voice.md>`. Sources: a video (its .srt next to it, or `--srt my.srt`), `.srt`/`.vtt`/`.txt`/`.md`, a YouTube link (needs yt-dlp), the user's own page, or a research folder. It prints the run folder `out/<date>_<name>/` (a new folder each time; `--resume` continues the same one). The user's own photos or local pages: `--files a.jpg,page.html` (copied into the run folder; local files outside it are never used).
    - No voice sheet yet and the user has their own transcripts (lives, lectures)? `CW voice <files...> --name "<their name>" --out voice.md`, then `--voice voice.md`. Transcripts stay on their computer.
 2. Read `brief.md`, `source/source.txt`, `source/voice.md`, and look at `source/frames.jpg` (sharp frames with their times) if there is a video.
-3. Plan (skills/plan-hooks.md), then write each `<platform>/post.md` (replace the `{{write}}` line):
+3. Editorial brief first (skills/editorial-brief.md: reader, purpose, claims to keep, what may be public, next action), then plan (skills/plan-hooks.md), then write each `<platform>/post.md` (replace the `{{write}}` line). Every post keeps the brief's claims and ends with its next action:
    - Threads and X: posts separated by a line with only `---`. Blog platforms: `# Title`, `## Heading`, a picture between paragraphs, `keyword: ...`. Last line `tags: a, b`.
    - Pictures, one line each where the picture goes:
      `[image: frame 05:45 "caption"]`, `[image: quote "exact words from source.txt" 10:17]`, `[image: stat "15" "what it is" 11:49]`, `[image: title "headline" "small line"]`, `[image: steps "one" "two" "three"]`, `[image: page https://their.site "caption"]`, `[image: file photo.jpg "caption"]` (also a trends chart png).

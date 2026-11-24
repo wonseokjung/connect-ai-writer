@@ -58,7 +58,7 @@ ok('platforms.json: 7 platforms with limits, picture size and where each limit c
   assert.equal(src.title, '제목'); assert.equal(src.kind, 'notes'); assert.equal(src.video, null);
   const vid = path.join(tmp, 'clip.mp4');
   fs.writeFileSync(vid, '');
-  await assert.rejects(() => SRC.readSource([vid]), /No subtitles next to/);
+  await assert.rejects(() => SRC.readSource([vid]), /No subtitles for clip\.mp4[\s\S]*--srt my\.srt[\s\S]*YouTube Studio/);
   ok('sources: notes file; a video without subtitles asks for --srt');
 }
 
@@ -165,18 +165,20 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const {POSTABLE} = await imp('lib/post.mjs');
   const src = fs.readFileSync(path.join(KIT, 'lib/post.mjs'), 'utf8');
   assert.doesNotMatch(src, /type=.?password|\.fill\([^)]*pass|otp|verification code/i);
-  assert.match(src, /if \(P\.publish\)/);
+  assert.doesNotMatch(src, /P\.publish|tweetButton|'published'|confirmPublish/, 'no publish path left in post.mjs');
   assert.deepEqual(POSTABLE, ['threads', 'x', 'naver']);
-  ok('post: a new space of our own each time, closed with finish({keep: []}); never claims another space; publish only behind P.publish');
-  const {post, confirmPublish} = await imp('lib/post.mjs');
+  ok('post: a new space of our own each time, closed with finish({keep: []}); never claims another space; no publish path at all');
+  const {post, NO_PUBLISH} = await imp('lib/post.mjs');
   const rd = path.join(tmp, 'run');
   fs.mkdirSync(path.join(rd, 'threads'), {recursive: true});
   fs.writeFileSync(path.join(rd, 'threads', 'post.json'), JSON.stringify({parts: [{text: 'a', images: []}]}));
   fs.writeFileSync(path.join(rd, 'threads', 'check.md'), '# c\n\nFIX the number 3 is not in your source.\n');
   await assert.rejects(() => post(rd, 'threads', {log: quiet}), /still has things to fix/);
   await assert.rejects(() => post(rd, 'instagram', {log: quiet}), /works for threads, x, naver/);
-  if (!process.stdin.isTTY) await assert.rejects(() => confirmPublish('threads'), /needs a person/);
-  ok('post: refuses a draft that has FIX lines, refuses unknown platforms, --publish needs a person typing');
+  await assert.rejects(() => post(rd, 'threads', {publish: true, log: quiet}), (e) => e.message === NO_PUBLISH);
+  const cli = spawnSync(process.execPath, [path.join(KIT, 'bin', 'cli.mjs'), 'post', rd, '--to', 'threads', '--publish'], {encoding: 'utf8'});
+  assert.equal(cli.status, 1); assert.match(cli.stderr, /no publish step/);
+  ok('post: refuses a draft that has FIX lines, refuses unknown platforms, --publish is refused (publishing is your own click)');
 }
 
 // ---------- installer ----------
@@ -184,7 +186,9 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const home = path.join(tmp, 'home');
   fs.mkdirSync(path.join(home, '.claude'), {recursive: true});
   fs.mkdirSync(path.join(home, '.codex'), {recursive: true});
-  const list = installSkill({home, env: {}, log: quiet});
+  const npmCalls = [];
+  const fakeNpm = (args, {cwd}) => { npmCalls.push([args.join(' '), cwd]); fs.mkdirSync(path.join(cwd, 'node_modules'), {recursive: true}); return {code: 0, out: ''}; };
+  const list = installSkill({home, env: {}, log: quiet, npm: fakeNpm});
   const dest = path.join(home, '.claude', 'skills', 'connect-ai-writer');
   assert.ok(fs.existsSync(path.join(dest, 'SKILL.md')));
   assert.ok(fs.existsSync(path.join(home, '.agents', 'skills', 'connect-ai-writer', 'SKILL.md')));
@@ -192,12 +196,37 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const other = path.join(home, '.cursor', 'skills', 'connect-ai-writer');
   fs.mkdirSync(other, {recursive: true});
   fs.writeFileSync(path.join(other, 'SKILL.md'), 'someone else');
-  const l2 = installSkill({agent: 'cursor', home, env: {}, log: quiet});
+  const l2 = installSkill({agent: 'cursor', home, env: {}, log: quiet, npm: fakeNpm});
   assert.equal(l2[0].action, 'skip');
+  // the runtime: a copy of the kit that stays, outside any npx cache, with its own npm ci
+  const ver = JSON.parse(fs.readFileSync(path.join(KIT, 'package.json'), 'utf8')).version;
+  const marker = JSON.parse(fs.readFileSync(path.join(dest, '.connect-ai-writer.json'), 'utf8'));
+  const rtDir = path.join(home, '.connect-ai', 'connect-ai-writer', ver);
+  assert.equal(marker.kit, rtDir); assert.equal(marker.bin, path.join(rtDir, 'bin', 'cli.mjs'));
+  assert.ok(fs.existsSync(marker.bin) && fs.existsSync(path.join(rtDir, 'lib', 'run.mjs')) && fs.existsSync(path.join(rtDir, 'package-lock.json')));
+  assert.equal(npmCalls.length, 1, 'npm ci once; the second install reuses it');
+  assert.match(npmCalls[0][0], /^ci --omit=dev/); assert.equal(npmCalls[0][1], rtDir);
+  assert.match(marker.fallback, /^npx github:wonseokjung\/connect-ai-writer#(v\d|[0-9a-f]{40})/);
+  const skillMd = fs.readFileSync(path.join(dest, 'SKILL.md'), 'utf8');
+  assert.ok(skillMd.includes(JSON.stringify(marker.bin)), 'SKILL.md names the full bin path');
+  assert.ok(fs.existsSync(path.join(dest, 'NOTICE.md')), 'NOTICE travels with the skill');
   removeSkill({home, env: {}, log: quiet});
   assert.ok(!fs.existsSync(dest));
   assert.equal(fs.readFileSync(path.join(other, 'SKILL.md'), 'utf8'), 'someone else');
   ok('install-skill: copies into Claude Code and the shared agents folder; never touches a folder that is not ours');
+  ok('install-skill: the kit is copied to ~/.connect-ai/connect-ai-writer/<version> with npm ci --omit=dev; SKILL.md and the marker name that bin; NOTICE copied');
+  // where it came from: the npx lock of a GitHub install gives the exact commit
+  const fakeNpx = path.join(tmp, '_npx', 'abc123', 'node_modules');
+  fs.mkdirSync(path.join(fakeNpx, 'connect-ai-writer'), {recursive: true});
+  const shaX = 'a'.repeat(40);
+  fs.writeFileSync(path.join(fakeNpx, '.package-lock.json'), JSON.stringify({packages: {'node_modules/connect-ai-writer': {resolved: `git+ssh://git@github.com/wonseokjung/connect-ai-writer.git#${shaX}`}}}));
+  const IN = await imp('lib/install.mjs');
+  assert.equal(IN.sourceRef(path.join(fakeNpx, 'connect-ai-writer')), shaX);
+  assert.ok(IN.inNpxCache(path.join(fakeNpx, 'connect-ai-writer')));
+  assert.throws(() => installSkill({agent: 'nope', home, env: {}, log: quiet, npm: fakeNpm}), /unknown agent/);
+  const bad = spawnSync(process.execPath, [path.join(KIT, 'bin', 'cli.mjs'), 'install-skill', '--agent', 'nope', '--no-runtime'], {encoding: 'utf8', env: {...process.env, HOME: home, CONNECT_AI_HOME: path.join(home, '.connect-ai')}});
+  assert.equal(bad.status, 1);
+  ok('install-skill: pins the GitHub commit from the npx lock; an unknown --agent (nothing to install) exits 1');
 }
 
 // ---------- pictures end to end ----------
@@ -254,6 +283,8 @@ else {
   await naverTests({ok, assert, imp, tmp});
   const {skillTests} = await import(path.join(KIT, 'tests', 'skills.mjs'));
   await skillTests({ok, skip, assert, imp, tmp, KIT, findChrome});
+  const {v03Tests} = await import(path.join(KIT, 'tests', 'v03.mjs'));
+  await v03Tests({ok, skip, assert, imp, tmp, KIT, findChrome});
 }
 if (!hasFfmpeg()) skip('frames from a video (no ffmpeg)');
 else {

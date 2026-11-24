@@ -10,7 +10,7 @@ process.removeAllListeners('warning');
 process.on('warning', (w) => { if (w.name !== 'ExperimentalWarning') console.error(w.message); });
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = ['for', 'voice', 'srt', 'video', 'out', 'title', 'slug', 'theme', 'only', 'to', 'name', 'blog-id', 'frames', 'writer', 'agent', 'dir', 'age', 'pages', 'lang', 'geo', 'listen', 'screens', 'after', 'by', 'kw', 'from'];
+const VALUE_FLAGS = ['for', 'voice', 'srt', 'video', 'out', 'title', 'slug', 'theme', 'only', 'to', 'name', 'blog-id', 'frames', 'writer', 'agent', 'dir', 'age', 'pages', 'lang', 'geo', 'listen', 'screens', 'after', 'by', 'kw', 'from', 'files'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -19,7 +19,9 @@ const opt = (n, d = null) => {
 const pos = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && VALUE_FLAGS.includes(argv[i - 1].slice(2))));
 const cmd = flag('help') || argv.includes('-h') ? 'help' : flag('version') || argv.includes('-v') ? 'version' : pos[0] || 'help';
 const log = (...a) => console.log(...a);
-const show = (f) => { const r = path.relative(process.cwd(), f); return r.startsWith('..') ? f : r; };
+// a path you can paste back into a terminal: quoted when it has spaces, 한글 or other special letters
+const q = (f) => (/^[\w@%+=:,./-]+$/.test(f) ? f : JSON.stringify(f));
+const show = (f) => { const r = path.relative(process.cwd(), f); return q(r.startsWith('..') || !r ? f : r); };
 
 function hello() {
   log(banner());
@@ -57,40 +59,47 @@ function summary(r) {
     if (fails.length + warns.length > 14) log(dimmed(`  ... all of it in ${show(path.join(r.runDir, 'check.md'))}`));
   }
   log('');
-  log(`  preview  ${path.join(r.runDir, 'index.html')}`);
-  if (r.sheet) log(`  sheet    ${r.sheet}`);
-  log(`  hand-off ${path.join(r.runDir, 'handoff')}   (for connect-ai-marketer; nothing is posted)`);
+  log(`  result   ${q(r.runDir)}`);
+  log(`  preview  ${q(path.join(r.runDir, 'index.html'))}`);
+  if (r.sheet) log(`  sheet    ${q(r.sheet)}`);
+  log(`  hand-off ${q(path.join(r.runDir, 'handoff'))}   (for connect-ai-marketer; nothing is posted)`);
   log(fails.length ? dimmed('  고칠 게 남아 있어요. 위에 FIX 줄을 고치고 build 를 한 번 더 돌려 주세요.') : dimmed('  다 됐어요. 미리보기를 한번 보세요. 올리는 건 직접 확인하신 다음에만 해요.'));
 }
 
 const HELP = `
   skills    research · trends · plan · write · story · humanize · check (fact-check) · repurpose
 
-  npx ${KIT_NAME} demo                       try it on the example notes (no video, no AI, no account)
+  npx ${KIT_NAME} demo                       try it on the example notes (no video, no AI, no account; no Chrome needed)
   npx ${KIT_NAME} start <source> --for threads,naver,x
                                              read your source, make out/<date>_<name>/ with a brief and one post.md per platform
   npx ${KIT_NAME} build [run]                post.md -> pictures, check, preview.html, post.txt (latest run if no folder)
   npx ${KIT_NAME} check [run]                only the text checks, fast
+  npx ${KIT_NAME} brief [run] (--check)      the editorial brief: reader, purpose, claims to keep, what may be public, next action
   npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in Ego Lite and stop before the post button
   npx ${KIT_NAME} voice <your transcripts...> --out voice.md   a voice sheet from your own words
   npx ${KIT_NAME} research "topic" [links or files...]   sources with dates + a fact sheet (research add | research check)
   npx ${KIT_NAME} trends "words" ["more words"]           what people search and post now, with sources and dates
   npx ${KIT_NAME} plan [run] (--score)        titles and first lines to choose from, scored
   npx ${KIT_NAME} story "7살, 공룡, 잠자리 동화" --age 7   a picture book: story.md -> book.html, pages, PDF
-  npx ${KIT_NAME} humanize <file> [--after rewrite.md]  what sounds like an AI; with --after, proves facts were kept
-  npx ${KIT_NAME} check [run] --trace         where every number in your posts comes from
+  npx ${KIT_NAME} humanize <file> [--after rewrite.md]  what sounds like an AI; with --after, checks numbers, quotes, names and up/down words were kept
+  npx ${KIT_NAME} check [run] --trace         where every number in your posts comes from (numbers, quotes and up/down words; not a meaning check)
   npx ${KIT_NAME} motion [run] --from threads (--render)   a motion graphics video from the post, made by connect-ai-motion
   npx ${KIT_NAME} engines                    our other AI employees it works with, found or not
   npx ${KIT_NAME} install-skill              add the agent skill (Claude Code, Codex, Antigravity, Cursor)
   npx ${KIT_NAME} platforms | themes | doctor
 
   sources   a video (its .srt next to it, or --srt), .srt / .vtt / .txt / .md, a YouTube link (needs yt-dlp), or your own page's link
-  start     --for threads,naver,x,linkedin,instagram,tistory,brunch | all     --voice voice.md     --video my.mp4 (frames for a transcript)
-            --title "..."  --out out  --frames 16 (sharp frames to choose from, 0 = none)  --download-video (YouTube, for frames)
+  start     --for threads,naver,x,linkedin,instagram,tistory,brunch | all | all,newsletter     --voice voice.md
+            --srt my.srt (subtitles of the video; or my.srt next to my.mp4)   --video my.mp4 (frames for a transcript)
+            --files photo.jpg,page.html (your own pictures/pages, copied into the run folder)   --resume (continue the same run folder)
+            --title "..."  --slug name  --out out  --frames 16 (sharp frames to choose from, 0 = none)  --download-video (YouTube, for frames)
   write     [run] --writer "claude -p"       optional: a headless agent writes every post.md (normally your agent in chat does)
-  build     --theme default|paper|my-theme.json   --only threads,x
+            runs without a shell; a writer command is read only from this flag or ~/.connect-ai/connect-ai-writer/writer.config.json
+  build     --theme default|paper|my-theme.json   --only threads,x   --no-pictures (text, check and preview only; needs no Chrome)
   post      --to threads|x|naver  --blog-id <naver id>  --leave-open (keep the filled editor open for you)
-            --no-save (do not press the draft save)  --publish (asks you to type the platform name first)
+            --no-save (do not press the draft save)  --drafts-shot (Naver: also a screenshot of your drafts list)
+            only a draft that build checked and that has not changed since; publishing is always your own click
+            exit codes: 0 done, 1 error, 3 logged out, 4 no post box found, 5 waiting for your choice in the editor
   research  start a run from it: start <research folder> --for naver,newsletter (posts are checked against the fact sheet)
   trends    --geo KR  --lang ko  --listen x,threads,youtube (Ego Lite, read only)  --no-google
             Naver DataLab turns on with your own NAVER_CLIENT_ID and NAVER_CLIENT_SECRET
@@ -107,17 +116,20 @@ async function main() {
       fs.mkdirSync(path.join(dir, 'source'), {recursive: true});
       for (const f of fs.readdirSync(path.join(KIT, 'examples', 'source'))) fs.copyFileSync(path.join(KIT, 'examples', 'source', f), path.join(dir, 'source', f));
       const {start, build} = await import('../lib/run.mjs');
-      const s = await start({inputs: [path.join(dir, 'source', 'notes.md')], out: path.join(dir, 'out'), want: 'threads,naver,x,linkedin,instagram', slug: 'demo', frames: 0, log});
+      const s = await start({inputs: [path.join(dir, 'source', 'notes.md')], out: path.join(dir, 'out'), want: 'threads,naver,x,linkedin,instagram', slug: 'demo', frames: 0, files: [path.join(dir, 'source', 'page.html')], log});
       for (const k of s.keys) {
         const ex = path.join(KIT, 'examples', 'posts', `${k}.md`);
         if (fs.existsSync(ex)) fs.copyFileSync(ex, path.join(s.runDir, k, 'post.md'));
       }
       log(`  demo: example notes -> ${s.keys.join(', ')}  (the posts were written from the notes in advance; with your agent they are written for you)`);
-      const r = await build(s.runDir, {log});
+      const {findChrome} = await import('../lib/chrome.mjs');
+      const pictures = !flag('no-pictures') && !!findChrome();
+      if (!pictures) log(dimmed('  No Chrome here (or --no-pictures): the posts, the check and the previews are made; the picture cards are skipped. 크롬이 없어서 그림 카드만 건너뛰어요.'));
+      const r = await build(s.runDir, {log, pictures});
       summary(r);
       openFile(path.join(r.runDir, 'index.html'));
       log('');
-      log(`  Next: npx ${KIT_NAME} start <your video or transcript> --for threads,naver,x   then let your agent write (install-skill)`);
+      log(`  Next: npx ${KIT_NAME} start <your video> --srt <its subtitles .srt> --for threads,naver,x   then let your agent write (install-skill)`);
       return;
     }
     case 'start': {
@@ -125,26 +137,28 @@ async function main() {
       const inputs = pos.slice(1);
       if (!inputs.length) throw new Error('Give a source: a video, .srt, .txt / .md notes, a YouTube link or your page link.');
       const {start} = await import('../lib/run.mjs');
-      const s = await start({inputs, out: opt('out', 'out'), want: opt('for', 'threads,naver,x'), voice: opt('voice'), srt: opt('srt'), video: opt('video'), title: opt('title'), slug: opt('slug'), frames: Number(opt('frames', '16')), downloadVideo: flag('download-video'), log});
+      const s = await start({inputs, out: opt('out', 'out'), want: opt('for', 'threads,naver,x'), voice: opt('voice'), srt: opt('srt'), video: opt('video'), title: opt('title'), slug: opt('slug'), frames: Number(opt('frames', '16')), downloadVideo: flag('download-video'), files: (opt('files') || '').split(',').map((x) => x.trim()).filter(Boolean), resume: flag('resume'), log});
       log(`  source   ${s.src.kind}, ${s.src.lines.length} lines${s.src.video ? ', video ' + path.basename(s.src.video) : ''}`);
-      log(`  run      ${s.runDir}`);
-      log(`  brief    ${path.join(s.runDir, 'brief.md')}`);
-      if (s.frameList.length) log(`  frames   ${path.join(s.runDir, 'source', 'frames.jpg')}   (${s.frameList.length} sharp frames with their times)`);
-      for (const k of s.keys) log(`  write    ${path.join(s.runDir, k, 'post.md')}`);
+      log(`  run      ${q(s.runDir)}`);
+      log(`  brief    ${q(path.join(s.runDir, 'brief.md'))}`);
+      if (s.frameList.length) log(`  frames   ${q(path.join(s.runDir, 'source', 'frames.jpg'))}   (${s.frameList.length} sharp frames with their times)`);
+      for (const k of s.keys) log(`  write    ${q(path.join(s.runDir, k, 'post.md'))}`);
       log('');
-      log(`  Next: your agent writes each post.md from the brief (or: npx ${KIT_NAME} write --writer "claude -p"), then  npx ${KIT_NAME} build ${path.relative(process.cwd(), s.runDir)}`);
+      log(`  Next: npx ${KIT_NAME} brief ${show(s.runDir)} (reader, purpose, next action), your agent writes each post.md from the brief (or: npx ${KIT_NAME} write --writer "claude -p"), then  npx ${KIT_NAME} build ${show(s.runDir)}`);
       return;
     }
     case 'write': {
       hello();
       const runDir = latestRun(pos[1]);
       const {loadConfig} = await import('../lib/config.mjs');
-      const command = opt('writer') || loadConfig(path.dirname(runDir)).settings.writer?.command;
+      const settings = loadConfig(path.dirname(runDir)).settings;
+      if (!opt('writer') && settings._ignored?.includes('writer')) log(dimmed('  A writer.config.json in this project folder has a writer command. It is ignored: commands come only from --writer or your own ~/.connect-ai/connect-ai-writer/writer.config.json.'));
+      const command = opt('writer') || settings.writer?.command;
       if (!command) throw new Error('No writer command. Use --writer "claude -p" (or "codex exec"), or let your agent in chat write the post.md files from brief.md.');
       const {writeWithCommand} = await import('../lib/writer.mjs');
       const run = JSON.parse(fs.readFileSync(path.join(runDir, 'run.json'), 'utf8'));
-      const wrote = writeWithCommand(runDir, run.platforms, command, {overwrite: flag('overwrite'), log});
-      log(`  wrote ${wrote.join(', ') || 'nothing new'}. Next: npx ${KIT_NAME} build ${path.relative(process.cwd(), runDir)}`);
+      const wrote = writeWithCommand(runDir, run.platforms, command, {overwrite: flag('overwrite'), passEnv: settings.writer?.passEnv || [], log});
+      log(`  wrote ${wrote.join(', ') || 'nothing new'}. Next: npx ${KIT_NAME} build ${show(runDir)}`);
       return;
     }
     case 'build': {
@@ -156,12 +170,15 @@ async function main() {
         const fails = r.findings.filter((f) => f.level === 'fail');
         log(`  ${r.story.meta.title || 'story'}: ${r.story.pages.length} pages, ${r.files.length} pictures`);
         for (const f of r.findings.slice(0, 16)) log(`  ${f.level === 'fail' ? 'FIX ' : dimmed('LOOK')} ${f.message}`);
-        if (r.files.length) { log(''); log(`  book     ${path.join(r.dir, 'book.html')}`); log(`  pages    ${path.join(r.dir, 'pages')}`); log(`  sheet    ${r.sheet}`); if (r.pdf) log(`  pdf      ${r.pdf}`); openFile(path.join(r.dir, 'book.html')); }
+        if (r.book) { log(''); log(`  book     ${q(r.book)}`); }
+        if (r.files.length) { log(`  pages    ${q(path.join(r.dir, 'pages'))}`); log(`  sheet    ${q(r.sheet)}`); if (r.pdf) log(`  pdf      ${q(r.pdf)}`); }
+        else if (r.book) log(dimmed(`  ${r.pictureError || 'No Chrome here, so the page pictures and the PDF were not made'}. book.html has the whole book; open it in any browser.`));
+        if (r.book) openFile(r.book);
         if (fails.length) process.exitCode = 2;
         return;
       }
       const {build} = await import('../lib/run.mjs');
-      const r = await build(target, {theme: opt('theme'), only: opt('only'), log});
+      const r = await build(target, {theme: opt('theme'), only: opt('only'), pictures: !flag('no-pictures'), log});
       summary(r);
       openFile(path.join(r.runDir, 'index.html'));
       if (r.findings.some((f) => f.level === 'fail')) process.exitCode = 2;
@@ -193,6 +210,30 @@ async function main() {
         }
       }
       if (all.some((f) => f.level === 'fail')) process.exitCode = 2;
+      return;
+    }
+    case 'brief': {
+      hello();
+      const runDir = latestRun(pos[1]);
+      const B = await import('../lib/brief.mjs');
+      if (flag('check')) {
+        const src = JSON.parse(fs.readFileSync(path.join(runDir, 'source', 'source.json'), 'utf8'));
+        if (!fs.existsSync(B.briefFile(runDir))) throw new Error(`No editorial-brief.md yet. Run: brief ${show(runDir)}`);
+        const r = B.checkBrief(fs.readFileSync(B.briefFile(runDir), 'utf8'), src);
+        for (const s of B.SECTIONS) log(`  ${s.en.padEnd(18)} ${(r.brief[s.key] || []).join(' / ').slice(0, 90) || dimmed('(empty)')}`);
+        log('');
+        for (const p of r.problems) log(`  FIX ${p}`);
+        const run = JSON.parse(fs.readFileSync(path.join(runDir, 'run.json'), 'utf8'));
+        const html = path.join(runDir, 'editorial-brief.html');
+        fs.writeFileSync(html, B.briefHtml({title: (fs.readFileSync(B.briefFile(runDir), 'utf8').match(/^#\s+Editorial brief:\s*(.+)$/m) || [])[1] || run.title, result: r}));
+        log(r.ok ? gold('  brief ok') + dimmed(`  Next: plan ${show(runDir)}  (titles and first lines for this reader)`) : '');
+        log(`  page     ${q(html)}`);
+        if (!r.ok) process.exitCode = 2;
+        return;
+      }
+      const r = B.startBrief(runDir);
+      log(`  brief    ${q(r.file)}${r.made ? '' : '  (already there; --check to check it)'}`);
+      log(`  Fill: reader, purpose, claims to keep, what may be public, next action. Then: brief ${show(runDir)} --check`);
       return;
     }
     case 'research': {
@@ -262,8 +303,11 @@ async function main() {
         return;
       }
       const {loadConfig} = await import('../lib/config.mjs');
+      const {readBrief} = await import('../lib/brief.mjs');
       const run = JSON.parse(fs.readFileSync(path.join(runDir, 'run.json'), 'utf8'));
-      fs.writeFileSync(f, P.planTemplate({title: run.title, keys: run.platforms, platforms: loadConfig(path.dirname(runDir)).platforms}));
+      const brief = readBrief(runDir);
+      if (!brief) log(dimmed(`  No editorial brief yet (who reads it, what for, next action). Better first: brief ${show(runDir)}`));
+      fs.writeFileSync(f, P.planTemplate({title: run.title, keys: run.platforms, platforms: loadConfig(path.dirname(runDir)).platforms, brief}));
       log(`  plan     ${f}\n  Fill titles and first lines (or let your agent), then: plan ${show(runDir)} --score`);
       return;
     }
@@ -356,29 +400,26 @@ async function main() {
     }
     case 'post': {
       hello();
+      const {post, NO_PUBLISH, EXIT} = await import('../lib/post.mjs');
+      if (flag('publish')) throw new Error(NO_PUBLISH);
       const runDir = latestRun(pos[1]);
       const to = opt('to');
       if (!to) throw new Error('Say where: --to threads (or x, naver)');
-      const {post, confirmPublish} = await import('../lib/post.mjs');
-      let publish = false;
-      if (flag('publish')) {
-        publish = await confirmPublish(to);
-        if (!publish) { log('  Stopped. Nothing was posted.'); return; }
-      }
-      const r = await post(runDir, to, {publish, saveDraft: !flag('no-save'), leaveOpen: flag('leave-open'), blogId: opt('blog-id'), log});
+      const r = await post(runDir, to, {saveDraft: !flag('no-save'), leaveOpen: flag('leave-open'), blogId: opt('blog-id'), draftsShot: flag('drafts-shot'), log});
       const said = {
         'logged-out': `You are not logged in to ${to} in Ego Lite. Open Ego Lite, log in yourself, then run this again. Nothing was typed.`,
+        'no-composer': `Could not find the post box on ${to} (the page may have changed). Nothing was typed.`,
+        'needs-you': `Waiting for you: ${r.error || 'a choice in the editor'}`,
         'saved-as-draft': `Filled and saved as a draft in ${to}. Nothing was posted. Open your drafts there to look and post it yourself.`,
         'filled-draft-not-saved': `Filled, but ${to} did not offer to save a draft. Nothing was posted.${r.leftOpen ? ' The editor is still open in Ego Lite.' : ' Use --leave-open to keep the filled editor open for you.'}`,
         'filled-stopped-before-post': `Filled and stopped before the post button. Nothing was posted.${r.leftOpen ? ' The editor is open in Ego Lite for you.' : ''}`,
-        published: `Published to ${to}.`,
         error: `Stopped: ${r.error}`,
       }[r.status] || `Result: ${r.status}`;
       log(`  ${said}`);
       if (r.parts) for (const p of r.parts) log(dimmed(`  post ${p.part}: text ${p.typed === false ? 'NOT confirmed' : 'in'}${p.picturesInBox != null ? `, pictures in the box ${p.picturesInBox}` : ''}`));
-      if (r.shot) log(`  screenshot ${r.shot}`);
+      if (r.shot) log(`  screenshot ${q(r.shot)}`);
       if (r.notice) log(dimmed('  Ego Lite says an update is available (ego-browser upgrade, when you want).'));
-      if (r.status === 'error') process.exitCode = 1;
+      if (EXIT[r.status]) process.exitCode = EXIT[r.status];
       return;
     }
     case 'platforms': {
@@ -397,13 +438,15 @@ async function main() {
       hello();
       const {doctor} = await import('../lib/doctor.mjs');
       const {loadConfig} = await import('../lib/config.mjs');
-      await doctor({settings: loadConfig(process.cwd()).settings});
+      const cfg = loadConfig(process.cwd());
+      await doctor({settings: cfg.settings, files: cfg.files});
       return;
     }
     case 'install-skill': {
       hello();
       const {installSkill} = await import('../lib/install.mjs');
-      const list = installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run')});
+      const list = installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), runtime: !flag('no-runtime')});
+      if (!flag('dry-run') && !list.some((t) => t.done)) { log('  Nothing was installed.'); process.exitCode = 1; return; }
       if (list.some((t) => t.done)) log(`\n  Open your agent in the folder with your video or transcript and say: "${gold('write a Threads post and a Naver blog post from this video')}"` + dimmed('\n  영상이 있는 폴더에서 에이전트를 열고 "이 영상으로 쓰레드랑 네이버 블로그 글 써 줘" 라고 말해 보세요'));
       return;
     }

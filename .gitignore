@@ -3,3 +3,4 @@ out/
 .DS_Store
 *.tgz
 /work/
+dogfood-out/

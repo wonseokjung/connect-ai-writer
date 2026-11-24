@@ -7,7 +7,7 @@
 
 # connect-ai-writer
 
-**An AI writing employee with every skill a writer needs. Say one sentence, and it finds what is trending, researches it with sources, and writes your blog post in your own voice, pictures included. It writes your kid a picture book, too.**
+**An AI writing employee for solo founders and YouTubers. Give it one of your videos, and it writes your Naver blog, Threads and Instagram posts in your own voice, with the pictures made for you. Finding what is trending and researching with sources take one sentence, too.**
 
 [![One sentence in: trends, research, a blog post, pictures, a picture book, a motion video. All real outputs](docs/hero_v02.webp)](https://wonseokjung.github.io/connect-ai-writer/)
 
@@ -15,7 +15,9 @@
 npx github:wonseokjung/connect-ai-writer install-skill
 ```
 
-Then open your agent (Claude Code, Codex, Antigravity, Cursor) and say "find what is trending and write a blog post about it". New to this? The [textbook](https://wonseokjung.github.io/connect-ai-writer/textbook/?lang=en) has eight copy-and-paste prompts, in order.
+To install, paste that line into your agent's chat (Claude Code, Codex, Antigravity, Cursor) and ask it to install. When it is done, open a new chat and say "find what is trending and write a blog post about it". New to this? The [textbook](https://wonseokjung.github.io/connect-ai-writer/textbook/?lang=en) has copy-and-paste prompts, in order.
+
+All you install yourself is [Node.js](https://nodejs.org) 20.19 or newer and a coding agent. You do not need to know the terminal; your agent types the commands. No paid API key.
 
 ## Skills
 
@@ -24,13 +26,17 @@ Every picture below is a real run.
 <table>
 <tr>
 <td width="33%" valign="top"><img src="docs/showcase/v02/trends.jpg" width="100%" alt="Trends"><br><b>Trends</b><br><sub>"What is hot right now?" Google Trends, search suggestions and Wikipedia views, each with its source and date.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/v02/research.jpg" width="100%" alt="Research"><br><b>Research</b><br><sub>"Research this with sources." It reads articles and reports and ties every fact to the sentence it came from.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/research.jpg" width="100%" alt="Research"><br><b>Research</b><br><sub>"Research this with sources." It reads articles and reports and marks, for every number and fact, the sentence it came from.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/blog.jpg" width="100%" alt="Naver blog post"><br><b>Posts for every platform</b><br><sub>Naver blog, Threads, X, LinkedIn, Instagram, newsletters. Numbers only as the source has them.</sub></td>
 </tr>
 <tr>
-<td width="33%" valign="top"><img src="docs/showcase/v02/story.jpg" width="100%" alt="Picture book"><br><b>Picture books</b><br><sub>"A bedtime story, age 7, a dinosaur." Illustrations drawn in code, and a PDF you can print.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/brief.jpg" width="100%" alt="Editorial brief"><br><b>Editorial brief</b> · v0.3<br><sub>One page before writing: who reads it, what it is for, the claims to keep, what may be public, the next action. Titles and posts follow it.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/humanize.jpg" width="100%" alt="Humanize"><br><b>Humanize</b><br><sub>Marks translationese and AI tells, then checks that the rewrite kept every number.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/v02/voice.jpg" width="100%" alt="Voice sheet"><br><b>Your voice sheet</b><br><sub>Give it your own subtitles and it counts how you really talk. Posts follow that sheet.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/voice.jpg" width="100%" alt="Voice sheet"><br><b>Your voice sheet</b><br><sub>Give it your own subtitles and it pulls out the endings, words and phrases you use (and never use). Posts follow that sheet.</sub></td>
+</tr>
+<tr>
+<td width="33%" valign="top"><img src="docs/showcase/v02/story.jpg" width="100%" alt="Picture book"><br><b>Bonus: picture books</b> (optional)<br><sub>"A bedtime story, age 7, a dinosaur." Illustrations drawn in code, and a PDF you can print.</sub></td>
+<td colspan="2" valign="top"><b>What the pictures are</b><br><sub>Sharp frames picked from your video, quote cards with your exact words, number and compare cards from numbers in the source, captures of your own page, and pictures drawn in code. Never a made-up person, screen or number.</sub></td>
 </tr>
 <tr>
 <td colspan="3"><b>Works with our other AI employees</b></td>
@@ -46,13 +52,27 @@ Every picture below is a real run.
 
 <img src="docs/showcase/v02/before_after.jpg" width="100%" alt="The v0.1 post and the v0.2 post from the same lesson video">
 
-A Naver blog post from one of my lesson videos. v0.2 scores the titles, puts the search words first and writes from my voice sheet. The right one passes every check.
+A Naver blog post from one of my lesson videos (Korean). The real openings, word for word:
 
-## What it catches before you post
+- v0.1 title: "바이브코딩으로 영상 만들기: 몸을 인식하는 모션그래픽 AI 직원 (비주얼 바이브코딩 2강 1부)"
+- v0.1 first lines: "안녕하세요, AI 멘토 제이입니다." "바이브코딩으로 영상을 만든다는 건 확장 가능성이 무궁무진해지는 거거든요."
+- v0.2 title: "바이브코딩 영상, 초당 15번 몸을 재는 AI 직원 설치하기"
+- v0.2 first lines: "영상에 그래픽 넣을 때 제일 귀찮은 게 내 얼굴 가리는 거잖아요." "그래서 바이브코딩 영상 직원을 하나 만들었어요."
 
-- Numbers that are not in the source, changed quotes, links it never read
-- Posts over the limit, posts with no picture, titles without the search word
-- Translationese, AI tells, emoji, corner brackets
+The v0.1 title was too long for search results and the post had no line saying which search words it was for (keyword). v0.2 puts the search words first and a number I said in the video (15 times a second) in the title, and passes every check.
+
+## What it checks before you post
+
+- Search: the search words at the front of the title, in the first paragraph and in a heading
+- Platform rules: Threads 500 characters, X about 140 Korean letters, pictures per post, first-line length
+- Numbers: every number, quote and up/down word must match the source. It checks numbers, quotes and direction words, not every meaning, so read it once yourself.
+- Your voice: translationese, AI tells, emoji, corner brackets
+
+The Korean README was checked with this tool too: AI-tell score 0 (per 1,000 letters), 0 FIX. The textbook and the guide are 0 FIX as well (`node scripts/dogfood.mjs`).
+
+## Where the result is
+
+In `out/<date>_<title>/`. Ask your agent "open index.html in the result folder you just made" and every platform's post and pictures open on one page. It stops at a saved draft; publishing is always your click.
 
 <!-- team:start -->
 ## CONNECT AI LAB's AI employees
@@ -70,9 +90,9 @@ I'm building AI employees one by one, in the open. Grab the one you need first.
 
 ---
 
-Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx github:wonseokjung/connect-ai-writer demo`.
+Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx github:wonseokjung/connect-ai-writer demo`. It works without Chrome too (the posts and previews are made; the picture cards are skipped).
 
-MIT with the Commons Clause (free to use, not for resale). Use it, change it, share it, and use it for your own business and channels. Do not sell it, sell access to it, or sell a paid course or service built mainly on it. See LICENSE. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
+Source available under MIT with the Commons Clause (free to use, not for resale). Use it, change it, share it, and use it for your own business and channels; what you write with it is yours. Do not Sell it: that is, do not charge others for a product or service whose value comes entirely or substantially from this tool (selling it, selling access to it, or a paid course or hosting built mainly on it). See LICENSE. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
 
 If you want to build tools like this with your own AI agent, I show you how in [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding).
 
