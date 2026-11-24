@@ -1,0 +1,55 @@
+{
+  "name": "connect-ai-writer",
+  "version": "0.1.0",
+  "description": "Your AI writing employee. Give it something you made (a video, its subtitles, your notes or your own page) and it writes a post for every text platform in your own voice, with pictures made from your real material: Threads, Naver blog, X, LinkedIn, Instagram and more. It checks every number against your source, shows a preview, and can put the draft in the editor through Ego Lite, stopping before the post button.",
+  "type": "module",
+  "license": "MIT",
+  "author": "CONNECT AI LAB",
+  "bin": {
+    "connect-ai-writer": "bin/cli.mjs"
+  },
+  "scripts": {
+    "demo": "node bin/cli.mjs demo",
+    "test": "node tests/run.mjs"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "@mozilla/readability": "0.6.0",
+    "linkedom": "0.18.14",
+    "marked": "18.1.3",
+    "sharp": "0.35.5"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "skill/",
+    "examples/",
+    "tests/",
+    "themes/",
+    "platforms.json",
+    "rules.json",
+    "banned.json",
+    "docs/guide.md",
+    "docs/guide.ko.md",
+    "NOTICE.md",
+    "README.md",
+    "README.ko.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "writing",
+    "threads",
+    "naver-blog",
+    "x",
+    "linkedin",
+    "instagram",
+    "social-media",
+    "content",
+    "ego-browser",
+    "agent-skill",
+    "claude-code",
+    "codex"
+  ]
+}

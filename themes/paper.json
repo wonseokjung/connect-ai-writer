@@ -1,0 +1,16 @@
+{
+  "_about": "A light theme. Use it with --theme paper, or copy it to theme.json in your project folder.",
+  "name": "Paper",
+  "brand": "",
+  "bg": "#F6F1E8",
+  "bg2": "#EDE5D6",
+  "fg": "#1B1812",
+  "muted": "#6E6556",
+  "accent": "#B8711C",
+  "accent2": "#D6892A",
+  "line": "rgba(184,113,28,0.35)",
+  "fontHeadline": "'Noto Serif KR', 'Nanum Myeongjo', AppleMyungjo, 'Bodoni 72', Batang, serif",
+  "fontBody": "Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif",
+  "fontFiles": [],
+  "grain": false
+}

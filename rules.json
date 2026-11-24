@@ -1,0 +1,21 @@
+{
+  "_about": "What `check` looks for. Each rule is \"fail\", \"warn\" or \"off\". Copy this file into your project folder to change it.",
+  "numbersInSource": "fail",
+  "quotesInSource": "fail",
+  "claimWords": "warn",
+  "limits": "fail",
+  "bannedPhrases": "fail",
+  "watchPhrases": "warn",
+  "emoji": "fail",
+  "cornerBrackets": "fail",
+  "emDash": "fail",
+  "noImages": "fail",
+  "firstPartImage": "warn",
+  "placeholder": "fail",
+  "generatedImages": "warn",
+  "allowNumbers": [],
+  "claims": {
+    "ko": ["최고", "최초", "1위", "유일한", "보장", "완벽", "100%", "무조건 돈", "누구나 쉽게", "평생"],
+    "en": ["best", "first ever", "#1", "number one", "guaranteed", "proven", "the only", "100%", "never fails"]
+  }
+}

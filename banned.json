@@ -1,0 +1,30 @@
+{
+  "_about": "Phrases that make writing sound like an AI wrote it. 'banned' fails the check, 'watch' only warns. Add your own, or remove a line you really say (your voice sheet wins).",
+  "ko": {
+    "banned": [
+      "에 대해 알아보겠습니다", "에 대해서 알아보겠습니다", "알아보도록 하겠습니다", "살펴보도록 하겠습니다", "살펴보겠습니다",
+      "이를 통해", "이를 통해서", "함으로써", "에 있어서", "되어집니다", "되어진", "하는 것이 가능합니다",
+      "혁신적인", "획기적인", "강력한 기능", "놀라운", "게임 체인저", "게임체인저", "차원이 다른", "극대화", "시너지",
+      "여정", "세계로 초대합니다", "지금 바로", "결론적으로", "요약하자면", "정리하자면", "핵심 포인트",
+      "당신", "여러분의 성공을 응원합니다", "많은 분들이 어려움을 겪", "필자", "본 글에서는", "본 포스팅에서는",
+      "다음과 같습니다", "중요한 역할을 합니다", "빼놓을 수 없는", "한 단계 더 나아가",
+      "인사이트를 얻", "새로운 지평", "패러다임", "꿀팁 대방출"
+    ],
+    "watch": [
+      "다양한", "효율적으로", "효과적으로", "활용할 수 있습니다", "할 수 있습니다", "중요합니다", "필수", "완벽한", "강력한",
+      "손쉽게", "간편하게", "단 몇 분", "누구나", "특히", "또한", "뿐만 아니라", "그렇다면", "마무리하며"
+    ]
+  },
+  "en": {
+    "banned": [
+      "In today's fast-paced world", "in today's digital age", "Let's dive in", "dive into", "deep dive", "delve",
+      "game-changer", "game changer", "revolutionary", "revolutionize", "unlock", "supercharge", "seamless", "seamlessly",
+      "cutting-edge", "effortlessly", "In this article", "In this post, we will", "harness the power", "embark",
+      "tapestry", "ever-evolving", "It's important to note", "It is important to note", "In conclusion", "elevate your",
+      "take it to the next level", "a testament to", "look no further", "Without further ado"
+    ],
+    "watch": [
+      "leverage", "journey", "landscape", "robust", "streamline", "empower", "boost", "powerful", "ultimate", "Moreover", "Furthermore", "Additionally"
+    ]
+  }
+}

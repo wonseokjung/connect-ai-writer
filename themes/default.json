@@ -1,0 +1,16 @@
+{
+  "_about": "Colors and fonts for every card. Copy this file to theme.json in your project folder and change it to your brand.",
+  "name": "Black and gold",
+  "brand": "",
+  "bg": "#0B0A08",
+  "bg2": "#17140F",
+  "fg": "#F4EEE4",
+  "muted": "#9A8F80",
+  "accent": "#D6892A",
+  "accent2": "#F2B45A",
+  "line": "rgba(214,137,42,0.35)",
+  "fontHeadline": "'Noto Serif KR', 'Nanum Myeongjo', AppleMyungjo, 'Bodoni 72', Batang, serif",
+  "fontBody": "Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif",
+  "fontFiles": [],
+  "grain": true
+}
