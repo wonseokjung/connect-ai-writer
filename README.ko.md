@@ -7,7 +7,7 @@
 
 # connect-ai-writer
 
-**글 잘 쓰는 데 필요한 스킬을 다 모아 둔 AI 글쓰기 직원이에요. 한 문장만 말하면 트렌드 찾고, 자료 조사하고, 내 말투로 블로그 글을 사진까지 써 줘요. 아이 동화도 써 주고요.**
+**글 잘 쓰는 데 필요한 스킬을 제가 다 모아 둔 AI 글쓰기 직원이에요. 여러분들이 한 문장만 말하면 트렌드 찾고, 자료 조사하고, 내 말투로 블로그 글을 사진까지 다 써 주는 거예요. 아이 동화도 써 주고요.**
 
 [![한 문장 넣으면 트렌드, 리서치, 블로그, 그림, 동화, 모션그래픽까지. 전부 실제로 돌린 결과예요](docs/hero_v02.webp)](https://wonseokjung.github.io/connect-ai-writer/)
 
@@ -30,7 +30,7 @@ npx connect-ai-writer install-skill
 <tr>
 <td width="33%" valign="top"><img src="docs/showcase/v02/story.jpg" width="100%" alt="그림책 동화"><br><b>그림책 동화</b><br><sub>"7살, 공룡, 잠자리 동화 써 줘." 그림도 코드로 그려서 인쇄할 수 있는 PDF까지 나와요.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/humanize.jpg" width="100%" alt="AI 티 지우기"><br><b>AI 티 지우기</b><br><sub>번역투랑 AI 말버릇을 찾아서 표시해 주고, 고친 다음에 숫자 하나 안 바뀌었는지까지 확인해요.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/v02/voice.jpg" width="100%" alt="말투표"><br><b>내 말투표</b><br><sub>내 영상 자막을 주면 내가 실제로 어떻게 말하는지 세어서 표로 만들어요. 글은 이 표대로 써요.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/voice.jpg" width="100%" alt="말투표"><br><b>내 말투표</b><br><sub>내 영상 자막을 주면 내가 실제로 어떻게 말하는지 세어서 표로 만들어 주거든요. 글은 전부 이 표대로 쓰는 거예요.</sub></td>
 </tr>
 <tr>
 <td colspan="3"><b>우리 다른 AI 직원들이랑 같이 일해요</b></td>
@@ -38,9 +38,15 @@ npx connect-ai-writer install-skill
 <tr>
 <td width="33%" valign="top"><img src="docs/showcase/v02/motion.jpg" width="100%" alt="모션그래픽 영상"><br><b>모션그래픽 영상</b> · <a href="https://github.com/wonseokjung/connect-ai-motion"><code>connect-ai-motion</code></a><br><sub>"이 글로 모션그래픽 영상도 만들어 줘." 쓴 글 그대로 가로, 세로 영상이 나와요. 84.6%는 84.6%로요.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/posts.jpg" width="100%" alt="영상 하나로 다섯 군데"><br><b>영상 하나로 다섯 군데</b><br><sub>제 강의 영상 하나로 쓰레드, 네이버, X, 링크드인, 인스타 글이랑 사진이 한 번에 나와요.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Ego Lite 임시저장"><br><b>임시저장까지만</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>Ego Lite로 글쓰기 화면에 채우고 임시저장까지만 해요. 발행은 직접 누르세요. 올리는 건 마케팅팀이 이어받아요.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Ego Lite 임시저장"><br><b>임시저장까지만</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>Ego Lite로 글쓰기 화면에 채우고 임시저장까지만 해 줘요. 발행은 여러분들이 직접 누르시면 돼요. 올리는 건 마케팅팀이 이어받거든요.</sub></td>
 </tr>
 </table>
+
+## v0.1 이랑 v0.2, 같은 영상으로 비교
+
+<img src="docs/showcase/v02/before_after.jpg" width="100%" alt="같은 강의 영상으로 쓴 v0.1 글과 v0.2 글">
+
+제 2강 영상 하나로 쓴 네이버 블로그 글인데요. v0.2는 제목에 점수를 매기고, 검색어를 앞에 두고, 제 말투표대로 쓰는 거예요. 그래서 오른쪽은 검사를 다 통과했거든요.
 
 ## 올리기 전에 이걸 잡아 줘요
 

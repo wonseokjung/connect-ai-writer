@@ -323,12 +323,12 @@ async function main() {
       if (!file) throw new Error('Give a text file: humanize draft.md   (or a run\'s post.md)');
       const H = await import('../lib/humanize.mjs');
       const text = fs.readFileSync(path.resolve(file), 'utf8');
-      let never = [];
-      if (opt('voice')) { const m = fs.readFileSync(path.resolve(opt('voice')), 'utf8').match(/<!--\s*never:\s*([\s\S]*?)-->/); never = m ? m[1].split(',').map((x) => x.trim()) : []; }
+      let never = [], own = '';
+      if (opt('voice')) { const v = fs.readFileSync(path.resolve(opt('voice')), 'utf8'); const m = v.match(/<!--\s*never:\s*([\s\S]*?)-->/); never = m ? m[1].split(',').map((x) => x.trim()) : []; own = v.replace(/<!--[\s\S]*?-->/g, ''); }
       const patterns = H.loadPatterns(path.dirname(path.resolve(file)));
-      const result = H.analyze(text, {patterns, never});
+      const result = H.analyze(text, {patterns, never, own});
       let cmp = null, afterText = null;
-      if (opt('after')) { afterText = fs.readFileSync(path.resolve(opt('after')), 'utf8'); cmp = H.compare(text, afterText, {patterns, never}); }
+      if (opt('after')) { afterText = fs.readFileSync(path.resolve(opt('after')), 'utf8'); cmp = H.compare(text, afterText, {patterns, never, own}); }
       for (const l of H.reportLines(result).slice(0, 24)) log('  ' + l);
       log('');
       log(`  score    ${result.score} per 1,000 letters (${result.grade})${cmp ? `  ->  after ${cmp.after.score} (${cmp.after.grade})` : ''}`);

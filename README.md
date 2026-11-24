@@ -42,6 +42,12 @@ Every picture below is a real run.
 </tr>
 </table>
 
+## v0.1 vs v0.2, same video
+
+<img src="docs/showcase/v02/before_after.jpg" width="100%" alt="The v0.1 post and the v0.2 post from the same lesson video">
+
+A Naver blog post from one of my lesson videos. v0.2 scores the titles, puts the search words first and writes from my voice sheet. The right one passes every check.
+
 ## What it catches before you post
 
 - Numbers that are not in the source, changed quotes, links it never read

@@ -108,8 +108,10 @@ export async function skillTests({ok, skip, assert, imp, tmp, KIT, findChrome}) 
   assert.equal(H.register('좋습니다.'), 'formal'); assert.equal(H.register('좋거든요.'), 'polite'); assert.equal(H.register('좋다.'), 'plain');
   const mixed = H.analyze('저는 갑니다. 너는 간다. 우리는 가요. 그는 갑니다. 그녀는 간다. 모두 가요.');
   assert.ok(mixed.rhythm.some((r) => r.id === 'mixed-register'));
+  assert.ok(H.analyze('확장 가능성이 무궁무진해요.').findings.some((f) => f.id === 'ko-hype'));
+  assert.equal(H.analyze('확장 가능성이 무궁무진해요.', {own: '진짜 19, 무궁무진 2'}).findings.length, 0, 'a word you really say is yours');
   assert.ok(H.analyze('We delve into a rich tapestry. It is not just a tool, it is a movement.').findings.some((f) => f.id === 'en-stock'));
-  ok('humanize: Korean 번역투 and staging, English tells, mixed speech levels; --after proves every number was kept and nothing was added');
+  ok('humanize: Korean 번역투 and staging, English tells, mixed speech levels, your own words from the voice sheet are kept; --after proves every number was kept and nothing was added');
 
   // ---------- story ----------
   const md = `# 토토와 작은 별\nage: 7\nmood: bedtime\ncover: [scene: night moon | dino:green]\n---\n[scene: night hill moon stars | dino:green:happy]\n토토는 별을 세요.\n---\n[scene: room bed | 공룡:초록:졸린]\n달님이 웃었어요.\n---\n토토는 로켓을 탔어요.\n---\n[scene: space rocket unicorn | dino:green:excited]\n${'아주 긴 문장이 계속 이어지고 또 이어져서 아이가 읽기 어려워요. '.repeat(5)}\n---\n[scene: room bed moon | dino:green:sleepy]\n그래서 우리는 일찍 자야 해요. 이게 교훈이에요.`;
