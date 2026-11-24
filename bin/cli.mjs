@@ -395,6 +395,7 @@ async function main() {
       log(`  ${analysis.lines} lines, ${analysis.sentences} sentences from ${files.length} file(s)`);
       log(`  endings  ${analysis.ends.slice(0, 5).map(([e, n]) => `${e.split(' ')[0]} ${n}`).join(', ')}`);
       log(`  voice    ${out}`);
+      if (analysis.thin) log(`  LOOK only ${analysis.lines} lines: a try-out sheet. Give a few of your own lives or lectures for a real one.`);
       log(dimmed('  Give it to start with --voice. Your transcripts stay on your computer.'));
       return;
     }

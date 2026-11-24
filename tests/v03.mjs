@@ -259,4 +259,24 @@ export async function v03Tests({ok, skip, assert, imp, tmp, KIT, findChrome}) {
     assert.match(H.humanizeHtml({file: 'a.md', text: '"혁신적인"', result: H.analyze('"혁신적인"')}), /mark class="quoted"/);
     ok('humanize: 그 자리에 있어요 / 안에 있어야 not flagged, 교육에 있어서 / 함에 있어 flagged; quoted examples shown as quoted (not counted)');
   }
+
+  // the bundled sample.srt makes a try-out voice sheet (textbook prompt 2-2), not an error
+  {
+    const V = await imp('lib/voice.mjs');
+    const r = V.buildVoice([path.join(KIT, 'examples', 'source', 'sample.srt')], {banned: {}, name: 'sample'});
+    assert.ok(r.analysis.thin && r.analysis.lines >= 10, String(r.analysis.lines));
+    assert.match(r.markdown, /Try-out sheet: only \d+ lines/);
+    const few = path.join(tmp, 'few.srt');
+    fs.writeFileSync(few, '1\n00:00:01,000 --> 00:00:02,000\n안녕하세요.\n');
+    assert.throws(() => V.buildVoice([few], {banned: {}, name: 'x'}), /Only 1 lines/);
+    ok('voice: the bundled sample.srt gives a try-out sheet (marked thin); fewer than 10 lines is still refused');
+  }
+
+  {
+    const R = await imp('lib/run.mjs');
+    const out = path.join(tmp, 'novoice-out');
+    await assert.rejects(R.start({inputs: [path.join(KIT, 'examples', 'source', 'notes.md')], out, voice: path.join(tmp, 'missing-voice.md'), log: () => {}}), /--voice: not found/);
+    assert.ok(!fs.existsSync(out), 'no half-made run folder');
+    ok('start: a missing --voice or --files is refused before any folder is made');
+  }
 }
