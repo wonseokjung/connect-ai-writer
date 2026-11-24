@@ -72,7 +72,7 @@ AI 직원을 하나씩 오픈소스로 만들고 있어요. 필요한 직원부�
 
 명령이랑 옵션은 [docs/guide.ko.md](docs/guide.ko.md)에 다 정리해 뒀어요. 계정 없이 먼저 보고 싶으시면 `npx connect-ai-writer demo` 해 보세요.
 
-라이선스는 MIT예요. 같이 깔리는 패키지, 가져다 쓰는 프로그램, 방법을 배워 온 오픈소스는 [NOTICE.md](NOTICE.md)에 다 정리해 뒀어요.
+라이선스는 MIT + Commons Clause예요. 내 사업, 내 채널에 마음껏 쓰고 고치고 나눠도 돼요. 다만 이 도구 자체를 팔거나, 이걸로 유료 강의나 서비스를 만들어 파는 건 안 돼요. 자세한 건 LICENSE를 보세요. 같이 깔리는 패키지, 가져다 쓰는 프로그램, 방법을 배워 온 오픈소스는 [NOTICE.md](NOTICE.md)에 다 정리해 뒀어요.
 
 이런 도구를 내 AI 에이전트로 직접 만드는 법은 [비주얼 바이브코딩](https://www.aicitybuilders.com/vibecoding)에서 알려 드려요.
 

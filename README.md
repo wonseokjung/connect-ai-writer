@@ -72,7 +72,7 @@ I'm building AI employees one by one, in the open. Grab the one you need first.
 
 Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx connect-ai-writer demo`.
 
-MIT. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
+MIT with the Commons Clause (free to use, not for resale). Use it, change it, share it, and use it for your own business and channels. Do not sell it, sell access to it, or sell a paid course or service built mainly on it. See LICENSE. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
 
 If you want to build tools like this with your own AI agent, I show you how in [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding).
 
