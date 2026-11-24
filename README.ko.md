@@ -12,7 +12,7 @@
 [![한 문장 넣으면 트렌드, 리서치, 블로그, 그림, 동화, 모션그래픽까지. 전부 실제로 돌린 결과예요](docs/hero_v02.webp)](https://wonseokjung.github.io/connect-ai-writer/)
 
 ```bash
-npx connect-ai-writer install-skill
+npx github:wonseokjung/connect-ai-writer install-skill
 ```
 
 그다음에 에이전트(Claude Code, Codex, Antigravity, Cursor)를 여시고 이렇게 말해 보세요. "요즘 뜨는 주제로 네이버 블로그 글 써 줘." 처음이시면 [교재](https://wonseokjung.github.io/connect-ai-writer/textbook/)에 복사해서 쓰는 프롬프트 8개를 순서대로 넣어 놨어요.
@@ -70,7 +70,7 @@ AI 직원을 하나씩 오픈소스로 만들고 있어요. 필요한 직원부�
 
 ---
 
-명령이랑 옵션은 [docs/guide.ko.md](docs/guide.ko.md)에 다 정리해 뒀어요. 계정 없이 먼저 보고 싶으시면 `npx connect-ai-writer demo` 해 보세요.
+명령이랑 옵션은 [docs/guide.ko.md](docs/guide.ko.md)에 다 정리해 뒀어요. 계정 없이 먼저 보고 싶으시면 `npx github:wonseokjung/connect-ai-writer demo` 해 보세요.
 
 라이선스는 MIT + Commons Clause예요. 내 사업, 내 채널에 마음껏 쓰고 고치고 나눠도 돼요. 다만 이 도구 자체를 팔거나, 이걸로 유료 강의나 서비스를 만들어 파는 건 안 돼요. 자세한 건 LICENSE를 보세요. 같이 깔리는 패키지, 가져다 쓰는 프로그램, 방법을 배워 온 오픈소스는 [NOTICE.md](NOTICE.md)에 다 정리해 뒀어요.
 

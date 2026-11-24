@@ -12,7 +12,7 @@
 [![One sentence in: trends, research, a blog post, pictures, a picture book, a motion video. All real outputs](docs/hero_v02.webp)](https://wonseokjung.github.io/connect-ai-writer/)
 
 ```bash
-npx connect-ai-writer install-skill
+npx github:wonseokjung/connect-ai-writer install-skill
 ```
 
 Then open your agent (Claude Code, Codex, Antigravity, Cursor) and say "find what is trending and write a blog post about it". New to this? The [textbook](https://wonseokjung.github.io/connect-ai-writer/textbook/?lang=en) has eight copy-and-paste prompts, in order.
@@ -70,7 +70,7 @@ I'm building AI employees one by one, in the open. Grab the one you need first.
 
 ---
 
-Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx connect-ai-writer demo`.
+Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx github:wonseokjung/connect-ai-writer demo`.
 
 MIT with the Commons Clause (free to use, not for resale). Use it, change it, share it, and use it for your own business and channels. Do not sell it, sell access to it, or sell a paid course or service built mainly on it. See LICENSE. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
 

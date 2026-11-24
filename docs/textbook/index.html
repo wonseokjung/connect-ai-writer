@@ -219,9 +219,9 @@ html:lang(en) .head h2{letter-spacing:-.025em}
           <p data-i="s1_n">자, 그러면 여러분들 에이전트한테 이렇게 한번 말해 보세요.</p>
           <div class="pc" data-copy>
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
-            <pre class="pc-body" tabindex="0" data-i="p1">npx connect-ai-writer install-skill 실행해 줘</pre>
+            <pre class="pc-body" tabindex="0" data-i="p1">npx github:wonseokjung/connect-ai-writer install-skill 실행해 줘</pre>
           </div>
-          <p class="note" data-i="s1_after">"Ok to proceed?" 하고 물어보면 <code>y</code> 라고 답하시면 돼요. 다 끝나면 새 대화를 한번 열어 보세요. npm에 아직 안 올라가 있으면 <code>npx github:wonseokjung/connect-ai-writer install-skill</code> 으로 해도 똑같이 깔려요.</p>
+          <p class="note" data-i="s1_after">"Ok to proceed?" 하고 물어보면 <code>y</code> 라고 답하시면 돼요. 다 끝나면 새 대화를 한번 열어 보세요.</p>
           <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/install.jpg" width="1280" height="960" alt="install-skill 실행 화면" data-ia="a1"></div><figcaption><b>REAL OUTPUT</b><span data-i="c1">실제로 깔아 본 화면이에요. 스킬 파일 10개가 같이 들어가요.</span></figcaption></figure>
         </div>
       </div>
@@ -282,7 +282,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
             <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-2 · WITH CONNECT-AI-MOTION</span><button class="copy" type="button" data-i="copy">복사</button></div>
             <pre class="pc-body" tabindex="0" data-i="p5b">이 쓰레드 글로 모션그래픽 영상도 만들어 줘. connect-ai-writer motion --render 로 하고, 세로랑 가로 둘 다.</pre>
           </div>
-          <p class="note" data-i="s5_note">이건 우리 다른 AI 직원 connect-ai-motion 이 만들어요. 안 깔려 있으면 <code>npx connect-ai-writer engines</code> 하면 받는 법이 나와요.</p>
+          <p class="note" data-i="s5_note">이건 우리 다른 AI 직원 connect-ai-motion 이 만들어요. 안 깔려 있으면 <code>npx github:wonseokjung/connect-ai-writer engines</code> 하면 받는 법이 나와요.</p>
           <div class="pair">
             <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/motion.jpg" width="1280" height="960" alt="모션그래픽 영상 장면들" data-ia="a5b"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5b">4단계 자료로 쓴 쓰레드 글로 만든 20초 영상이에요. 84.6% 는 반올림 안 하고 84.6% 그대로 나와요.</span></figcaption></figure>
             <figure class="screen v916"><div class="frame"><video src="../showcase/v02/motion_9x16.mp4" poster="../showcase/v02/motion_9x16_poster.jpg" width="540" height="960" muted loop playsinline autoplay preload="metadata"></video><span class="chip">9:16</span></div></figure>
@@ -337,11 +337,11 @@ html:lang(en) .head h2{letter-spacing:-.025em}
         <h2 id="stuck-t" data-i="h_stuck"><em>막히면</em></h2>
       </div>
       <dl class="faq">
-        <div><dt data-i="q1">그림이 하나도 안 나와요</dt><dd data-i="a1t">크롬이 있어야 그림을 만들어요. <code>npx connect-ai-writer doctor</code> 해 보시면 뭐가 빠졌는지 나와요.</dd></div>
+        <div><dt data-i="q1">그림이 하나도 안 나와요</dt><dd data-i="a1t">크롬이 있어야 그림을 만들어요. <code>npx github:wonseokjung/connect-ai-writer doctor</code> 해 보시면 뭐가 빠졌는지 나와요.</dd></div>
         <div><dt data-i="q2">검사에서 숫자 때문에 막혀요</dt><dd data-i="a2t">출처에 없는 숫자라서 그렇거든요. 규칙을 끄는 게 아니라 글을 고치셔야 돼요. <code>check --trace</code> 한번 해 보시면 숫자마다 어디서 왔는지 다 보여 줘요.</dd></div>
         <div><dt data-i="q3">트렌드에 구글 관심도가 비어 있어요</dt><dd data-i="a3t">구글이 잠깐 막을 때가 있거든요. 조금 있다가 다시 한번 해 보세요. 나머지 신호는 그대로 다 나와요.</dd></div>
         <div><dt data-i="q4">네이버가 작성 중인 글을 이어서 쓸지 물어봐요</dt><dd data-i="a4t">그건 여러분들 글이라서 직원이 대신 안 고르거든요. Ego Lite 열어서 확인이나 취소를 직접 누르시고 다시 한번 시켜 보세요.</dd></div>
-        <div><dt data-i="q5">모션그래픽 영상이 안 만들어져요</dt><dd data-i="a5t">connect-ai-motion 이 깔려 있어야 돼요. <code>npx connect-ai-writer engines</code> 로 확인해 보세요.</dd></div>
+        <div><dt data-i="q5">모션그래픽 영상이 안 만들어져요</dt><dd data-i="a5t">connect-ai-motion 이 깔려 있어야 돼요. <code>npx github:wonseokjung/connect-ai-writer engines</code> 로 확인해 보세요.</dd></div>
       </dl>
     </div>
   </section>
@@ -401,8 +401,8 @@ html:lang(en) .head h2{letter-spacing:-.025em}
     prep4: 'Ego Lite (only for step 8 drafts; everything else works without it)',
     copy: 'Copy', copied: 'Copied. Paste it to your agent.',
     s1_h: 'Bring in the writing employee', s1_n: 'Say this to your agent.',
-    p1: 'Run npx connect-ai-writer install-skill',
-    s1_after: 'If it asks "Ok to proceed?", answer <code>y</code>. Then open a new chat. Before it is on npm, <code>npx github:wonseokjung/connect-ai-writer install-skill</code> installs the same thing.',
+    p1: 'Run npx github:wonseokjung/connect-ai-writer install-skill',
+    s1_after: 'If it asks "Ok to proceed?", answer <code>y</code>. Then open a new chat.',
     a1: 'install-skill output', c1: 'A real install. Ten skill files come with it.',
     s2_h: 'Make your voice sheet', s2_n: 'AI writing reads wrong because it is not your voice. So first it counts how you really talk, from your own subtitles.',
     p2: 'Make my voice sheet from all my video subtitles (.srt) in this folder. Use connect-ai-writer voice and save it as voice.md.',
@@ -419,7 +419,7 @@ html:lang(en) .head h2{letter-spacing:-.025em}
     p5a: 'Write a Threads post, a Naver blog post and an Instagram post from this video. Make the pictures from the video, and follow my voice sheet.',
     a5a: 'Posts and pictures from one video', c5a: 'Posts and pictures from one video, lesson 2 of my Visual Vibe Coding course. Every picture comes from that video.',
     p5b: 'Make a motion graphics video from this Threads post too. Use connect-ai-writer motion --render, vertical and landscape.',
-    s5_note: 'Our other AI employee, connect-ai-motion, makes this one. If it is not installed, <code>npx connect-ai-writer engines</code> tells you how to get it.',
+    s5_note: 'Our other AI employee, connect-ai-motion, makes this one. If it is not installed, <code>npx github:wonseokjung/connect-ai-writer engines</code> tells you how to get it.',
     a5b: 'Scenes of the motion video', c5b: 'A 20-second video from the Threads post written in step 4. 84.6% shows as 84.6%, never rounded.',
     s6_h: 'A picture book for your kid', p6: 'Write a bedtime story for my kid. Age 7, loves dinosaurs. Make it a picture book, with a PDF.',
     s6_after: 'One scene per page, anything the words name is in the picture, and the end comes back to the first scene instead of a lesson. The employee checks these picture-book rules itself. Pictures use code-made animals and things only, never people.',
@@ -430,11 +430,11 @@ html:lang(en) .head h2{letter-spacing:-.025em}
     s8_after: 'The employee never posts on its own. It does not log in or type a password. If you are logged out, log in yourself inside Ego Lite.',
     a8: 'The post inside the Naver blog editor', c8: 'My own Naver blog editor: title, headings, pictures between paragraphs, tags, and it stops at the draft.',
     h_stuck: '<em>If you get stuck</em>',
-    q1: 'No pictures come out', a1t: 'Pictures need Chrome. Run <code>npx connect-ai-writer doctor</code> to see what is missing.',
+    q1: 'No pictures come out', a1t: 'Pictures need Chrome. Run <code>npx github:wonseokjung/connect-ai-writer doctor</code> to see what is missing.',
     q2: 'The check stops on a number', a2t: 'That number is not in the source. Fix the words, not the rule. <code>check --trace</code> shows where every number comes from.',
     q3: 'Google interest is empty in trends', a3t: 'Google sometimes blocks for a while. Try again a bit later. The other signals still come in.',
     q4: 'Naver asks whether to continue an unfinished post', a4t: 'That is your post, so the employee does not choose for you. Open Ego Lite, pick confirm or cancel yourself, and ask again.',
-    q5: 'The motion video is not made', a5t: 'connect-ai-motion has to be installed. Check with <code>npx connect-ai-writer engines</code>.',
+    q5: 'The motion video is not made', a5t: 'connect-ai-motion has to be installed. Check with <code>npx github:wonseokjung/connect-ai-writer engines</code>.',
     h_hw: '<em>Assignment</em>',
     hw1: 'Make your voice sheet from one of your videos, pick one trending topic, and go from research all the way to a Naver blog draft. If you have kids, make them a picture book too.',
     hw2: 'When you are done, keep a screenshot of index.html and sheet.jpg in the run folder. Look at just two things: does it sound like you, and is every number in a source.',
