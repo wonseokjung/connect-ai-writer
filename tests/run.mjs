@@ -227,6 +227,23 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const bad = spawnSync(process.execPath, [path.join(KIT, 'bin', 'cli.mjs'), 'install-skill', '--agent', 'nope', '--no-runtime'], {encoding: 'utf8', env: {...process.env, HOME: home, CONNECT_AI_HOME: path.join(home, '.connect-ai')}});
   assert.equal(bad.status, 1);
   ok('install-skill: pins the GitHub commit from the npx lock; an unknown --agent (nothing to install) exits 1');
+  // npm never packs package-lock.json: a GitHub / npx copy has only runtime-lock.json, and npm ci must still get a lock
+  assert.equal(fs.readFileSync(path.join(KIT, 'runtime-lock.json'), 'utf8'), fs.readFileSync(path.join(KIT, 'package-lock.json'), 'utf8'), 'runtime-lock.json is a copy of package-lock.json (cp package-lock.json runtime-lock.json)');
+  assert.ok(JSON.parse(fs.readFileSync(path.join(KIT, 'package.json'), 'utf8')).files.includes('runtime-lock.json'));
+  const packed = path.join(tmp, 'packed-kit');
+  fs.mkdirSync(path.join(packed, 'bin'), {recursive: true});
+  fs.writeFileSync(path.join(packed, 'package.json'), JSON.stringify({name: 'connect-ai-writer', files: ['bin/', 'runtime-lock.json']}));
+  fs.writeFileSync(path.join(packed, 'bin', 'cli.mjs'), '');
+  fs.writeFileSync(path.join(packed, 'runtime-lock.json'), '{"lockfileVersion":3}');
+  const seen = [];
+  const npm2 = (args, {cwd}) => { seen.push([args[0], fs.existsSync(path.join(cwd, 'package-lock.json'))]); fs.mkdirSync(path.join(cwd, 'node_modules'), {recursive: true}); return {code: 0, out: ''}; };
+  IN.installRuntime({home: path.join(tmp, 'home2'), env: {}, kit: packed, npm: npm2, log: quiet});
+  assert.deepEqual(seen[0], ['ci', true], 'npm ci runs with the lock restored');
+  fs.rmSync(path.join(packed, 'runtime-lock.json'));
+  IN.installRuntime({home: path.join(tmp, 'home3'), env: {}, kit: packed, npm: npm2, log: quiet});
+  assert.equal(seen[1][0], 'install', 'no lock at all: npm install instead of a failing npm ci');
+  assert.throws(() => IN.installRuntime({home: path.join(tmp, 'home4'), env: {}, kit: packed, npm: () => ({code: 1, out: 'npm error something broke'}), log: quiet}), /npm install in .* failed: npm error something broke/);
+  ok('install-skill from a packed copy (no package-lock.json): runtime-lock.json is restored so npm ci works; without any lock it uses npm install');
 }
 
 // ---------- pictures end to end ----------

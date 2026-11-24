@@ -36,7 +36,7 @@
     "docs/guide.md",
     "docs/guide.ko.md",
     "NOTICE.md",
-    "package-lock.json",
+    "runtime-lock.json",
     "README.md",
     "README.ko.md",
     "LICENSE"
