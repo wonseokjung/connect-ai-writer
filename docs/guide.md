@@ -11,6 +11,15 @@
 | `check [run]` | Text checks only, fast |
 | `post [run] --to threads\|x\|naver` | Fills the editor in Ego Lite and stops before the post button |
 | `voice <files...> --name "Name" --out voice.md` | Voice sheet from your own transcripts |
+| `trends "words" --listen x,threads` | Google Trends feed and interest, search suggestions (Google, YouTube, Naver), Wikipedia views, and optional read-only listening on X, Threads and YouTube through Ego Lite. `trends.html`, `ideas.md`, charts. Naver DataLab only with `NAVER_CLIENT_ID` / `NAVER_CLIENT_SECRET` |
+| `research "topic" <links or files...>` | Reads each source with its date into `out/<date>_<topic>-research/`, plus a `questions.md` and a `facts.md` to fill. `research add`, `research check` (every fact traced to a source sentence, `research.html`) |
+| `start <research folder> --for naver,newsletter` | Posts from the fact sheet: numbers, quotes and links are checked against it, and blog posts need a sources section |
+| `plan [run] --score` | Titles and first lines to choose from, scored |
+| `story "idea" --age 7` | A picture book: `story.md` with a scene line per page. `build <story folder>` makes `book.html`, page pictures, `sheet.jpg` and `book.pdf` |
+| `humanize <file> --after <rewrite>` | Marks AI tells (Korean translationese, English stock phrases); with `--after`, a before/after page and proof that every number was kept |
+| `check [run] --trace` | Where every number in each post comes from |
+| `motion [run] --from threads --render` | A motion graphics video of the post by connect-ai-motion, if installed (`--wide` for 16:9 only) |
+| `engines` | Our other AI employees (motion, video-motion, product-photo, marketer), found or how to get them |
 | `platforms`, `themes`, `doctor` | What is set up and ready |
 | `install-skill`, `remove-skill` | The agent skill (Claude Code, Codex, Antigravity, Cursor) |
 

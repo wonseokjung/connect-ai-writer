@@ -11,6 +11,15 @@
 | `check [run]` | 글 검사만 빠르게 |
 | `post [run] --to threads\|x\|naver` | Ego Lite에서 편집 화면에 넣고 게시 버튼 앞에서 멈춰요 |
 | `voice <파일...> --name "이름" --out voice.md` | 내 받아쓰기로 말투표 만들기 |
+| `trends "단어" --listen x,threads` | 구글 트렌드 급상승과 관심도, 검색어 자동완성(구글, 유튜브, 네이버), 위키백과 조회수, 그리고 Ego Lite로 X, 쓰레드, 유튜브를 읽기만 하는 리스닝. `trends.html`, `ideas.md`, 차트가 나와요. 네이버 데이터랩은 `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` 이 있을 때만 |
+| `research "주제" <링크나 파일...>` | 출처를 날짜까지 읽어서 `out/<날짜>_<주제>-research/` 에 넣고, 채울 `questions.md`, `facts.md` 를 만들어요. `research add`, `research check`(사실마다 출처 문장 연결, `research.html`) |
+| `start <리서치 폴더> --for naver,newsletter` | 사실 시트로 글 쓰기. 숫자, 인용, 링크를 시트랑 맞춰 보고, 블로그 글은 출처 칸이 있어야 해요 |
+| `plan [run] --score` | 고를 제목이랑 첫 줄 후보, 점수까지 |
+| `story "아이디어" --age 7` | 그림책. 쪽마다 장면 줄이 있는 `story.md` 를 쓰고 `build <동화 폴더>` 하면 `book.html`, 쪽 그림, `sheet.jpg`, `book.pdf` 가 나와요 |
+| `humanize <파일> --after <고친 글>` | AI 티(번역투, 영어 상투어) 표시. `--after` 를 주면 전후 비교 화면이랑 숫자가 다 그대로인지 확인 |
+| `check [run] --trace` | 글 속 숫자가 어디서 왔는지 |
+| `motion [run] --from threads --render` | connect-ai-motion 이 깔려 있으면 그 글로 모션그래픽 영상 (`--wide` 는 가로만) |
+| `engines` | 같이 일하는 다른 AI 직원들(motion, video-motion, product-photo, marketer)이 있는지, 없으면 받는 법 |
 | `platforms`, `themes`, `doctor` | 뭐가 준비돼 있는지 보기 |
 | `install-skill`, `remove-skill` | 에이전트 스킬 (Claude Code, Codex, Antigravity, Cursor) |
 

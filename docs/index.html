@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>connect-ai-writer · CONNECT AI LAB</title>
-<meta name="description" content="Your AI writing employee. Hand it one video, and it writes your Threads, Naver blog, X, LinkedIn and Instagram posts in your own voice, pictures included. Open source by CONNECT AI LAB.">
-<meta property="og:image" content="hero_poster.jpg">
+<meta name="description" content="An AI writing employee with every skill a writer needs: trends, research with sources, posts for every platform in your own voice with pictures, picture books, a humanizer and a fact check. Open source by CONNECT AI LAB.">
+<meta property="og:image" content="hero_v02_poster.jpg">
 <style>
 :root{--bg:#0B0A09;--bg2:#14110E;--ink:#EBE2D2;--dim:rgba(235,226,210,.62);--faint:rgba(235,226,210,.14);--gold:#D6892A;--goldhi:#F2B45A;--teal:#3FB7A6}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
@@ -91,6 +91,18 @@ section{padding:56px 0 10px}
 .maker{display:flex;gap:22px;align-items:center;padding:36px 0 70px}
 .maker img{width:104px;height:104px;border-radius:50%;object-fit:cover;border:1px solid rgba(214,137,42,.6)}
 .maker b{font-weight:400;font-size:17px}.maker p{margin:6px 0 0;color:var(--dim);font-size:14.5px}
+.tb{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;letter-spacing:.04em;color:var(--goldhi)}.tb:before{content:"";width:8px;height:8px;background:var(--gold)}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.sk{margin:0;min-width:0}.sk img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:1px solid rgba(214,137,42,.35)}
+.sk figcaption{padding-top:12px}.sk .n{font-family:"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.24em;color:var(--goldhi);text-transform:uppercase}
+.sk h4{margin:6px 0 4px;font-family:"Cormorant Garamond","Noto Serif KR",Georgia,serif;font-size:26px;font-weight:400}.sk p{margin:0;color:var(--dim);font-size:14.5px}.sk q{color:var(--ink);quotes:none}
+.crew2{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;align-items:start;margin-top:34px;padding-top:30px;border-top:1px solid var(--faint)}
+.crew2 video{width:100%;aspect-ratio:9/16;display:block;background:#000;border:1px solid rgba(214,137,42,.45)}
+.crew2 .side{display:grid;gap:18px}.crew2 .side img{width:100%;display:block;border:1px solid var(--faint)}
+.crew2 h3{margin:0;font-family:"Cormorant Garamond","Noto Serif KR",Georgia,serif;font-size:clamp(26px,2.6vw,34px);font-weight:400}.crew2 h3 em{color:var(--goldhi)}
+.crew2 p{margin:0;color:var(--dim);font-size:15px}.crew2 code{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--goldhi)}
+@media (max-width:980px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.skills{grid-template-columns:minmax(0,1fr)}.crew2{grid-template-columns:minmax(0,1fr)}.crew2 video{max-width:240px;margin:0 auto}}
 @media (max-width:980px){.hero,.source{grid-template-columns:minmax(0,1fr)}.posts{grid-template-columns:minmax(0,1fr)}.checks{grid-template-columns:1fr}.drafts{grid-template-columns:1fr}}
 @media (max-width:520px){.wrap{padding:0 16px}.hero{padding:36px 0 24px;gap:28px}nav{gap:14px;font-size:13px}.cmd{font-size:12.5px;padding:10px 10px 10px 14px}.t-pics img{height:200px}.team td:first-child{width:44%}.maker{align-items:flex-start}.maker img{width:72px;height:72px}}
 </style>
@@ -99,19 +111,41 @@ section{padding:56px 0 10px}
 <div class="wrap">
 <header>
   <div class="brand"><b>CONNECT AI LAB</b> · AI employee</div>
-  <nav><a href="https://github.com/wonseokjung/connect-ai-writer">GitHub</a><a href="https://github.com/wonseokjung/connect-ai-writer/blob/main/README.ko.md">한국어</a><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a></nav>
+  <nav><a href="textbook/?lang=en">Textbook</a><a href="textbook/">교재</a><a href="https://github.com/wonseokjung/connect-ai-writer">GitHub</a><a href="https://github.com/wonseokjung/connect-ai-writer/blob/main/README.ko.md">한국어</a><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a></nav>
 </header>
 
 <div class="hero">
   <div>
-    <div class="kicker">AI writing employee</div>
-    <h1>One video.<br><em>Every post.</em></h1>
-    <p class="ko">영상 하나 주면, 플랫폼마다 내 말투로 글이랑 사진까지 써 줘요.</p>
-    <p class="lead">Threads, Naver blog, X, LinkedIn and Instagram, in your own voice, with pictures from your own video. It stops at the draft. Posting is your call.</p>
+    <div class="kicker">AI writing employee · v0.2</div>
+    <h1>One sentence.<br><em>Every skill.</em></h1>
+    <p class="ko">한 문장만 말하면 트렌드 찾고, 자료 조사하고, 내 말투로 글을 사진까지 써 줘요.</p>
+    <p class="lead">Trends, research with sources, posts for every platform in your own voice, picture books, a humanizer and a fact check. It stops at the draft. Posting is your call.</p>
     <div class="cmd"><span><i>$</i> npx connect-ai-writer install-skill</span><button data-copy="npx connect-ai-writer install-skill">Copy</button></div>
+    <a class="tb" href="textbook/?lang=en">Follow the textbook: eight prompts to copy</a>
   </div>
-  <div class="film"><img src="hero.webp" alt="One video frame becomes five platform posts"></div>
+  <div class="film"><img src="hero_v02.webp" alt="One sentence in: trends, research, a blog post, pictures, a picture book, a motion video"></div>
 </div>
+
+<section>
+  <h2>Every skill <em>a writer needs</em></h2>
+  <p class="sub">Each picture is a real run. Say the line in quotes to your agent.</p>
+  <div class="skills">
+    <figure class="sk"><img loading="lazy" src="showcase/v02/trends.jpg" alt="Trends page with a Wikipedia views chart"><figcaption><span class="n">01 · trends</span><h4>Find what is hot</h4><p><q>"요즘 뜨는 거 찾아 줘."</q> Google Trends, search suggestions and Wikipedia views, each with its source and date.</p></figcaption></figure>
+    <figure class="sk"><img loading="lazy" src="showcase/v02/research.jpg" alt="Research fact sheet, every fact traced to a source sentence"><figcaption><span class="n">02 · research</span><h4>Research with sources</h4><p><q>"자료 찾아서 정리해 줘."</q> Every fact is tied to the sentence it came from. 16 of 16 here.</p></figcaption></figure>
+    <figure class="sk"><img loading="lazy" src="showcase/v02/blog.jpg" alt="Naver blog draft written from the research"><figcaption><span class="n">03 · write</span><h4>A post for every platform</h4><p>Naver blog, Threads, X, LinkedIn, Instagram, newsletters. Numbers only as the source has them.</p></figcaption></figure>
+    <figure class="sk"><img loading="lazy" src="showcase/v02/story.jpg" alt="Picture book cover: a green dinosaur under a star and the moon"><figcaption><span class="n">04 · story</span><h4>Picture books</h4><p><q>"7살, 공룡, 잠자리 동화 써 줘."</q> Illustrations drawn in code, a PDF you can print.</p></figcaption></figure>
+    <figure class="sk"><img loading="lazy" src="showcase/v02/humanize.jpg" alt="Humanize before and after, score 128.2 to 0"><figcaption><span class="n">05 · humanize</span><h4>No AI tells</h4><p>Translationese and stock phrases marked, then a check that the rewrite kept every number.</p></figcaption></figure>
+    <figure class="sk"><img loading="lazy" src="showcase/v02/voice.jpg" alt="Voice sheet counted from my own subtitles"><figcaption><span class="n">06 · voice</span><h4>Your voice sheet</h4><p>Counted from your own subtitles: how you end sentences, how you start them, your words.</p></figcaption></figure>
+  </div>
+  <div class="crew2">
+    <video src="showcase/v02/motion_9x16.mp4" poster="showcase/v02/motion_9x16_poster.jpg" autoplay muted loop playsinline aria-label="Motion graphics video made from the Threads post"></video>
+    <div class="side">
+      <h3>Works with our <em>other AI employees</em></h3>
+      <p><q>"이 글로 모션그래픽 영상도 만들어 줘."</q> The writer hands the post to <code>connect-ai-motion</code>, which makes a vertical and a landscape video from the post's own words. 84.6% stays 84.6%. Drafts go to <code>connect-ai-marketer</code> for posting.</p>
+      <img loading="lazy" src="showcase/v02/motion.jpg" alt="Every beat of the motion video">
+    </div>
+  </div>
+</section>
 
 <section>
   <h2>From <em>one lesson video</em></h2>

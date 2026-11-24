@@ -2,44 +2,51 @@
 
 <p align="center">
   <b>CONNECT AI LAB</b> · AI education for everyone · 모두를 위한 AI 교육<br>
-  <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">Course: Visual Vibe Coding</a> · <a href="README.ko.md">한국어</a>
+  <a href="https://wonseokjung.github.io/connect-ai-writer/textbook/?lang=en"><b>Follow the textbook</b></a> · <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">Course: Visual Vibe Coding</a> · <a href="README.ko.md">한국어</a>
 </p>
 
 # connect-ai-writer
 
-**Your AI writing employee. Hand it one video, and it writes your Threads, Naver blog, X, LinkedIn and Instagram posts in your own voice, pictures included.**
+**An AI writing employee with every skill a writer needs. Say one sentence, and it finds what is trending, researches it with sources, and writes your blog post in your own voice, pictures included. It writes your kid a picture book, too.**
 
-[![Five posts for five platforms, made from one of my lesson videos](docs/hero.webp)](https://wonseokjung.github.io/connect-ai-writer/)
-
-## Start
+[![One sentence in: trends, research, a blog post, pictures, a picture book, a motion video. All real outputs](docs/hero_v02.webp)](https://wonseokjung.github.io/connect-ai-writer/)
 
 ```bash
 npx connect-ai-writer install-skill
 ```
 
-Then open your agent (Claude Code, Codex, Antigravity, Cursor) in the folder with your video and say "write a Threads post and a Naver blog post from this video".
+Then open your agent (Claude Code, Codex, Antigravity, Cursor) and say "find what is trending and write a blog post about it". New to this? The [textbook](https://wonseokjung.github.io/connect-ai-writer/textbook/?lang=en) has eight copy-and-paste prompts, in order.
 
-## What you get
+## Skills
+
+Every picture below is a real run.
 
 <table>
 <tr>
-<td width="33%" valign="top"><img src="docs/showcase/threads_preview.jpg" width="100%" alt="Threads preview"><br><b>Threads</b><br><sub>A thread, with pictures that fill the frame.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/naver_preview.jpg" width="100%" alt="Naver blog preview"><br><b>Naver blog</b><br><sub>Title, headings, a picture between paragraphs.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/x_preview.jpg" width="100%" alt="X preview"><br><b>X</b><br><sub>Korean letters count as 2 there. It counts for you.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/trends.jpg" width="100%" alt="Trends"><br><b>Trends</b><br><sub>"What is hot right now?" Google Trends, search suggestions and Wikipedia views, each with its source and date.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/research.jpg" width="100%" alt="Research"><br><b>Research</b><br><sub>"Research this with sources." It reads articles and reports and ties every fact to the sentence it came from.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/blog.jpg" width="100%" alt="Naver blog post"><br><b>Posts for every platform</b><br><sub>Naver blog, Threads, X, LinkedIn, Instagram, newsletters. Numbers only as the source has them.</sub></td>
+</tr>
+<tr>
+<td width="33%" valign="top"><img src="docs/showcase/v02/story.jpg" width="100%" alt="Picture book"><br><b>Picture books</b><br><sub>"A bedtime story, age 7, a dinosaur." Illustrations drawn in code, and a PDF you can print.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/humanize.jpg" width="100%" alt="Humanize"><br><b>Humanize</b><br><sub>Marks translationese and AI tells, then checks that the rewrite kept every number.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/voice.jpg" width="100%" alt="Voice sheet"><br><b>Your voice sheet</b><br><sub>Give it your own subtitles and it counts how you really talk. Posts follow that sheet.</sub></td>
+</tr>
+<tr>
+<td colspan="3"><b>Works with our other AI employees</b></td>
+</tr>
+<tr>
+<td width="33%" valign="top"><img src="docs/showcase/v02/motion.jpg" width="100%" alt="Motion graphics video"><br><b>Motion video</b> · <a href="https://github.com/wonseokjung/connect-ai-motion"><code>connect-ai-motion</code></a><br><sub>"Make a motion video from this post." Landscape and vertical, from the post's own words. 84.6% stays 84.6%.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/v02/posts.jpg" width="100%" alt="One video, five platforms"><br><b>One video, five platforms</b><br><sub>One of my lesson videos in; Threads, Naver, X, LinkedIn and Instagram posts with pictures out.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Draft saved in Ego Lite"><br><b>Drafts only</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>It fills the editor through Ego Lite and saves a draft. Publishing is your click. The marketing team takes it from there.</sub></td>
 </tr>
 </table>
 
-Real output from one of my lesson videos and its subtitles. Every picture comes from that video.
-
 ## What it catches before you post
 
-- Numbers or quotes that aren't in your source
-- Posts over the character limit, or with no picture
-- AI-sounding phrases, emoji, corner brackets
-
-`post` puts it in the editor through Ego Lite and saves a draft. The publish button is yours.
-
-connect-ai-writer writes the posts and makes the pictures; the marketing employee [connect-ai-marketer](https://github.com/wonseokjung/connect-ai-marketer) handles the posting.
+- Numbers that are not in the source, changed quotes, links it never read
+- Posts over the limit, posts with no picture, titles without the search word
+- Translationese, AI tells, emoji, corner brackets
 
 <!-- team:start -->
 ## CONNECT AI LAB's AI employees
@@ -59,7 +66,7 @@ I'm building AI employees one by one, in the open. Grab the one you need first.
 
 Every command is in [docs/guide.md](docs/guide.md). Want to try it without an account first? Run `npx connect-ai-writer demo`.
 
-MIT. The packages it installs and the programs it calls keep their own licenses, listed in [NOTICE.md](NOTICE.md).
+MIT. The packages it installs, the programs it calls and the open source it learned methods from are listed in [NOTICE.md](NOTICE.md).
 
 If you want to build tools like this with your own AI agent, I show you how in [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding).
 

@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>한 문장이면 글이 나와요 · connect-ai-writer 교재</title>
+<meta name="description" content="CONNECT AI LAB 글쓰기 직원 connect-ai-writer 교재. 복사해서 붙여 넣는 프롬프트 8개로 말투표, 트렌드, 리서치, 블로그 글, 모션그래픽 영상, 그림책 동화, AI 티 지우기, 임시저장까지.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="한 문장이면 글이 나와요 · connect-ai-writer 교재">
+<meta property="og:image" content="../hero_v02_poster.jpg">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* connect-ai-writer textbook. Same shape as the Visual Vibe Coding textbooks: white page, dark ink, gold #D6892A only for squares, lines and buttons,
+ * small gold text #8A5410 (6.3:1 on white), big accent #B4701F, square corners, 1px lines, mono labels, a copy button on every prompt. */
+:root{
+  --bg:#FFFFFF; --bg2:#F7F5F0; --well:#F3EFE7; --screen:#0B0C0E;
+  --ink:#111214; --text:#2A2C30; --muted:#5B5E66; --line:rgba(17,18,20,.12); --line2:rgba(17,18,20,.22);
+  --gold:#D6892A; --gold-ink:#8A5410; --gold-big:#B4701F; --gold-dim:rgba(214,137,42,.55); --gold-wash:rgba(214,137,42,.10);
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
+  --serif:"Cormorant Garamond","Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.75;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.shell{max-width:1112px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--gold-ink)}
+a,button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3,p,li,span,dd,dt{word-break:keep-all}
+img,video{display:block;max-width:100%}
+code{font:500 .86em/1.5 var(--mono);background:var(--well);color:var(--ink);padding:1px 6px;overflow-wrap:anywhere;word-break:break-all}
+b{color:var(--ink);font-weight:650}
+.label,.kicker{display:flex;align-items:center;gap:10px;margin:0;font:500 11px/1.4 var(--mono);letter-spacing:.24em;text-transform:uppercase}
+.label{color:var(--gold-ink)}
+.kicker{color:var(--muted)}
+.kicker i{width:7px;height:7px;flex:none;background:var(--gold)}
+
+.mast{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px;border-bottom:1px solid var(--line)}
+.mast a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font:500 11px/1.4 var(--mono);letter-spacing:.2em;color:var(--muted);white-space:nowrap}
+.mast a.brand{color:var(--gold-ink)}
+.mast a:hover{color:var(--ink)}
+.mast-r{display:flex;align-items:center;gap:18px;min-width:0}
+.lang{display:inline-flex;border:1px solid var(--line2)}
+.lang button{min-height:42px;min-width:52px;padding:0 12px;border:0;background:var(--bg);color:var(--muted);font:600 13px/1 var(--sans);cursor:pointer}
+.lang button+button{border-left:1px solid var(--line2)}
+.lang button[aria-pressed="true"]{background:var(--gold);color:#120C04}
+
+.hero{padding:56px 0 64px}
+.serif-en{margin:26px 0 8px;color:var(--gold-ink);font:italic 500 clamp(24px,2.8vw,34px)/1.15 var(--serif);letter-spacing:.01em}
+.hero h1{color:var(--ink);font-size:clamp(42px,8.4vw,96px);font-weight:300;line-height:1.1;letter-spacing:-.045em}
+.hero h1 em{font-style:normal;color:var(--gold-big)}
+.lead{margin-top:26px;max-width:36em;color:var(--text);font-size:18px;line-height:1.8}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0;padding:0;list-style:none}
+.toc a{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:8px 16px;border:1px solid var(--line2);color:var(--ink);text-decoration:none;font-size:15px;transition:border-color .2s,color .2s}
+.toc a i{font:600 17px/1 var(--serif);font-style:normal;color:var(--gold-ink)}
+.toc a:hover{border-color:var(--gold);color:var(--gold-ink)}
+.screen{margin:0;min-width:0}
+.screen .frame{position:relative;background:var(--screen);outline:1px solid var(--gold-dim);outline-offset:5px;box-shadow:0 26px 70px rgba(17,18,20,.16)}
+.screen img,.screen video{width:100%;height:auto;background:var(--screen)}
+.screen figcaption{margin-top:16px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.screen figcaption b{display:block;margin-bottom:2px;font:500 11px/1.4 var(--mono);letter-spacing:.18em;color:var(--gold-ink);text-transform:uppercase}
+.hero .screen{margin-top:48px}
+.chip{position:absolute;top:10px;left:10px;z-index:1;padding:6px 9px;background:rgba(11,12,14,.72);color:#F4F1EA;font:500 11px/1 var(--mono);letter-spacing:.16em;pointer-events:none}
+
+.sec{padding:84px 0;border-top:1px solid var(--line);scroll-margin-top:8px}
+.sec.alt{background:var(--bg2)}
+.head{display:grid;gap:12px;margin-bottom:34px}
+.head h2{color:var(--ink);font-size:clamp(34px,5.2vw,58px);font-weight:300;line-height:1.14;letter-spacing:-.04em}
+.head h2 em{font-style:normal;color:var(--gold-big)}
+.sub{max-width:40em;color:var(--text);font-size:17px;line-height:1.75}
+.make{list-style:none;margin:0;padding:0;border-top:1px solid var(--gold-dim)}
+.make li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);font-size:18px;line-height:1.65}
+.make li i{font:600 24px/1.2 var(--serif);font-style:normal;color:var(--gold-ink)}
+
+.prep{display:grid;gap:10px;margin:0 0 48px;padding:20px 22px;border:1px solid var(--line);background:var(--bg2)}
+.prep h3{font:500 11px/1.4 var(--mono);letter-spacing:.2em;color:var(--gold-ink)}
+.prep ul{margin:0;padding:0 0 0 18px;color:var(--ink);font-size:16.5px}
+.prep li+li{margin-top:4px}
+.step{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding:40px 0;border-top:1px solid var(--line)}
+.step-n{display:flex;align-items:baseline;gap:12px}
+.step-n b{font:600 46px/1 var(--serif);color:var(--gold-ink);font-variant-numeric:lining-nums}
+.step-n small{font:500 11px/1.4 var(--mono);letter-spacing:.22em;color:var(--muted)}
+.step h3{color:var(--ink);font-size:clamp(24px,3vw,32px);font-weight:400;line-height:1.3;letter-spacing:-.025em}
+.step p{max-width:40em}
+.step-body{display:grid;gap:18px;min-width:0}
+@media (min-width:880px){.step{grid-template-columns:220px minmax(0,1fr);gap:40px}}
+.pc{display:grid;gap:10px;min-width:0;padding:18px;border:1px solid var(--line2);background:var(--bg)}
+.pc-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pc-n{font:500 11px/1.4 var(--mono);letter-spacing:.22em;color:var(--gold-ink)}
+.pc-body{margin:0;padding:14px 16px;background:var(--well);border-left:2px solid var(--gold);color:var(--ink);font:500 14.5px/1.8 var(--mono);white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+.copy{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:84px;min-height:44px;padding:8px 16px;border:1px solid var(--gold);background:var(--gold);color:#120C04;font:700 14px/1 var(--sans);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.copy:hover{background:#E59A3C;border-color:#E59A3C}
+.copy.done{background:var(--bg);color:var(--gold-ink);border-color:var(--gold-dim)}
+.note{color:var(--muted);font-size:15px}
+.pair{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.62fr);gap:22px;align-items:start}
+
+.hw{max-width:46em;padding:26px;border:1px solid var(--gold);box-shadow:inset 0 3px 0 var(--gold);background:var(--bg)}
+.hw p{color:var(--ink);font-size:18px;line-height:1.8}
+.hw p.hint{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--text);font-size:16px}
+.faq{margin:0;border-top:1px solid var(--gold-dim)}
+.faq div{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
+.faq dt{color:var(--ink);font-size:18px;font-weight:500;line-height:1.45}
+.faq dd{margin:0;color:var(--text);font-size:16px;line-height:1.7}
+@media (min-width:760px){.faq div{grid-template-columns:300px minmax(0,1fr);gap:28px}}
+.back{padding:56px 0 64px;border-top:1px solid var(--line)}
+.back nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 22px;border:1px solid var(--gold);background:var(--gold);color:#120C04;text-decoration:none;font-size:15px;font-weight:700;line-height:1.4;transition:background .2s,border-color .2s,color .2s}
+.btn:hover{background:#E59A3C;border-color:#E59A3C}
+.btn--ghost{background:var(--bg);border-color:var(--line2);color:var(--ink);font-weight:600;min-height:48px}
+.btn--ghost:hover{background:var(--bg);border-color:var(--gold);color:var(--gold-ink)}
+footer{padding:30px 0 calc(44px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg2)}
+footer .brand{color:var(--ink);font-size:19px;font-weight:300;letter-spacing:-.01em}
+footer .brand em{font-style:normal;color:var(--gold-ink)}
+footer .fine{margin-top:12px;color:var(--muted);font:500 11px/1.5 var(--mono);letter-spacing:.22em}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:calc(100vw - 32px);background:var(--ink);color:#fff;font-weight:600;font-size:14px;line-height:1.5;padding:10px 16px;transition:opacity .2s,transform .2s;z-index:5}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+html:lang(en) .serif-en{display:none}
+html:lang(en) .hero h1{margin-top:26px;letter-spacing:-.03em}
+html:lang(en) .head h2{letter-spacing:-.025em}
+
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .hero{padding:34px 0 48px}
+  .lead{font-size:17px;margin-top:20px}
+  .toc li{flex:1 1 auto}
+  .toc a{width:100%;justify-content:center;padding:8px 12px}
+  .hero .screen{margin-top:36px}
+  .screen .frame{outline-offset:3px}
+  .sec{padding:60px 0}
+  .head{margin-bottom:26px}
+  .step{padding:30px 0}
+  .pc{padding:14px}
+  .pc-body{padding:12px;font-size:13.5px}
+  .pair{grid-template-columns:minmax(0,1fr)}
+  .pair .v916{width:62%;justify-self:center}
+  .hw{padding:18px}
+  .hw p{font-size:17px}
+  .back nav .btn{flex:1 1 100%}
+  .mast .mast-gh{display:none}
+}
+@media (max-width:400px){.label,.kicker{font-size:10px;letter-spacing:.16em}.mast a{letter-spacing:.14em}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast,.toc a,.btn,.copy{transition:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="mast">
+    <a class="brand" href="../" lang="en">CONNECT AI LAB</a>
+    <div class="mast-r">
+      <a class="mast-gh" href="https://github.com/wonseokjung/connect-ai-writer" lang="en">GITHUB</a>
+      <span class="lang" role="group" aria-label="Language"><button type="button" data-lang="ko" aria-pressed="true">한국어</button><button type="button" data-lang="en" aria-pressed="false">EN</button></span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="shell">
+      <p class="kicker" lang="en"><i aria-hidden="true"></i>CONNECT AI LAB · THE WRITING EMPLOYEE · TEXTBOOK</p>
+      <p class="serif-en" lang="en">One sentence in. A post out.</p>
+      <h1 data-i="h1">한 문장이면<br><em>글이 나와요</em></h1>
+      <p class="lead" data-i="lead">블로그 글 하나 쓰려면 할 게 많잖아요. 요즘 뭐가 뜨는지 찾아야 되고, 자료 찾아야 되고, 내 말투로 써야 되고, 사진도 만들어야 되거든요. 이걸 AI 글쓰기 직원 하나한테 다 넣어 놨어요. 아래 프롬프트 8개를 순서대로 복사해서 에이전트한테 붙여 넣기만 하시면 돼요.</p>
+      <ul class="toc">
+        <li><a href="#make"><i>01</i><span data-i="t1">오늘 만들 것</span></a></li>
+        <li><a href="#steps"><i>02</i><span data-i="t2">따라 하기</span></a></li>
+        <li><a href="#stuck"><i>03</i><span data-i="t3">막히면</span></a></li>
+        <li><a href="#hw"><i>04</i><span data-i="t4">과제</span></a></li>
+      </ul>
+      <figure class="screen">
+        <div class="frame"><img src="../hero_v02.webp" width="1100" height="631" alt="한 문장 넣으면 트렌드, 리서치, 블로그, 그림, 동화, 모션그래픽까지" data-ia="hero_alt"></div>
+        <figcaption><b>REAL RUNS</b><span data-i="hero_cap">여기 나오는 화면은 전부 제가 실제로 돌린 결과예요. 꾸민 거 하나도 없어요.</span></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="sec alt" id="make" aria-labelledby="make-t">
+    <div class="shell">
+      <div class="head">
+        <p class="label" lang="en">01 · WHAT YOU MAKE TODAY</p>
+        <h2 id="make-t" data-i="h_make">오늘 <em>만들 것</em></h2>
+      </div>
+      <ol class="make">
+        <li><i>1</i><span data-i="m1">내 영상 자막으로 만든 내 말투표</span></li>
+        <li><i>2</i><span data-i="m2">요즘 뜨는 주제, 그리고 출처가 하나하나 붙은 자료 정리</span></li>
+        <li><i>3</i><span data-i="m3">쓰레드, 네이버 블로그, 인스타 글이랑 사진. 같은 글로 모션그래픽 영상까지</span></li>
+        <li><i>4</i><span data-i="m4">우리 아이 그림책 동화 한 권, 인쇄용 PDF로</span></li>
+        <li><i>5</i><span data-i="m5">AI 티 안 나게 고친 글, 그리고 네이버 블로그 임시저장</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="steps" aria-labelledby="steps-t">
+    <div class="shell">
+      <div class="head">
+        <p class="label" lang="en">02 · STEP BY STEP</p>
+        <h2 id="steps-t" data-i="h_steps">따라 <em>하기</em></h2>
+      </div>
+      <div class="prep">
+        <h3 data-i="prep_h">준비물</h3>
+        <ul>
+          <li data-i="prep1">Node.js 20.9 이상 (터미널에 <code>node -v</code> 쳐 보시면 돼요)</li>
+          <li data-i="prep2">코딩 에이전트 하나: Claude Code, Codex, Antigravity, Cursor 중에 아무거나</li>
+          <li data-i="prep3">크롬 (그림 만들 때 써요. 따로 받는 건 없어요)</li>
+          <li data-i="prep4">Ego Lite (8단계 임시저장할 때만. 없어도 나머지는 다 돼요)</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>1</b><small lang="en">STEP 01</small></div>
+        <div class="step-body">
+          <h3 data-i="s1_h">AI 글쓰기 직원 데려오기</h3>
+          <p data-i="s1_n">에이전트한테 이렇게 말하세요.</p>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p1">npx connect-ai-writer install-skill 실행해 줘</pre>
+          </div>
+          <p class="note" data-i="s1_after">"Ok to proceed?" 하고 물어보면 <code>y</code> 라고 답하면 돼요. 끝나면 새 대화를 여세요. npm에 아직 안 올라가 있으면 <code>npx github:wonseokjung/connect-ai-writer install-skill</code> 으로 해도 똑같이 깔려요.</p>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/install.jpg" width="1280" height="960" alt="install-skill 실행 화면" data-ia="a1"></div><figcaption><b>REAL OUTPUT</b><span data-i="c1">실제로 깔아 본 화면이에요. 스킬 파일 10개가 같이 들어가요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>2</b><small lang="en">STEP 02</small></div>
+        <div class="step-body">
+          <h3 data-i="s2_h">내 말투표 만들기</h3>
+          <p data-i="s2_n">AI가 쓴 글이 어색한 이유가 내 말투가 아니라서거든요. 그래서 제일 먼저 내 영상 자막으로 내가 실제로 어떻게 말하는지 세어 봐요.</p>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p2">이 폴더에 있는 내 영상 자막(.srt) 전부로 내 말투표 만들어 줘. connect-ai-writer voice 로 하고 voice.md 로 저장해 줘.</pre>
+          </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/voice.jpg" width="1280" height="960" alt="말투표" data-ia="a2"></div><figcaption><b>REAL OUTPUT</b><span data-i="c2">제 강의 자막 5개로 만든 거예요. 2,443줄에서 문장 786개를 셌어요. 어미, 첫마디, 자주 쓰는 말까지 다 나와요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>3</b><small lang="en">STEP 03</small></div>
+        <div class="step-body">
+          <h3 data-i="s3_h">요즘 뜨는 주제 찾기</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p3">요즘 뜨는 주제 찾아 줘. "바이브코딩" 이랑 "AI 1인 기업" 으로. 출처랑 날짜 꼭 붙이고, 글감 후보도 뽑아 줘.</pre>
+          </div>
+          <p data-i="s3_after">구글 트렌드, 구글이랑 유튜브랑 네이버 검색어 자동완성, 위키백과 조회수를 키 없이 봐요. Ego Lite가 있으면 X, 쓰레드도 읽기만 해서 같이 보고요. 네이버 데이터랩은 내 키를 넣었을 때만 켜져요.</p>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/trends.jpg" width="1280" height="960" alt="트렌드 화면" data-ia="a3"></div><figcaption><b>REAL OUTPUT</b><span data-i="c3">11월 24일에 돌린 거예요. 위키백과 바이브 코딩 문서 조회수가 올해 3월에 제일 높았어요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>4</b><small lang="en">STEP 04</small></div>
+        <div class="step-body">
+          <h3 data-i="s4_h">출처 붙여서 자료 조사하고, 그걸로 블로그 글</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 4-1</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p4a">바이브코딩 자료 찾아서 정리해 줘. 기사랑 보고서로 찾고, 사실마다 어느 출처에서 왔는지 붙여 줘. 다 하면 research check 로 확인까지.</pre>
+          </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/research.jpg" width="1280" height="960" alt="자료 정리 화면" data-ia="a4a"></div><figcaption><b>REAL OUTPUT</b><span data-i="c4a">출처 6개, 사실 16개. 16개 전부 출처 문장이랑 이어졌어요. 숫자가 출처랑 다르면 여기서 바로 빨간색으로 떠요.</span></figcaption></figure>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 4-2</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p4b">방금 정리한 자료로 네이버 블로그 글이랑 쓰레드 글 써 줘. 내 말투표(voice.md) 보고 쓰고, 숫자는 자료에 있는 그대로만.</pre>
+          </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/blog.jpg" width="1280" height="960" alt="네이버 블로그 미리보기" data-ia="a4b"></div><figcaption><b>REAL OUTPUT</b><span data-i="c4b">자료에 없는 숫자를 쓰거나 읽지 않은 링크를 넣으면 검사에서 막혀요. 글 끝에 출처도 자동으로 붙어요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>5</b><small lang="en">STEP 05</small></div>
+        <div class="step-body">
+          <h3 data-i="s5_h">영상 하나로 쓰레드, 블로그, 인스타. 모션그래픽 영상까지</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-1</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p5a">이 영상으로 쓰레드, 네이버 블로그, 인스타 글 써 줘. 사진은 영상에서 뽑아서 같이 만들고, 내 말투표 보고 써 줘.</pre>
+          </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/posts.jpg" width="1280" height="960" alt="영상 하나로 만든 글과 사진" data-ia="a5a"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5a">제 비주얼 바이브코딩 2강 영상 하나로 나온 글이랑 사진이에요. 사진은 전부 그 영상에서 가져왔어요.</span></figcaption></figure>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT 5-2 · WITH CONNECT-AI-MOTION</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p5b">이 쓰레드 글로 모션그래픽 영상도 만들어 줘. connect-ai-writer motion --render 로 하고, 세로랑 가로 둘 다.</pre>
+          </div>
+          <p class="note" data-i="s5_note">이건 우리 다른 AI 직원 connect-ai-motion 이 만들어요. 안 깔려 있으면 <code>npx connect-ai-writer engines</code> 하면 받는 법이 나와요.</p>
+          <div class="pair">
+            <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/motion.jpg" width="1280" height="960" alt="모션그래픽 영상 장면들" data-ia="a5b"></div><figcaption><b>REAL OUTPUT</b><span data-i="c5b">4단계 자료로 쓴 쓰레드 글로 만든 20초 영상이에요. 84.6% 는 반올림 안 하고 84.6% 그대로 나와요.</span></figcaption></figure>
+            <figure class="screen v916"><div class="frame"><video src="../showcase/v02/motion_9x16.mp4" poster="../showcase/v02/motion_9x16_poster.jpg" width="540" height="960" muted loop playsinline autoplay preload="metadata"></video><span class="chip">9:16</span></div></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>6</b><small lang="en">STEP 06</small></div>
+        <div class="step-body">
+          <h3 data-i="s6_h">우리 아이 그림책 동화</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p6">우리 아이 잠자리 동화 써 줘. 7살이고 공룡 좋아해. 그림책으로 만들어서 PDF까지.</pre>
+          </div>
+          <p data-i="s6_after">한 쪽에 한 장면, 글에 나온 건 그림에도 나오게, 마지막은 교훈 말고 첫 장면으로 돌아오게. 이런 그림책 규칙을 직원이 알아서 검사해요. 그림은 코드로 그린 동물이랑 물건만 써요. 사람은 안 그려요.</p>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/story_pages.jpg" width="1824" height="912" alt="그림책 쪽들" data-ia="a6"></div><figcaption><b>REAL OUTPUT</b><span data-i="c6">"토토와 졸린 작은 별", 12쪽짜리예요. 표지, 본문, 끝 쪽까지 이렇게 나와요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>7</b><small lang="en">STEP 07</small></div>
+        <div class="step-body">
+          <h3 data-i="s7_h">AI가 쓴 티 지우기</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p7">이 글 AI가 쓴 티 안 나게 고쳐 줘. 내 말투표대로 쓰고, 숫자는 하나도 바꾸지 마. 고친 다음에 humanize --after 로 전후 비교까지.</pre>
+          </div>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/v02/humanize.jpg" width="1280" height="960" alt="고치기 전과 후" data-ia="a7"></div><figcaption><b>REAL OUTPUT</b><span data-i="c7">"~에 대해 알아보겠습니다", "단순히 ~가 아니라", "혁신적인" 같은 말을 찾아서 표시해요. 고친 글은 18개에서 0개가 됐고, 숫자는 하나도 안 바뀌었어요.</span></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n"><b>8</b><small lang="en">STEP 08</small></div>
+        <div class="step-body">
+          <h3 data-i="s8_h">Ego Lite로 임시저장까지만</h3>
+          <div class="pc" data-copy>
+            <div class="pc-top"><span class="pc-n" lang="en">PROMPT</span><button class="copy" type="button" data-i="copy">복사</button></div>
+            <pre class="pc-body" tabindex="0" data-i="p8">네이버 블로그 글 Ego Lite로 글쓰기 화면에 넣고 임시저장까지만 해 줘. 발행은 내가 할게.</pre>
+          </div>
+          <p data-i="s8_after">직원은 절대 혼자 안 올려요. 로그인도 안 하고, 비밀번호도 안 쳐요. 로그아웃돼 있으면 Ego Lite에서 직접 로그인하시면 돼요.</p>
+          <figure class="screen"><div class="frame"><img loading="lazy" src="../showcase/naver_editor.jpg" alt="네이버 블로그 글쓰기 화면에 들어간 글" data-ia="a8"></div><figcaption><b>REAL OUTPUT</b><span data-i="c8">제 계정 네이버 블로그 글쓰기 화면이에요. 제목, 소제목, 문단 사이 사진, 태그까지 들어가고 임시저장에서 멈춰요.</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="stuck" aria-labelledby="stuck-t">
+    <div class="shell">
+      <div class="head">
+        <p class="label" lang="en">03 · IF YOU GET STUCK</p>
+        <h2 id="stuck-t" data-i="h_stuck"><em>막히면</em></h2>
+      </div>
+      <dl class="faq">
+        <div><dt data-i="q1">그림이 하나도 안 나와요</dt><dd data-i="a1t">크롬이 있어야 그림을 만들어요. <code>npx connect-ai-writer doctor</code> 해 보시면 뭐가 빠졌는지 나와요.</dd></div>
+        <div><dt data-i="q2">검사에서 숫자 때문에 막혀요</dt><dd data-i="a2t">출처에 없는 숫자라서 그래요. 규칙을 끄지 말고 글을 고치세요. <code>check --trace</code> 하면 숫자마다 어디서 왔는지 보여 줘요.</dd></div>
+        <div><dt data-i="q3">트렌드에 구글 관심도가 비어 있어요</dt><dd data-i="a3t">구글이 잠깐 막을 때가 있어요. 조금 있다가 다시 해 보세요. 나머지 신호는 그대로 나와요.</dd></div>
+        <div><dt data-i="q4">네이버가 작성 중인 글을 이어서 쓸지 물어봐요</dt><dd data-i="a4t">그건 내 글이라서 직원이 대신 안 골라요. Ego Lite 열어서 확인이나 취소를 직접 누르고 다시 시키세요.</dd></div>
+        <div><dt data-i="q5">모션그래픽 영상이 안 만들어져요</dt><dd data-i="a5t">connect-ai-motion 이 깔려 있어야 돼요. <code>npx connect-ai-writer engines</code> 로 확인해 보세요.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="hw" aria-labelledby="hw-t">
+    <div class="shell">
+      <div class="head">
+        <p class="label" lang="en">04 · ASSIGNMENT</p>
+        <h2 id="hw-t" data-i="h_hw"><em>과제</em></h2>
+      </div>
+      <div class="hw">
+        <p data-i="hw1">내 영상 하나로 말투표 만들고, 요즘 뜨는 주제 하나 골라서 자료 조사부터 네이버 블로그 임시저장까지 해 보세요. 아이가 있으시면 동화도 한 권 만들어 주시고요.</p>
+        <p class="hint" data-i="hw2">다 하시면 결과 폴더의 index.html 이랑 sheet.jpg 를 캡처해 두세요. 내 말투로 나왔는지, 숫자가 다 출처에 있는지 그 두 개만 보시면 돼요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="back">
+    <div class="shell">
+      <p class="label" lang="en">CONNECT AI LAB</p>
+      <nav>
+        <a class="btn" href="https://github.com/wonseokjung/connect-ai-writer" data-i="b1">GitHub에서 보기</a>
+        <a class="btn btn--ghost" href="../" data-i="b2">결과물 전부 보기</a>
+        <a class="btn btn--ghost" href="https://www.aicitybuilders.com/vibecoding" data-i="b3">비주얼 바이브코딩 강의</a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    <p class="brand">CONNECT AI LAB · <em data-i="f1">모두를 위한 AI 교육</em></p>
+    <p class="fine" lang="en">CONNECT-AI-WRITER · MIT · MADE BY AI MENTOR JAY</p>
+  </div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var EN = {
+    title: 'One sentence in, a post out · connect-ai-writer textbook',
+    h1: 'One sentence.<br><em>A post.</em>',
+    lead: 'Writing one blog post takes a lot. You find what is trending, you dig up sources, you write it in your own voice, you make the pictures. I put all of that into one AI writing employee. Copy the eight prompts below, in order, and paste them to your agent.',
+    t1: 'What you make', t2: 'Step by step', t3: 'If you get stuck', t4: 'Assignment',
+    hero_alt: 'One sentence in: trends, research, a blog post, pictures, a picture book, a motion video',
+    hero_cap: 'Every screen on this page is a real run. Nothing is mocked up.',
+    h_make: 'What you <em>make today</em>',
+    m1: 'Your own voice sheet, from your video subtitles',
+    m2: 'What is trending now, and research where every fact has its source',
+    m3: 'Threads, Naver blog and Instagram posts with pictures, and a motion graphics video of the same post',
+    m4: 'A picture book for your kid, as a printable PDF',
+    m5: 'A rewrite with no AI tells, and a Naver blog draft',
+    h_steps: 'Step <em>by step</em>', prep_h: 'What you need',
+    prep1: 'Node.js 20.9 or newer (type <code>node -v</code> in a terminal)',
+    prep2: 'One coding agent: Claude Code, Codex, Antigravity or Cursor',
+    prep3: 'Chrome (for the pictures; nothing is downloaded)',
+    prep4: 'Ego Lite (only for step 8 drafts; everything else works without it)',
+    copy: 'Copy', copied: 'Copied. Paste it to your agent.',
+    s1_h: 'Bring in the writing employee', s1_n: 'Say this to your agent.',
+    p1: 'Run npx connect-ai-writer install-skill',
+    s1_after: 'If it asks "Ok to proceed?", answer <code>y</code>. Then open a new chat. Before it is on npm, <code>npx github:wonseokjung/connect-ai-writer install-skill</code> installs the same thing.',
+    a1: 'install-skill output', c1: 'A real install. Ten skill files come with it.',
+    s2_h: 'Make your voice sheet', s2_n: 'AI writing reads wrong because it is not your voice. So first it counts how you really talk, from your own subtitles.',
+    p2: 'Make my voice sheet from all my video subtitles (.srt) in this folder. Use connect-ai-writer voice and save it as voice.md.',
+    a2: 'Voice sheet', c2: 'Made from five of my lesson subtitles: 786 sentences out of 2,443 lines. Endings, first words and favourite words, all counted.',
+    s3_h: 'Find what is trending', p3: 'Find what is trending for "vibe coding" and "AI one-person company". Put a source and a date on everything, and give me post ideas.',
+    s3_after: 'It reads Google Trends, Google, YouTube and Naver search suggestions and Wikipedia views with no key. With Ego Lite it also reads X and Threads, read only. Naver DataLab turns on only with your own key.',
+    a3: 'Trends page', c3: 'Run on November 24. Views of the Korean Wikipedia page on vibe coding peaked this March.',
+    s4_h: 'Research with sources, then a blog post from it',
+    p4a: 'Research vibe coding. Use articles and reports, and put the source on every fact. When done, confirm with research check.',
+    a4a: 'Fact sheet', c4a: 'Six sources, sixteen facts, all sixteen tied to a source sentence. A number that differs from its source shows up red right here.',
+    p4b: 'Write a Naver blog post and a Threads post from that research. Follow my voice sheet (voice.md), and use numbers only as the research has them.',
+    a4b: 'Naver blog preview', c4b: 'A number that is not in the research, or a link it never read, fails the check. The sources go at the end on their own.',
+    s5_h: 'One video to Threads, blog and Instagram. And a motion video',
+    p5a: 'Write a Threads post, a Naver blog post and an Instagram post from this video. Make the pictures from the video, and follow my voice sheet.',
+    a5a: 'Posts and pictures from one video', c5a: 'Posts and pictures from one video, lesson 2 of my Visual Vibe Coding course. Every picture comes from that video.',
+    p5b: 'Make a motion graphics video from this Threads post too. Use connect-ai-writer motion --render, vertical and landscape.',
+    s5_note: 'Our other AI employee, connect-ai-motion, makes this one. If it is not installed, <code>npx connect-ai-writer engines</code> tells you how to get it.',
+    a5b: 'Scenes of the motion video', c5b: 'A 20-second video from the Threads post written in step 4. 84.6% shows as 84.6%, never rounded.',
+    s6_h: 'A picture book for your kid', p6: 'Write a bedtime story for my kid. Age 7, loves dinosaurs. Make it a picture book, with a PDF.',
+    s6_after: 'One scene per page, anything the words name is in the picture, and the end comes back to the first scene instead of a lesson. The employee checks these picture-book rules itself. Pictures use code-made animals and things only, never people.',
+    a6: 'Picture book pages', c6: '"Toto and the Sleepy Little Star", 12 pages. Cover, pages and the end page come out like this.',
+    s7_h: 'Take out the AI tells', p7: 'Rewrite this so it does not sound like an AI wrote it. Follow my voice sheet and do not change a single number. Then compare before and after with humanize --after.',
+    a7: 'Before and after', c7: 'It marks stock openers, "not just X but Y" and hype words. The rewrite went from 18 marks to 0, and every number stayed the same.',
+    s8_h: 'Save a draft with Ego Lite, nothing more', p8: 'Put the Naver blog post into the editor with Ego Lite and save it as a draft. I will publish it myself.',
+    s8_after: 'The employee never posts on its own. It does not log in or type a password. If you are logged out, log in yourself inside Ego Lite.',
+    a8: 'The post inside the Naver blog editor', c8: 'My own Naver blog editor: title, headings, pictures between paragraphs, tags, and it stops at the draft.',
+    h_stuck: '<em>If you get stuck</em>',
+    q1: 'No pictures come out', a1t: 'Pictures need Chrome. Run <code>npx connect-ai-writer doctor</code> to see what is missing.',
+    q2: 'The check stops on a number', a2t: 'That number is not in the source. Fix the words, not the rule. <code>check --trace</code> shows where every number comes from.',
+    q3: 'Google interest is empty in trends', a3t: 'Google sometimes blocks for a while. Try again a bit later. The other signals still come in.',
+    q4: 'Naver asks whether to continue an unfinished post', a4t: 'That is your post, so the employee does not choose for you. Open Ego Lite, pick confirm or cancel yourself, and ask again.',
+    q5: 'The motion video is not made', a5t: 'connect-ai-motion has to be installed. Check with <code>npx connect-ai-writer engines</code>.',
+    h_hw: '<em>Assignment</em>',
+    hw1: 'Make your voice sheet from one of your videos, pick one trending topic, and go from research all the way to a Naver blog draft. If you have kids, make them a picture book too.',
+    hw2: 'When you are done, keep a screenshot of index.html and sheet.jpg in the run folder. Look at just two things: does it sound like you, and is every number in a source.',
+    b1: 'See it on GitHub', b2: 'See every output', b3: 'Visual Vibe Coding course', f1: 'AI education for everyone'
+  };
+  var KO = {}, nodes = document.querySelectorAll('[data-i]'), alts = document.querySelectorAll('[data-ia]');
+  nodes.forEach(function (n) { KO[n.dataset.i] = n.innerHTML; });
+  alts.forEach(function (n) { KO[n.dataset.ia] = n.getAttribute('alt'); });
+  KO.title = document.title; KO.copied = '복사했어요. 에이전트한테 붙여 넣으세요.';
+  var cur = 'ko';
+  function setLang(l, push) {
+    cur = l === 'en' ? 'en' : 'ko';
+    var D = cur === 'en' ? EN : KO;
+    document.documentElement.lang = cur;
+    document.title = D.title;
+    nodes.forEach(function (n) { var v = D[n.dataset.i]; if (v != null) n.innerHTML = v; });
+    alts.forEach(function (n) { var v = D[n.dataset.ia]; if (v != null) n.setAttribute('alt', v); });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === cur)); });
+    if (push) { try { var u = new URL(location.href); if (cur === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang'); history.replaceState(null, '', u); } catch (e) {} }
+  }
+  var q = null; try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  setLang(q === 'en' ? 'en' : 'ko', false);
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang, true); }); });
+
+  var toast = document.querySelector('.toast'), tt;
+  function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('show'); }, 1800); }
+  function selectText(el) { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+  document.querySelectorAll('.pc[data-copy] .copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.closest('.pc').querySelector('.pc-body'), text = pre.innerText.trim();
+      var D = cur === 'en' ? EN : KO;
+      function ok() { btn.classList.add('done'); btn.textContent = cur === 'en' ? 'Copied' : '복사됨'; say(D.copied); setTimeout(function () { btn.classList.remove('done'); btn.textContent = D.copy; }, 1600); }
+      function fallback() { selectText(pre); var done = false; try { done = document.execCommand('copy'); } catch (e) {} if (done) ok(); else say(cur === 'en' ? 'Selected. Press Ctrl+C or Cmd+C.' : '선택했어요. Ctrl+C 나 Cmd+C 누르세요.'); }
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+    });
+  });
+})();
+</script>
+</body>
+</html>
