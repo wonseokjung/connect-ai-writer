@@ -221,6 +221,38 @@ else {
   assert.match(fs.readFileSync(path.join(run, 'check.md'), 'utf8'), /Ready to post/);
   ok('demo: 5 platforms, pictures at platform size, previews, sheet, hand-off for the marketer, every check passed');
 }
+// ---------- pictures fill the card, face kept whole ----------
+{
+  const {cropBox} = await imp('lib/focus.mjs');
+  // a 16:9 frame into a 4:5 card: full height kept, face inside the crop
+  const face = {x: 0.37, y: 0.25, w: 0.14, h: 0.26};
+  const b = cropBox({sw: 1920, sh: 1080, tw: 1080, th: 1350, faces: [face]});
+  assert.equal(b.top, 0); assert.equal(b.height, 1080); assert.equal(b.width, 864);
+  assert.ok(b.left <= face.x * 1920 && b.left + b.width >= (face.x + face.w) * 1920, 'face inside the crop');
+  // a face near the right edge (a screen on the left): still whole, kept off-centre so the screen stays in
+  const edge = {x: 0.78, y: 0.32, w: 0.14, h: 0.24};
+  const e = cropBox({sw: 1920, sh: 1080, tw: 1080, th: 1350, faces: [edge]});
+  assert.ok(e.left <= edge.x * 1920 && e.left + e.width >= (edge.x + edge.w) * 1920 && e.left + e.width <= 1920);
+  assert.ok((edge.x + edge.w / 2) * 1920 - e.left > e.width * 0.55, 'face sits right of centre');
+  // nobody found: the middle
+  const c = cropBox({sw: 1920, sh: 1080, tw: 1080, th: 1350});
+  assert.equal(c.left, Math.round((1920 - 864) / 2));
+  // your own x= wins
+  assert.equal(cropBox({sw: 1920, sh: 1080, tw: 1080, th: 1350, x: 0}).left, 0);
+  // a tall picture into a wide card: full width, head kept with room above it
+  const t = cropBox({sw: 1080, sh: 1920, tw: 1200, th: 1200, faces: [{x: 0.4, y: 0.3, w: 0.2, h: 0.12}]});
+  assert.equal(t.width, 1080); assert.ok(t.top <= 0.3 * 1920 && t.top + t.height >= 0.42 * 1920);
+  const d = PF.directive('[image: frame 05:45 "얼굴" x=0.3]');
+  assert.equal(d.x, 0.3); assert.equal(d.caption, '얼굴'); assert.equal(d.at, '05:45');
+  const {card} = await imp('lib/cards.mjs');
+  const html = card({kind: 'frame', caption: '한 줄'}, {w: 1080, h: 1350, theme: cfg.theme || {bg: '#000', bg2: '#111', fg: '#fff', muted: '#999', accent: '#D6892A', line: '#333', fontBody: 'sans-serif', fontHeadline: 'serif'}, image: {file: path.join(tmp, 'x.jpg'), w: 1080, h: 1350, filled: true, face: {top: 0.2, bottom: 0.45}}});
+  assert.match(html, /center\/cover/); assert.match(html, /linear-gradient\(to top/); assert.doesNotMatch(html, /object-fit:contain/);
+  ok('fill-crop: frames fill the card, the face stays whole (centred, or off-centre near an edge), x= to choose, caption on a soft shadow');
+}
+{
+  const {naverTests} = await import(path.join(KIT, 'tests', 'naver.mjs'));
+  await naverTests({ok, assert, imp, tmp});
+}
 if (!hasFfmpeg()) skip('frames from a video (no ffmpeg)');
 else {
   const {bestFrame} = await imp('lib/frames.mjs');
