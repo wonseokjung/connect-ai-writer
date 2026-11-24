@@ -27,10 +27,11 @@ Talk to the user in their language.
    - Pictures, one line each where the picture goes:
      `[image: frame 05:45 "caption"]` (time from frames.jpg or source.txt), `[image: quote "exact words from source.txt" 10:17]`, `[image: stat "15" "what it is" 11:49]`, `[image: title "headline" "small line"]`, `[image: steps "one" "two" "three"]`, `[image: page https://their.site "caption"]`, `[image: file photo.jpg "caption"]`.
    - The first post of a thread gets the best picture. Quote cards copy the words exactly. A caption is the user's words too.
+   - A frame fills the whole card, cropped around the face (on a Mac, Apple Vision finds it; elsewhere it keeps the middle), with the caption on a soft shadow at the bottom. Look at `sheet.jpg` after build; if the crop lost something the line talks about, add `x=0.3` (0 = left edge, 1 = right edge) to that image line and build again.
 4. Build: `CW build <run>`. It makes the pictures, checks, and writes `preview.html` per platform, `index.html`, `sheet.jpg`, `post.txt`, `handoff/`.
 5. Read the output. Every `FIX` line: change post.md and build again until no FIX is left. `LOOK` lines: fix them unless the user really talks like that.
 6. Look at `sheet.jpg` yourself. Then show the user `index.html` and the sheet, and say in one line: nothing was posted.
-7. If the user wants it in the editor: `CW post <run> --to threads` (or `x`, or `naver --blog-id <id>`). Default saves it as a draft where the platform has drafts and closes our space; `--leave-open` keeps the filled editor open for them. Show the screenshot it prints. Threads was tested on a live account; X and Naver are not yet, so say so.
+7. If the user wants it in the editor: `CW post <run> --to threads` (or `x`, or `naver`; it opens the logged-in user's own blog editor). Default saves it as a draft where the platform has drafts and closes our space; `--leave-open` keeps the filled editor open for them. Show the screenshot it prints. Threads and Naver blog were tested on a live account (draft only); X is not yet, so say so.
 8. Instagram, LinkedIn, Tistory, Brunch: the user posts by hand from `preview.html` (copy text button, pictures in `images/`), or hands `handoff/writer-package.json` to the CONNECT AI LAB marketing agent `connect-ai-marketer`.
 
 ## Platform notes (all numbers in platforms.json, with where they came from)

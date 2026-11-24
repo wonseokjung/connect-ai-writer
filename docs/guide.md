@@ -30,7 +30,7 @@ No `[run]` means the newest run folder under `./out`.
 # Title                                  blog platforms
 ## Heading                               blog platforms
 Text in your own words.
-[image: frame 05:45 "caption"]          sharpest frame near 05:45, never cropped
+[image: frame 05:45 "caption"]          sharpest frame near 05:45, fills the picture, face kept whole (x=0.3 to choose where to look)
 [image: quote "exact words" 10:17]      quote card, must be in the source
 [image: stat "15" "label" 11:49]        number card, the number must be in the source
 [image: title "headline" "small line"]  cover card
