@@ -9,7 +9,7 @@
 
 # connect-ai-writer
 
-**AI 글쓰기 직원이에요. 영상 하나만 주시면 쓰레드, 네이버 블로그, X 글을 내 말투로 써 주고, 사진까지 내 자료로 같이 만들어 줘요.**
+**제가 만든 AI 글쓰기 직원이에요. 영상 하나만 주시면 쓰레드, 네이버 블로그, X 글을 여러분들 말투로 써 주고, 사진도 여러분들 자료로 같이 만들어 주거든요.**
 
 ![실제 강의 영상으로 만든 사진들: 선명한 장면, 숫자 카드, 인용 카드, 그림](docs/showcase/cards.jpg)
 
@@ -58,7 +58,7 @@ npx connect-ai-writer post --to threads        # 편집 화면에 넣고 임시�
 | `start` | 영상이랑 자막, 메모, 유튜브 링크, 내 페이지를 읽고, 선명한 장면을 골라 두고, 글 쓸 때 볼 brief 를 만들어요 |
 | `build` | 플랫폼 크기에 맞춰 사진을 만들고, 검사하고, `preview.html` 이랑 바로 붙여 넣을 `post.txt` 를 만들어요 |
 | `check` | 원본에 없는 숫자나 인용, 글자 수 초과, AI 같은 말투, 이모지, 꺾쇠 괄호, 긴 줄표, 사진 없는 글을 잡아요 |
-| `post` | Ego Lite에서 내 로그인으로 편집 화면에 넣고, 게시 버튼 앞에서 멈춰요. `--publish` 는 내가 직접 쳐야만 돼요 |
+| `post` | 내가 로그인해 둔 Ego Lite에서 편집 화면에 넣어 주고, 게시 버튼 앞에서 딱 멈춰요. `--publish` 는 내가 직접 쳐야 돼요 |
 
 플랫폼 규칙은 전부 [platforms.json](platforms.json)에 있고, 어디서 확인했는지도 같이 적어 뒀어요. `verified: false` 로 된 건 공식 페이지에서 확인을 못 한 거라서, 한 번 더 보셔야 돼요.
 
@@ -68,7 +68,7 @@ npx connect-ai-writer post --to threads        # 편집 화면에 넣고 임시�
 
 명령이랑 옵션은 [docs/guide.ko.md](docs/guide.ko.md)에 다 정리해 뒀어요. 저장소를 받으셨으면 `npm install` 하고 `npm test` 해 보시면 돼요.
 
-라이선스는 MIT예요. 설치되는 패키지랑 불러 쓰는 프로그램은 각자 라이선스가 있고, [NOTICE.md](NOTICE.md)에 정리해 뒀어요.
+라이선스는 MIT예요. 같이 깔리는 패키지랑 가져다 쓰는 프로그램은 각자 라이선스가 따로 있거든요. 그건 [NOTICE.md](NOTICE.md)에 다 정리해 뒀어요.
 
 이런 도구를 내 AI 에이전트로 직접 만드는 법은 [비주얼 바이브코딩](https://www.aicitybuilders.com/vibecoding)에서 알려 드려요.
 
