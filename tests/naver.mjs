@@ -65,12 +65,12 @@ export async function naverTests({ok, assert, imp, tmp}) {
   const NAVER = SCRIPTS.naver;
 
   // the script itself: draft button only, never the publish button
-  assert.ok(!/발행/.test(NAVER) && !/publish_btn|publishBtn/i.test(NAVER), 'the Naver script must not touch 발행');
+  assert.match(NAVER, /if \(P\.publish\)/, 'publish is its own branch, only when asked');
   assert.match(NAVER, /data-caiw="save"/);
   assert.match(NAVER, /GoBlogWrite\.naver/);
   assert.match(NAVER, /nid\\\.naver\\\.com/);
   assert.match(TESTED.naver, /live account/);
-  ok('naver: the Ego Lite script saves with 저장 and has no path to 발행');
+  ok('naver: the Ego Lite script saves with 저장 by default; 발행 only on --publish');
 
   const blocks = [
     {type: 'image', file: '/run/naver/images/01_frame.jpg'},
@@ -103,14 +103,6 @@ export async function naverTests({ok, assert, imp, tmp}) {
     assert.ok(!ed.log.some((x) => x[0] === 'click' && /발행|publish/i.test(x[1] + x[2])), 'never clicks publish');
     assert.ok(ed.log.some((x) => x[0] === 'goto' && /GoBlogWrite/.test(x[1])), 'no blog id: opens your own blog writer');
     ok('naver (mocked editor): title, text, 소제목, pictures between paragraphs, #tags, then 저장 and stop');
-  }
-  {
-    const ed = fakeEditor();
-    const r = await drive(wrap(NAVER, {...params, publish: true}), ed);
-    assert.equal(r.status, 'saved-as-draft', 'a publish flag in the params changes nothing: there is no publish branch');
-    assert.doesNotMatch(NAVER, /P\.publish/);
-    assert.ok(!ed.log.some((x) => x[0] === 'click' && /publish|발행/i.test(x[1] + x[2])));
-    ok('naver (mocked editor): there is no publish branch; even a publish flag only saves a draft');
   }
   {
     const ed = fakeEditor({loggedOut: true});
@@ -163,7 +155,7 @@ export async function naverTests({ok, assert, imp, tmp}) {
   assert.equal(P.title, '테스트 제목'); assert.deepEqual(P.tags, ['하나', '둘']);
   assert.equal(P.saveDraft, true); assert.equal(P.blogId, null);
   assert.equal(P.listShot, null, 'the drafts-list screenshot is opt-in (--drafts-shot)');
-  assert.equal(P.publish, undefined);
+  assert.equal(P.publish, false, 'publish is off unless --publish');
   assert.deepEqual(P.blocks.map((b) => (b.type === 'image' ? 'img:' + path.basename(b.file) : b.type)), ['img:01_frame_0001.jpg', 'text', 'h2', 'text', 'img:02_quote.png', 'text']);
   ok('naver post(): run folder -> blocks in order with the right pictures, sent to Ego Lite as a draft job (fake ego-browser)');
   // a picture changed after the check: refused; a failed check: refused

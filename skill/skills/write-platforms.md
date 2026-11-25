@@ -12,7 +12,7 @@
 4. Humanize (skills/humanize.md) if anything sounds written by an AI.
 5. `CW build <run>`: pictures, checks, `preview.html` per platform, `index.html`, `sheet.jpg`, `post.txt`, `handoff/`. Fix every FIX line and build again. LOOK lines: fix them unless the user really talks like that. Look at `sheet.jpg` yourself.
 6. Show `index.html` and the sheet; say nothing was posted.
-7. Draft in the editor if the user wants: `CW post <run> --to threads` (or `naver`, `x`). It saves a draft and closes its own space; `--leave-open` keeps the editor open. Threads and Naver blog were tested on a live account (draft only); X is not yet, so say so.
+7. Draft in the editor if the user wants: `CW post <run> --to threads` (or `naver`, `x`). It saves a draft and closes its own space; `--leave-open` keeps the editor open. If the user asked to publish, add `--publish`: it presses the platform's publish button and reports the link. Threads and Naver blog were tested on a live account (draft only); X is not yet, so say so.
 8. Instagram, LinkedIn, Tistory, Brunch: the user posts from `preview.html` (copy button, pictures in `images/`), or hands `handoff/writer-package.json` to connect-ai-marketer.
 
 Limits live in `platforms.json` with where each number came from. Threads 500 characters and 10 pictures; X 280 weighted (Korean letters count 2) and 4 pictures; LinkedIn 3,000; Instagram 2,200 and up to 5 hashtags.

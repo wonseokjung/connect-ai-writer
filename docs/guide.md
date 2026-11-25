@@ -10,7 +10,7 @@
 | `write [run] --writer "claude -p"` | Optional: a headless agent writes every `post.md`. Normally your agent in chat writes them |
 | `build [run]` | Pictures, check, `preview.html`, `post.txt`, `post.json`, `post.html` (blogs), `check.json` (the check result, sealed), `index.html`, `sheet.jpg`, `handoff/`. `--no-pictures` (or no Chrome): text, checks and previews only, each missing picture listed with why |
 | `check [run]` | Text checks only, fast |
-| `post [run] --to threads\|x\|naver` | Fills the editor in Ego Lite and saves a draft. Only a draft that `build` checked and that has not changed since. There is no publish step |
+| `post [run] --to threads\|x\|naver` | Fills the editor in Ego Lite and saves a draft. Only a draft that `build` checked and that has not changed since. `--publish` presses publish too |
 | `voice <files...> --name "Name" --out voice.md` | Voice sheet from your own transcripts |
 | `trends "words" --listen x,threads` | Google Trends feed and interest, search suggestions (Google, YouTube, Naver), Wikipedia views, and optional read-only listening on X, Threads and YouTube through Ego Lite. `trends.html`, `ideas.md`, charts. Naver DataLab only with `NAVER_CLIENT_ID` / `NAVER_CLIENT_SECRET` |
 | `research "topic" <links or files...>` | Reads each source with its date into `out/<date>_<topic>-research/`, plus a `questions.md` and a `facts.md` to fill. `research add`, `research check` (every fact traced to a source sentence, `research.html`) |
@@ -85,7 +85,7 @@ They run without a shell: the command is split into words once, `{out}`, `{w}`, 
 - Before anything is sent it shows the platform, the account, the title, the number of posts and pictures.
 - It only takes a draft whose `check.json` passed and whose `post.md`, `post.json` and pictures have not changed since `build`.
 - `--leave-open`: keep the filled editor open for you. `--no-save`: do not press save. `--drafts-shot` (Naver): also a screenshot of your drafts list.
-- There is no publish step. `--publish` is refused. Publishing is always your own click in the editor.
+- `--publish`: press the platform's publish button too and report the link. Your agent adds it when you say "publish it".
 - Naver's 작성 중인 글 popup (an unfinished post): it presses nothing, leaves the editor open in Ego Lite and stops (exit 5). You choose 확인 or 취소, then run it again.
 - Exit codes: 0 done, 1 error, 3 logged out, 4 no post box found, 5 waiting for you.
 - Tested on a live account: Threads and Naver (drafts). X: written, not yet tested on a live account.

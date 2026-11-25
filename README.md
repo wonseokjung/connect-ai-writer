@@ -80,7 +80,7 @@ The Korean README was checked with this tool too: AI-tell score 0 (per 1,000 let
 
 ## Where the result is
 
-In `out/<date>_<title>/`. Ask your agent "open index.html in the result folder you just made" and every platform's post and pictures open on one page. It stops at a saved draft; publishing is always your click.
+In `out/<date>_<title>/`. Ask your agent "open index.html in the result folder you just made" and every platform's post and pictures open on one page. It stops at a saved draft, or publishes when you say so (`--publish`).
 
 <!-- team:start -->
 ## CONNECT AI LAB's AI employees

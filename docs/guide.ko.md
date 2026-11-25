@@ -10,7 +10,7 @@
 | `write [run] --writer "claude -p"` | 선택. 대화창 없이 에이전트가 `post.md` 를 다 써요. 보통은 대화창의 에이전트가 써요 |
 | `build [run]` | 사진, 검사, `preview.html`, `post.txt`, `post.json`, `post.html`(블로그), `check.json`(검사 결과), `index.html`, `sheet.jpg`, `handoff/`. `--no-pictures` 거나 크롬이 없으면 글, 검사, 미리보기만 만들고 못 만든 사진은 이유랑 같이 알려 줘요 |
 | `check [run]` | 글 검사만 빠르게 |
-| `post [run] --to threads\|x\|naver` | Ego Lite에서 편집 화면에 넣고 임시저장해요. `build` 검사를 통과하고 그 뒤로 안 바뀐 글만 넣어요. 발행하는 기능은 아예 없어요 |
+| `post [run] --to threads\|x\|naver` | Ego Lite에서 편집 화면에 넣고 임시저장해요. `build` 검사를 통과하고 그 뒤로 안 바뀐 글만 넣어요. `--publish` 를 붙이면 발행까지 해요 |
 | `voice <파일...> --name "이름" --out voice.md` | 내 받아쓰기로 말투표 만들기 |
 | `trends "단어" --listen x,threads` | 구글 트렌드 급상승과 관심도, 검색어 자동완성(구글, 유튜브, 네이버), 위키백과 조회수, 그리고 Ego Lite로 X, 쓰레드, 유튜브를 읽기만 하는 리스닝. `trends.html`, `ideas.md`, 차트가 나와요. 네이버 데이터랩은 `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` 이 있을 때만 |
 | `research "주제" <링크나 파일...>` | 출처를 날짜까지 읽어서 `out/<날짜>_<주제>-research/` 에 넣고, 채울 `questions.md`, `facts.md` 를 만들어 줘요. `research add`, `research check` 하시면 사실마다 원문 어느 문장에서 나왔는지 붙여 주고 `research.html` 까지 나와요 |
@@ -74,6 +74,6 @@ tags: 하나, 둘
 - 돌릴 때마다 자기 작업 공간을 새로 만들고 끝나면 닫아요. 다른 공간은 안 건드려요.
 - 넣기 전에 플랫폼, 계정, 제목, 글 수, 사진 수를 먼저 보여 줘요.
 - 기본: 넣고, 화면 찍고, 임시저장하고, 닫아요. `--leave-open` 은 편집 화면을 열어 둬요. `--no-save` 는 저장을 안 눌러요. `--drafts-shot` 은 네이버 임시저장 목록도 찍어요.
-- 발행 기능은 없어요. 발행은 언제나 여러분들이 편집 화면에서 직접 누르는 거예요.
+- `--publish`: 발행 버튼까지 눌러서 올리고, 올라간 링크를 알려 줘요. 에이전트한테 "발행까지 해 줘" 라고 하시면 이걸 붙여요.
 - 네이버에 작성 중인 글이 있다는 창이 뜨면 아무것도 안 누르고, 편집 화면을 열어 둔 채로 멈춰요. 확인이나 취소는 직접 고르시고 다시 돌리시면 돼요.
 - 실제 계정으로 해 본 것: 쓰레드, 네이버 (임시저장). X는 아직 실제 계정으로 안 해 봤어요.

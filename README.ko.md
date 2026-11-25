@@ -24,7 +24,7 @@ npx github:wonseokjung/connect-ai-writer install-skill
   <img src="skill/assets/scholar/research.gif" width="68" alt="집현전 글쓰기 학사 · 조사">&nbsp;
   <img src="skill/assets/scholar/write.gif" width="68" alt="집현전 글쓰기 학사 · 집필">&nbsp;
   <img src="skill/assets/scholar/done.gif" width="68" alt="집현전 글쓰기 학사 · 완성"><br>
-  <sub><b>집현전 글쓰기 학사</b> (CONNECT AI HQ 픽셀 크루 공용) — 인사 · 자료 조사 · 집필 · 완성 단계마다 귀엽게 움직이며 표정이 바뀌어요.</sub>
+  <sub><b>집현전 글쓰기 학사</b> (CONNECT AI HQ 픽셀 크루 공용): 인사 · 자료 조사 · 집필 · 완성 단계마다 귀엽게 움직이며 표정이 바뀌어요.</sub>
 </p>
 
 ## 스킬
@@ -80,7 +80,7 @@ v0.1은 제목이 길어서 검색 결과에서 잘리고, 어떤 검색어를 �
 
 ## 결과는 어디에 있나요
 
-`out/날짜_제목/` 폴더에 생겨요. 에이전트한테 "방금 만든 결과 폴더에서 index.html 열어 줘" 라고 하시면 플랫폼별 글이랑 사진이 한 화면에 열려요. 올리는 건 임시저장까지만이고, 발행은 여러분들이 직접 누르시는 거예요.
+`out/날짜_제목/` 폴더에 생겨요. 에이전트한테 "방금 만든 결과 폴더에서 index.html 열어 줘" 라고 하시면 플랫폼별 글이랑 사진이 한 화면에 열려요. 기본은 임시저장까지예요. "발행까지 해 줘" 라고 하시면 발행 버튼까지 눌러서 올려 줘요.
 
 <!-- team:start -->
 ## CONNECT AI LAB의 AI 직원들

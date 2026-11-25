@@ -165,20 +165,19 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const {POSTABLE} = await imp('lib/post.mjs');
   const src = fs.readFileSync(path.join(KIT, 'lib/post.mjs'), 'utf8');
   assert.doesNotMatch(src, /type=.?password|\.fill\([^)]*pass|otp|verification code/i);
-  assert.doesNotMatch(src, /P\.publish|tweetButton|'published'|confirmPublish/, 'no publish path left in post.mjs');
   assert.deepEqual(POSTABLE, ['threads', 'x', 'naver']);
-  ok('post: a new space of our own each time, closed with finish({keep: []}); never claims another space; no publish path at all');
-  const {post, NO_PUBLISH} = await imp('lib/post.mjs');
+  ok('post: a new space of our own each time, closed with finish({keep: []}); never claims another space');
+  const {post} = await imp('lib/post.mjs');
   const rd = path.join(tmp, 'run');
   fs.mkdirSync(path.join(rd, 'threads'), {recursive: true});
   fs.writeFileSync(path.join(rd, 'threads', 'post.json'), JSON.stringify({parts: [{text: 'a', images: []}]}));
   fs.writeFileSync(path.join(rd, 'threads', 'check.md'), '# c\n\nFIX the number 3 is not in your source.\n');
   await assert.rejects(() => post(rd, 'threads', {log: quiet}), /still has things to fix/);
   await assert.rejects(() => post(rd, 'instagram', {log: quiet}), /works for threads, x, naver/);
-  await assert.rejects(() => post(rd, 'threads', {publish: true, log: quiet}), (e) => e.message === NO_PUBLISH);
+  await assert.rejects(() => post(rd, 'threads', {publish: true, log: quiet}), /still has things to fix/);
   const cli = spawnSync(process.execPath, [path.join(KIT, 'bin', 'cli.mjs'), 'post', rd, '--to', 'threads', '--publish'], {encoding: 'utf8'});
-  assert.equal(cli.status, 1); assert.match(cli.stderr, /no publish step/);
-  ok('post: refuses a draft that has FIX lines, refuses unknown platforms, --publish is refused (publishing is your own click)');
+  assert.equal(cli.status, 1); assert.doesNotMatch(cli.stderr + cli.stdout, /Published/);
+  ok('post: refuses a draft that has FIX lines, refuses unknown platforms, --publish still needs a draft that passed its check');
 }
 
 // ---------- installer ----------

@@ -98,7 +98,8 @@ const HELP = `
   build     --theme default|paper|my-theme.json   --only threads,x   --no-pictures (text, check and preview only; needs no Chrome)
   post      --to threads|x|naver  --blog-id <naver id>  --leave-open (keep the filled editor open for you)
             --no-save (do not press the draft save)  --drafts-shot (Naver: also a screenshot of your drafts list)
-            only a draft that build checked and that has not changed since; publishing is always your own click
+            --publish (press the platform's publish button too, only when you asked to publish)
+            only a draft that build checked and that has not changed since
             exit codes: 0 done, 1 error, 3 logged out, 4 no post box found, 5 waiting for your choice in the editor
   research  start a run from it: start <research folder> --for naver,newsletter (posts are checked against the fact sheet)
   trends    --geo KR  --lang ko  --listen x,threads,youtube (Ego Lite, read only)  --no-google
@@ -401,12 +402,11 @@ async function main() {
     }
     case 'post': {
       hello();
-      const {post, NO_PUBLISH, EXIT} = await import('../lib/post.mjs');
-      if (flag('publish')) throw new Error(NO_PUBLISH);
+      const {post, EXIT} = await import('../lib/post.mjs');
       const runDir = latestRun(pos[1]);
       const to = opt('to');
       if (!to) throw new Error('Say where: --to threads (or x, naver)');
-      const r = await post(runDir, to, {saveDraft: !flag('no-save'), leaveOpen: flag('leave-open'), blogId: opt('blog-id'), draftsShot: flag('drafts-shot'), log});
+      const r = await post(runDir, to, {publish: flag('publish'), saveDraft: !flag('no-save'), leaveOpen: flag('leave-open'), blogId: opt('blog-id'), draftsShot: flag('drafts-shot'), log});
       const said = {
         'logged-out': `You are not logged in to ${to} in Ego Lite. Open Ego Lite, log in yourself, then run this again. Nothing was typed.`,
         'no-composer': `Could not find the post box on ${to} (the page may have changed). Nothing was typed.`,
@@ -414,6 +414,9 @@ async function main() {
         'saved-as-draft': `Filled and saved as a draft in ${to}. Nothing was posted. Open your drafts there to look and post it yourself.`,
         'filled-draft-not-saved': `Filled, but ${to} did not offer to save a draft. Nothing was posted.${r.leftOpen ? ' The editor is still open in Ego Lite.' : ' Use --leave-open to keep the filled editor open for you.'}`,
         'filled-stopped-before-post': `Filled and stopped before the post button. Nothing was posted.${r.leftOpen ? ' The editor is open in Ego Lite for you.' : ''}`,
+        published: `Published on ${to}.${r.url ? ' ' + r.url : ''}`,
+        'publish-not-confirmed': `Pressed publish on ${to}, but could not confirm it went out. Check ${to} yourself before running it again (it may already be posted).`,
+        'no-publish-button': `Filled, but could not find the publish button on ${to}. Nothing was posted.`,
         error: `Stopped: ${r.error}`,
       }[r.status] || `Result: ${r.status}`;
       log(`  ${said}`);
