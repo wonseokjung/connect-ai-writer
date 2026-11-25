@@ -1,6 +1,6 @@
 {
   "name": "connect-ai-writer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Your AI writing employee, with every skill a writer needs: research with sources and a fact sheet, trends (Google Trends, search suggestions, Wikipedia views), titles and first lines, posts for Threads, Naver blog, X, LinkedIn, Instagram, newsletters and long articles in your own voice with pictures from your real material, children's picture books with code-made illustrations, a humanizer for AI-sounding text, and a check that traces every number, quote and up/down word to its source. Saves drafts through Ego Lite and never posts by itself.",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",

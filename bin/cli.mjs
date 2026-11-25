@@ -75,7 +75,7 @@ const HELP = `
   npx ${KIT_NAME} build [run]                post.md -> pictures, check, preview.html, post.txt (latest run if no folder)
   npx ${KIT_NAME} check [run]                only the text checks, fast
   npx ${KIT_NAME} brief [run] (--check)      the editorial brief: reader, purpose, claims to keep, what may be public, next action
-  npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in Ego Lite and stop before the post button
+  npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in Ego Lite (a draft; add --publish to post it)
   npx ${KIT_NAME} voice <your transcripts...> --out voice.md   a voice sheet from your own words
   npx ${KIT_NAME} research "topic" [links or files...]   sources with dates + a fact sheet (research add | research check)
   npx ${KIT_NAME} trends "words" ["more words"]           what people search and post now, with sources and dates
