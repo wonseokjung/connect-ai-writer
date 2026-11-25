@@ -55,10 +55,5 @@ A video without subtitles stops at start: ask for its .srt (next to the video wi
 - Ego Lite: every read or draft makes its own new task space and closes it. Do not open, claim or close any other task space.
 - Paid or keyed services stay off unless the user turns them on with their own key (Naver DataLab, an image hook).
 
-## Team Handoff (`connect-ai-handoff/v1`)
-When working in a multi-employee pipeline (e.g. `connect-ai-writer` -> `connect-ai-translator` -> `connect-ai-motion` / `connect-ai-product-photo` -> `connect-ai-marketer`, or inside CONNECT AI HQ):
-- Before starting, read `handoff.json` in the run folder if present (or call HQ MCP `read_handoff_packet`).
-- On completion, write `handoff.json` (`schema: "connect-ai-handoff/v1"`, `from: "connect-ai-writer"`, `to`, `summary`, `artifacts`, `nextAction`) or call HQ MCP `write_handoff_packet` with only safe deliverable paths (no secrets or private credentials).
-
 ## When you finish
 Show the user the result (`index.html`, `book.html`, `research.html`, `trends.html`, or the humanize report) and the sheet picture, and say in one line that nothing was posted.
