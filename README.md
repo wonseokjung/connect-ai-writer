@@ -19,6 +19,14 @@ To install, paste that line into your agent's chat (Claude Code, Codex, Antigrav
 
 All you install yourself is [Node.js](https://nodejs.org) 20.19 or newer and a coding agent. You do not need to know the terminal; your agent types the commands. No paid API key.
 
+<p align="center">
+  <img src="skill/assets/scholar/greet.png" width="76" alt="Jiphyeonjeon Scholar · Greet">&nbsp;
+  <img src="skill/assets/scholar/research.png" width="76" alt="Jiphyeonjeon Scholar · Research">&nbsp;
+  <img src="skill/assets/scholar/write.png" width="76" alt="Jiphyeonjeon Scholar · Write">&nbsp;
+  <img src="skill/assets/scholar/done.png" width="76" alt="Jiphyeonjeon Scholar · Done"><br>
+  <sub><b>Jiphyeonjeon Writer Scholar</b> (CONNECT AI HQ PixelCrew) — appears in chat with matching expressions as it greets, researches, writes, and finishes.</sub>
+</p>
+
 ## Skills
 
 Every picture below is a real run.
