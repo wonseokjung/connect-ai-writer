@@ -210,10 +210,10 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const skillMd = fs.readFileSync(path.join(dest, 'SKILL.md'), 'utf8');
   assert.ok(skillMd.includes(JSON.stringify(marker.bin)), 'SKILL.md names the full bin path');
   assert.ok(fs.existsSync(path.join(dest, 'NOTICE.md')), 'NOTICE travels with the skill');
-  for (const f of ['greet.png', 'research.png', 'write.png', 'done.png', 'scholar.json']) {
+  for (const f of ['greet.png', 'research.png', 'write.png', 'done.png', 'chat-greet.png', 'chat-research.png', 'chat-write.png', 'chat-done.png', 'scholar.json']) {
     assert.ok(fs.existsSync(path.join(dest, 'assets', 'scholar', f)), `scholar asset ${f} travels with the skill`);
   }
-  assert.ok(skillMd.includes('assets/scholar/greet.png'), 'SKILL.md references the pixel scholar portraits');
+  assert.ok(skillMd.includes('assets/scholar/chat-greet.png'), 'SKILL.md references the compact pixel scholar chat strips');
   removeSkill({home, env: {}, log: quiet});
   assert.ok(!fs.existsSync(dest));
   assert.equal(fs.readFileSync(path.join(other, 'SKILL.md'), 'utf8'), 'someone else');
