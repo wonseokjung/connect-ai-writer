@@ -20,11 +20,11 @@ npx github:wonseokjung/connect-ai-writer install-skill
 직접 깔아야 하는 건 [Node.js](https://nodejs.org) 20.19 이상이랑 코딩 에이전트뿐이에요. 터미널(명령어 치는 검은 창)은 몰라도 돼요, 에이전트가 대신 쳐 주거든요. 유료 API 키(돈 내고 받는 서비스 열쇠)도 필요 없어요.
 
 <p align="center">
-  <img src="skill/assets/scholar/greet.png" width="76" alt="집현전 글쓰기 학사 · 인사">&nbsp;
-  <img src="skill/assets/scholar/research.png" width="76" alt="집현전 글쓰기 학사 · 조사">&nbsp;
-  <img src="skill/assets/scholar/write.png" width="76" alt="집현전 글쓰기 학사 · 집필">&nbsp;
-  <img src="skill/assets/scholar/done.png" width="76" alt="집현전 글쓰기 학사 · 완성"><br>
-  <sub><b>집현전 글쓰기 학사</b> (CONNECT AI HQ 픽셀 크루 공용) — 인사 · 자료 조사 · 집필 · 완성 단계마다 표정이 바뀌며 채팅창에 나타나요.</sub>
+  <img src="skill/assets/scholar/greet.gif" width="68" alt="집현전 글쓰기 학사 · 인사">&nbsp;
+  <img src="skill/assets/scholar/research.gif" width="68" alt="집현전 글쓰기 학사 · 조사">&nbsp;
+  <img src="skill/assets/scholar/write.gif" width="68" alt="집현전 글쓰기 학사 · 집필">&nbsp;
+  <img src="skill/assets/scholar/done.gif" width="68" alt="집현전 글쓰기 학사 · 완성"><br>
+  <sub><b>집현전 글쓰기 학사</b> (CONNECT AI HQ 픽셀 크루 공용) — 인사 · 자료 조사 · 집필 · 완성 단계마다 귀엽게 움직이며 표정이 바뀌어요.</sub>
 </p>
 
 ## 스킬
