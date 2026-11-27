@@ -83,7 +83,7 @@ export async function naverTests({ok, assert, imp, tmp}) {
   const params = {space: 'test', title: '제목이에요', blocks, tags: ['바이브코딩', 'connect-ai-video-motion', 'CONNECT AI LAB'], publish: false, saveDraft: true, shot: '/run/naver/editor.png', listShot: '/run/naver/editor-drafts.png', blogId: null};
   {
     const ed = fakeEditor();
-    const r = await drive(wrap(NAVER, params), ed);
+    const r = await drive(wrap(NAVER, params, {browser: 'ego'}), ed);
     assert.equal(r.status, 'saved-as-draft');
     assert.deepEqual(r.drafts, {before: 2, after: 3});
     assert.deepEqual(ed.finished, {keep: []});
@@ -106,18 +106,18 @@ export async function naverTests({ok, assert, imp, tmp}) {
   }
   {
     const ed = fakeEditor({loggedOut: true});
-    const r = await drive(wrap(NAVER, params), ed);
+    const r = await drive(wrap(NAVER, params, {browser: 'ego'}), ed);
     assert.equal(r.status, 'logged-out');
     assert.ok(!ed.log.some((x) => x[0] === 'type' || x[0] === 'click'), 'logged out: nothing typed or clicked');
     const pop = '작성 중인 글이 있습니다.\n이어서 작성하시겠습니까?';
     const ed2 = fakeEditor({popup: pop, popupTitle: '손으로 쓰던 다른 글'});
-    const r2 = await drive(wrap(NAVER, params), ed2);
+    const r2 = await drive(wrap(NAVER, params, {browser: 'ego'}), ed2);
     assert.equal(r2.status, 'needs-you'); assert.ok(r2.restorePopup);
     assert.ok(!ed2.log.some((x) => x[0] === 'type' || x[0] === 'saved' || x[0] === 'click'), 'an unfinished post: nothing pressed (not 확인, not 취소), nothing typed');
     assert.deepEqual(ed2.finished, {keep: ['p1']}, 'the editor stays open for you to choose');
     // same title as ours, different body: still yours, still untouched
     const ed3 = fakeEditor({popup: pop, popupTitle: '제목이에요'});
-    const r3 = await drive(wrap(NAVER, {...params, blocks: [{type: 'text', text: '완전히 다른 본문'}]}), ed3);
+    const r3 = await drive(wrap(NAVER, {...params, blocks: [{type: 'text', text: '완전히 다른 본문'}]}, {browser: 'ego'}), ed3);
     assert.equal(r3.status, 'needs-you');
     assert.ok(!ed3.log.some((x) => x[0] === 'click' || x[0] === 'type' || x[0] === 'saved'), 'same title, different body: nothing pressed');
     assert.deepEqual(ed3.finished, {keep: ['p1']});
@@ -141,15 +141,16 @@ export async function naverTests({ok, assert, imp, tmp}) {
   fs.mkdirSync(bin, {recursive: true});
   const got = path.join(tmp, 'ego-script.js');
   fs.writeFileSync(path.join(bin, 'ego-browser'), `#!/bin/sh\ncat > "${got}"\necho '${MARK}{"status":"saved-as-draft","space":1}'\n`, {mode: 0o755});
-  const oldPath = process.env.PATH;
+  const oldPath = process.env.PATH, oldWant = process.env.CONNECT_AI_BROWSER;
   process.env.PATH = bin + path.delimiter + oldPath;
+  process.env.CONNECT_AI_BROWSER = 'ego';
   const said = [];
   try {
     const r = await post(run, 'naver', {log: (l) => said.push(l)});
     assert.equal(r.status, 'saved-as-draft');
     assert.deepEqual(r.summary, {platform: 'naver', account: 'the naver account logged in to Ego Lite', title: '테스트 제목', parts: 1, attachments: 2});
     assert.ok(said.some((l) => /platform\s+naver/.test(l)) && said.some((l) => /title\s+테스트 제목/.test(l)) && said.some((l) => /pictures 2/.test(l)), 'shows platform, account, title, pictures first');
-  } finally { process.env.PATH = oldPath; }
+  } finally { process.env.PATH = oldPath; if (oldWant === undefined) delete process.env.CONNECT_AI_BROWSER; else process.env.CONNECT_AI_BROWSER = oldWant; }
   const sent = fs.readFileSync(got, 'utf8');
   const P = JSON.parse(sent.split('\n')[0].replace(/^const P = /, '').replace(/;$/, ''));
   assert.equal(P.title, '테스트 제목'); assert.deepEqual(P.tags, ['하나', '둘']);

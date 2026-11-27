@@ -52,7 +52,7 @@ Every picture below is a real run.
 <tr>
 <td width="33%" valign="top"><img src="docs/showcase/v02/motion.jpg" width="100%" alt="Motion graphics video"><br><b>Motion video</b> · <a href="https://github.com/wonseokjung/connect-ai-motion"><code>connect-ai-motion</code></a><br><sub>"Make a motion video from this post." Landscape and vertical, from the post's own words. 84.6% stays 84.6%.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/posts.jpg" width="100%" alt="One video, five platforms"><br><b>One video, five platforms</b><br><sub>One of my lesson videos in; Threads, Naver, X, LinkedIn and Instagram posts with pictures out.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Draft saved in Ego Lite"><br><b>Drafts only</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>It fills the editor through Ego Lite and saves a draft. Publishing is your click. The marketing team takes it from there.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Draft saved in the browser"><br><b>Drafts only</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>It fills the editor through CONNECT AI Browser (or Ego Lite) and saves a draft. Publishing is your click. The marketing team takes it from there.</sub></td>
 </tr>
 </table>
 

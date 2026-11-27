@@ -52,7 +52,7 @@ npx github:wonseokjung/connect-ai-writer install-skill
 <tr>
 <td width="33%" valign="top"><img src="docs/showcase/v02/motion.jpg" width="100%" alt="모션그래픽 영상"><br><b>모션그래픽 영상</b> · <a href="https://github.com/wonseokjung/connect-ai-motion"><code>connect-ai-motion</code></a><br><sub>"이 글로 모션그래픽 영상도 만들어 줘." 쓴 글 그대로 가로, 세로 영상이 나와요. 84.6%는 84.6%로요.</sub></td>
 <td width="33%" valign="top"><img src="docs/showcase/v02/posts.jpg" width="100%" alt="영상 하나로 다섯 군데"><br><b>영상 하나로 다섯 군데</b><br><sub>제 강의 영상 하나로 쓰레드, 네이버, X, 링크드인, 인스타 글이랑 사진이 한 번에 나와요.</sub></td>
-<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="Ego Lite 임시저장"><br><b>임시저장까지만</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>Ego Lite로 글쓰기 화면에 채우고 임시저장까지만 해 줘요. 발행은 여러분들이 직접 누르시면 돼요. 올리는 건 마케팅팀이 이어받거든요.</sub></td>
+<td width="33%" valign="top"><img src="docs/showcase/naver_editor.jpg" width="100%" alt="브라우저 임시저장"><br><b>임시저장까지만</b> · <a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a><br><sub>CONNECT AI Browser(없으면 Ego Lite)로 글쓰기 화면에 채우고 임시저장까지만 해 줘요. 발행은 여러분들이 직접 누르시면 돼요. 올리는 건 마케팅팀이 이어받거든요.</sub></td>
 </tr>
 </table>
 

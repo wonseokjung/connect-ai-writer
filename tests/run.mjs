@@ -158,8 +158,16 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
 
 // ---------- Ego Lite script safety ----------
 {
-  const s = EGO.wrap('done({status: "x"});', {space: 'connect-ai-writer threads test', leaveOpen: false});
+  const s = EGO.wrap('done({status: "x"});', {space: 'connect-ai-writer threads test', leaveOpen: false}, {browser: 'ego'});
   assert.match(s, /taskSpace\(P\.space\)/);
+  const c = EGO.wrap('await step("a"); done({status: "x"});', {space: '글쓰기 직원 threads 10:00', leaveOpen: true}, {browser: 'cab', plan: ['a']});
+  assert.ok(c.startsWith('// connect-ai-writer on CONNECT AI Browser'), 'a cab script says so on its first line');
+  assert.match(c, /await newTaskSpace\(P\.space\)/);
+  assert.match(c, /task\.plan\(\["a"\]\)/);
+  assert.match(c, /task\.done\(\)/);
+  assert.match(c, /finish\(\{keep: \['p1'\]\}\)/);
+  assert.doesNotMatch(c, /claimTaskSpace|takeOverTaskSpace|listTaskSpaces|\btaskSpace\(/);
+  ok('cab: a new space of its own (newTaskSpace), plan + steps, done at the end; never claims, takes over or reuses a space');
   assert.match(s, /finish\(\{keep: \[\]\}\)/);
   assert.doesNotMatch(s, /claimTaskSpace|takeOverTaskSpace|listTaskSpaces/);
   const {POSTABLE} = await imp('lib/post.mjs');

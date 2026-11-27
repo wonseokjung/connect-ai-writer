@@ -75,7 +75,7 @@ const HELP = `
   npx ${KIT_NAME} build [run]                post.md -> pictures, check, preview.html, post.txt (latest run if no folder)
   npx ${KIT_NAME} check [run]                only the text checks, fast
   npx ${KIT_NAME} brief [run] (--check)      the editorial brief: reader, purpose, claims to keep, what may be public, next action
-  npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in Ego Lite (a draft; add --publish to post it)
+  npx ${KIT_NAME} post [run] --to threads    put the draft in the editor in your browser (a draft; add --publish to post it)
   npx ${KIT_NAME} voice <your transcripts...> --out voice.md   a voice sheet from your own words
   npx ${KIT_NAME} research "topic" [links or files...]   sources with dates + a fact sheet (research add | research check)
   npx ${KIT_NAME} trends "words" ["more words"]           what people search and post now, with sources and dates
@@ -102,7 +102,7 @@ const HELP = `
             only a draft that build checked and that has not changed since
             exit codes: 0 done, 1 error, 3 logged out, 4 no post box found, 5 waiting for your choice in the editor
   research  start a run from it: start <research folder> --for naver,newsletter (posts are checked against the fact sheet)
-  trends    --geo KR  --lang ko  --listen x,threads,youtube (Ego Lite, read only)  --no-google
+  trends    --geo KR  --lang ko  --listen x,threads,youtube (your browser, read only)  --no-google
             Naver DataLab turns on with your own NAVER_CLIENT_ID and NAVER_CLIENT_SECRET
   story     --age 3..8  --pages 12  --lang ko|en   then: build <story folder>
 `;
@@ -407,13 +407,16 @@ async function main() {
       const to = opt('to');
       if (!to) throw new Error('Say where: --to threads (or x, naver)');
       const r = await post(runDir, to, {publish: flag('publish'), saveDraft: !flag('no-save'), leaveOpen: flag('leave-open'), blogId: opt('blog-id'), draftsShot: flag('drafts-shot'), log});
+      const {browser} = await import('../lib/ego.mjs');
+      const {LABEL} = await import('../lib/browser.mjs');
+      const where = LABEL[browser()];
       const said = {
-        'logged-out': `You are not logged in to ${to} in Ego Lite. Open Ego Lite, log in yourself, then run this again. Nothing was typed.`,
+        'logged-out': `You are not logged in to ${to} in ${where}. Open its window, log in yourself, then run this again. Nothing was typed.`,
         'no-composer': `Could not find the post box on ${to} (the page may have changed). Nothing was typed.`,
         'needs-you': `Waiting for you: ${r.error || 'a choice in the editor'}`,
         'saved-as-draft': `Filled and saved as a draft in ${to}. Nothing was posted. Open your drafts there to look and post it yourself.`,
-        'filled-draft-not-saved': `Filled, but ${to} did not offer to save a draft. Nothing was posted.${r.leftOpen ? ' The editor is still open in Ego Lite.' : ' Use --leave-open to keep the filled editor open for you.'}`,
-        'filled-stopped-before-post': `Filled and stopped before the post button. Nothing was posted.${r.leftOpen ? ' The editor is open in Ego Lite for you.' : ''}`,
+        'filled-draft-not-saved': `Filled, but ${to} did not offer to save a draft. Nothing was posted.${r.leftOpen ? ' The editor is still open in ' + where + '.' : ' Use --leave-open to keep the filled editor open for you.'}`,
+        'filled-stopped-before-post': `Filled and stopped before the post button. Nothing was posted.${r.leftOpen ? ' The editor is open in ' + where + ' for you.' : ''}`,
         published: `Published on ${to}.${r.url ? ' ' + r.url : ''}`,
         'publish-not-confirmed': `Pressed publish on ${to}, but could not confirm it went out. Check ${to} yourself before running it again (it may already be posted).`,
         'no-publish-button': `Filled, but could not find the publish button on ${to}. Nothing was posted.`,
@@ -430,7 +433,7 @@ async function main() {
       const {loadConfig} = await import('../lib/config.mjs');
       const {platforms, files} = loadConfig(process.cwd());
       log(`  from ${files.platforms}\n`);
-      for (const [k, p] of Object.entries(platforms)) log(`  ${k.padEnd(10)} ${p.kind.padEnd(9)} ${String(p.maxChars).padStart(5)} ${p.count === 'x-weighted' ? 'weighted' : 'chars   '}  ${String(p.maxImages).padStart(2)} pictures  ${p.image.w}x${p.image.h}  ${p.post === 'ego' ? 'post: Ego Lite' : 'hand-off'}${p.verified ? '' : dimmed('  limits: check again')}${p.optional ? dimmed('  optional') : ''}`);
+      for (const [k, p] of Object.entries(platforms)) log(`  ${k.padEnd(10)} ${p.kind.padEnd(9)} ${String(p.maxChars).padStart(5)} ${p.count === 'x-weighted' ? 'weighted' : 'chars   '}  ${String(p.maxImages).padStart(2)} pictures  ${p.image.w}x${p.image.h}  ${p.post === 'ego' ? 'post: browser' : 'hand-off'}${p.verified ? '' : dimmed('  limits: check again')}${p.optional ? dimmed('  optional') : ''}`);
       return;
     }
     case 'themes': {
