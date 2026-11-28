@@ -20,7 +20,7 @@
 | `humanize <file> --after <rewrite>` | Marks AI tells (Korean translationese, English stock phrases); with `--after`, a before/after page and a check that every number, quote, name and up/down word was kept |
 | `check [run] --trace` | Where every number in each post comes from. The check covers numbers, quotes and direction words (늘었다/줄었다, more/less next to the same number), not every meaning |
 | `motion [run] --from threads --render` | A motion graphics video of the post by connect-ai-motion, if installed (`--wide` for 16:9 only) |
-| `engines` | Our other AI employees (motion, video-motion, product-photo, marketer), found or how to get them |
+| `engines` | Our other AI agents (motion, video-motion, product-photo, marketer), found or how to get them |
 | `platforms`, `themes`, `doctor` | What is set up and ready |
 | `install-skill`, `remove-skill` | The agent skill (Claude Code, Codex, Antigravity, Cursor) |
 
@@ -80,7 +80,7 @@ They run without a shell: the command is split into words once, `{out}`, `{w}`, 
 ## post (ELDO or Ego Lite)
 
 - Which browser: ELDO (`cab`) when it is installed, else Ego Lite. To choose, put `"browser": "cab"` or `"ego"` in `~/.connect-ai/connect-ai-writer/writer.config.json`, or set `CONNECT_AI_BROWSER=cab|ego`. Install cab once: [eldobrowser.com](https://eldobrowser.com) (free macOS / Windows).
-- In ELDO the writer works as the agent `writer`, in a new space named for the job (글쓰기 직원 threads 초안 10:30). The plan panel shows each step while the window is on screen.
+- In ELDO the writer works as the agent `writer`, in a new space named for the job (AI 글쓰기 에이전트 threads 초안 10:30). The plan panel shows each step while the window is on screen.
 - Log in to each platform yourself in that browser first. The tool never logs in and never types a password or a code.
 - Each run makes its own new task space and closes it at the end. It never touches another space.
 - Default: fill, screenshot, save as a draft (Threads, X: the close-and-save dialog; Naver: the 저장 button), close.

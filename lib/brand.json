@@ -1,8 +1,8 @@
 {
   "kit": "connect-ai-writer",
   "employee": {
-    "ko": "AI 글쓰기 직원",
-    "en": "AI writer"
+    "ko": "AI 글쓰기 에이전트",
+    "en": "AI Writing Agent"
   },
   "by": "AI Mentor Jay",
   "brand": "CONNECT AI LAB",

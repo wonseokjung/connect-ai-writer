@@ -26,7 +26,7 @@ connect-ai-writer is source available by CONNECT AI LAB under MIT with the Commo
 | Wikipedia page views | Wikimedia REST API | data CC0 | Read with no key |
 | Trending feed, search suggestions | Google Trends RSS, Google / YouTube / Naver suggest | each service's terms | Read with no key, a few requests per run |
 | Picture-book illustrations | `lib/scenes.mjs` (CONNECT AI LAB) | ours (this licence) | Ours: animals, things and skies drawn in code. No people |
-| Other employees | connect-ai-motion, connect-ai-video-motion, connect-ai-product-photo, connect-ai-marketer (CONNECT AI LAB) | MIT | Optional engines, found if installed, never bundled |
+| Other agents | connect-ai-motion, connect-ai-video-motion, connect-ai-product-photo, connect-ai-marketer (CONNECT AI LAB) | MIT | Optional engines, found if installed, never bundled |
 | `examples/` notes, page and posts | CONNECT AI LAB | ours (this licence) | Ours. They describe this tool only |
 | Editorial brief | ordinary editorial practice (a creative brief before writing) | none | No source copied; the five sections and their checks are ours, in `lib/brief.mjs` and `skill/skills/editorial-brief.md` |
 | `docs/showcase/*` | Frames and cards from AI Mentor Jay's own lesson video, made with this tool | All rights reserved | Showcase only; do not reuse |

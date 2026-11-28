@@ -25,7 +25,7 @@ const show = (f) => { const r = path.relative(process.cwd(), f); return q(r.star
 
 function hello() {
   log(banner());
-  log('  ' + 'Your AI writing employee. ' + gold('One source in, a post for every platform out, with pictures.') + dimmed('  영상 하나로 플랫폼마다 글과 사진을'));
+  log('  ' + 'Your AI writing agent. ' + gold('One source in, a post for every platform out, with pictures.') + dimmed('  영상 하나로 플랫폼마다 글과 사진을'));
   log('');
 }
 
@@ -84,7 +84,7 @@ const HELP = `
   npx ${KIT_NAME} humanize <file> [--after rewrite.md]  what sounds like an AI; with --after, checks numbers, quotes, names and up/down words were kept
   npx ${KIT_NAME} check [run] --trace         where every number in your posts comes from (numbers, quotes and up/down words; not a meaning check)
   npx ${KIT_NAME} motion [run] --from threads (--render)   a motion graphics video from the post, made by connect-ai-motion
-  npx ${KIT_NAME} engines                    our other AI employees it works with, found or not
+  npx ${KIT_NAME} engines                    our other AI agents it works with, found or not
   npx ${KIT_NAME} install-skill              add the agent skill (Claude Code, Codex, Antigravity, Cursor)
   npx ${KIT_NAME} platforms | themes | doctor
 
@@ -315,7 +315,7 @@ async function main() {
     case 'engines': {
       hello();
       const {engineTable} = await import('../lib/engines.mjs');
-      log('  Our other AI employees the writer works with (optional, never installed for you):\n');
+      log('  Our other AI agents the writer works with (optional, never installed for you):\n');
       for (const e of engineTable()) log(`  ${e.found ? gold('found ') : dimmed('  -   ')} ${e.pkg.padEnd(26)} ${e.what}${e.found ? dimmed('  ' + e.found.where) : dimmed('  get it: ' + e.get)}`);
       log(dimmed('\n  A kit folder of your own works too: CAIW_MOTION_KIT=/path/to/connect-ai-motion (and CAIW_VIDEO_MOTION_KIT, CAIW_PRODUCT_PHOTO_KIT, CAIW_MARKETER_KIT).'));
       return;
