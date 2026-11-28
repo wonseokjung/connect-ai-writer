@@ -71,7 +71,7 @@ tags: 하나, 둘
 ## post (ELDO 또는 Ego Lite)
 
 - 어떤 브라우저: ELDO(`cab`)가 깔려 있으면 그걸 쓰고, 없으면 Ego Lite를 써요. 직접 고르시려면 `~/.connect-ai/connect-ai-writer/writer.config.json` 에 `"browser": "cab"` 이나 `"ego"` 를 넣거나 `CONNECT_AI_BROWSER=cab|ego` 를 주시면 돼요. cab 설치는 한 번만: [eldobrowser.com](https://eldobrowser.com) (free macOS / Windows)
-- ELDO에서는 `writer` 라는 에이전트 이름으로, 일 이름을 붙인 새 공간(AI 글쓰기 에이전트 threads 초안 10:30)에서 일해요. 창이 화면에 있으면 계획 패널에 단계가 하나씩 보여요.
+- ELDO에서는 `writer` 라는 에이전트 이름으로, 일 이름을 붙인 새 공간(글쓰기 AI 에이전트 threads 초안 10:30)에서 일해요. 창이 화면에 있으면 계획 패널에 단계가 하나씩 보여요.
 - 플랫폼마다 그 브라우저에서 직접 로그인해 두세요. 이 도구는 로그인도 안 하고 비밀번호나 인증번호도 절대 안 쳐요.
 - 돌릴 때마다 자기 작업 공간을 새로 만들고 끝나면 닫아요. 다른 공간은 안 건드려요.
 - 넣기 전에 플랫폼, 계정, 제목, 글 수, 사진 수를 먼저 보여 줘요.
