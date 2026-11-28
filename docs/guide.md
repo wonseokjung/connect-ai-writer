@@ -10,7 +10,7 @@
 | `write [run] --writer "claude -p"` | Optional: a headless agent writes every `post.md`. Normally your agent in chat writes them |
 | `build [run]` | Pictures, check, `preview.html`, `post.txt`, `post.json`, `post.html` (blogs), `check.json` (the check result, sealed), `index.html`, `sheet.jpg`, `handoff/`. `--no-pictures` (or no Chrome): text, checks and previews only, each missing picture listed with why |
 | `check [run]` | Text checks only, fast |
-| `post [run] --to threads\|x\|naver` | Fills the editor in your browser (CONNECT AI Browser, or Ego Lite) and saves a draft. Only a draft that `build` checked and that has not changed since. `--publish` presses publish too |
+| `post [run] --to threads\|x\|naver` | Fills the editor in your browser (ELDO, or Ego Lite) and saves a draft. Only a draft that `build` checked and that has not changed since. `--publish` presses publish too |
 | `voice <files...> --name "Name" --out voice.md` | Voice sheet from your own transcripts |
 | `trends "words" --listen x,threads` | Google Trends feed and interest, search suggestions (Google, YouTube, Naver), Wikipedia views, and optional read-only listening on X, Threads and YouTube through your browser. `trends.html`, `ideas.md`, charts. Naver DataLab only with `NAVER_CLIENT_ID` / `NAVER_CLIENT_SECRET` |
 | `research "topic" <links or files...>` | Reads each source with its date into `out/<date>_<topic>-research/`, plus a `questions.md` and a `facts.md` to fill. `research add`, `research check` (every fact traced to a source sentence, `research.html`) |
@@ -77,10 +77,10 @@ They run without a shell: the command is split into words once, `{out}`, `{w}`, 
 
 `numbersInSource`, `quotesInSource`, `directionInSource`, `limits`, `bannedPhrases`, `emoji`, `cornerBrackets`, `emDash`, `noImages`, `placeholder` fail by default. `claimWords`, `watchPhrases`, `firstPartImage`, `generatedImages` warn. Set any rule to `"fail"`, `"warn"` or `"off"`. `allowNumbers` lists numbers that may appear without being in the source.
 
-## post (CONNECT AI Browser or Ego Lite)
+## post (ELDO or Ego Lite)
 
-- Which browser: CONNECT AI Browser (`cab`) when it is installed, else Ego Lite. To choose, put `"browser": "cab"` or `"ego"` in `~/.connect-ai/connect-ai-writer/writer.config.json`, or set `CONNECT_AI_BROWSER=cab|ego`. Install cab once: `npx github:wonseokjung/connect-ai-browser setup`.
-- In CONNECT AI Browser the writer works as the agent `writer`, in a new space named for the job (글쓰기 직원 threads 초안 10:30). The plan panel shows each step while the window is on screen.
+- Which browser: ELDO (`cab`) when it is installed, else Ego Lite. To choose, put `"browser": "cab"` or `"ego"` in `~/.connect-ai/connect-ai-writer/writer.config.json`, or set `CONNECT_AI_BROWSER=cab|ego`. Install cab once: [eldobrowser.com](https://eldobrowser.com) (free macOS / Windows).
+- In ELDO the writer works as the agent `writer`, in a new space named for the job (글쓰기 직원 threads 초안 10:30). The plan panel shows each step while the window is on screen.
 - Log in to each platform yourself in that browser first. The tool never logs in and never types a password or a code.
 - Each run makes its own new task space and closes it at the end. It never touches another space.
 - Default: fill, screenshot, save as a draft (Threads, X: the close-and-save dialog; Naver: the 저장 button), close.

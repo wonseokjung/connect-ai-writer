@@ -161,7 +161,7 @@ const rulesOf = (F, level = 'fail') => F.filter((f) => f.level === level).map((f
   const s = EGO.wrap('done({status: "x"});', {space: 'connect-ai-writer threads test', leaveOpen: false}, {browser: 'ego'});
   assert.match(s, /taskSpace\(P\.space\)/);
   const c = EGO.wrap('await step("a"); done({status: "x"});', {space: '글쓰기 직원 threads 10:00', leaveOpen: true}, {browser: 'cab', plan: ['a']});
-  assert.ok(c.startsWith('// connect-ai-writer on CONNECT AI Browser'), 'a cab script says so on its first line');
+  assert.ok(c.startsWith('// connect-ai-writer on ELDO'), 'a cab script says so on its first line');
   assert.match(c, /await newTaskSpace\(P\.space\)/);
   assert.match(c, /task\.plan\(\["a"\]\)/);
   assert.match(c, /task\.done\(\)/);

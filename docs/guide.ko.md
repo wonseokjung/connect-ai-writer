@@ -10,7 +10,7 @@
 | `write [run] --writer "claude -p"` | 선택. 대화창 없이 에이전트가 `post.md` 를 다 써요. 보통은 대화창의 에이전트가 써요 |
 | `build [run]` | 사진, 검사, `preview.html`, `post.txt`, `post.json`, `post.html`(블로그), `check.json`(검사 결과), `index.html`, `sheet.jpg`, `handoff/`. `--no-pictures` 거나 크롬이 없으면 글, 검사, 미리보기만 만들고 못 만든 사진은 이유랑 같이 알려 줘요 |
 | `check [run]` | 글 검사만 빠르게 |
-| `post [run] --to threads\|x\|naver` | 브라우저(CONNECT AI Browser, 없으면 Ego Lite)에서 편집 화면에 넣고 임시저장해요. `build` 검사를 통과하고 그 뒤로 안 바뀐 글만 넣어요. `--publish` 를 붙이면 발행까지 해요 |
+| `post [run] --to threads\|x\|naver` | 브라우저(ELDO, 없으면 Ego Lite)에서 편집 화면에 넣고 임시저장해요. `build` 검사를 통과하고 그 뒤로 안 바뀐 글만 넣어요. `--publish` 를 붙이면 발행까지 해요 |
 | `voice <파일...> --name "이름" --out voice.md` | 내 받아쓰기로 말투표 만들기 |
 | `trends "단어" --listen x,threads` | 구글 트렌드 급상승과 관심도, 검색어 자동완성(구글, 유튜브, 네이버), 위키백과 조회수, 그리고 브라우저로 X, 쓰레드, 유튜브를 읽기만 하는 리스닝. `trends.html`, `ideas.md`, 차트가 나와요. 네이버 데이터랩은 `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` 이 있을 때만 |
 | `research "주제" <링크나 파일...>` | 출처를 날짜까지 읽어서 `out/<날짜>_<주제>-research/` 에 넣고, 채울 `questions.md`, `facts.md` 를 만들어 줘요. `research add`, `research check` 하시면 사실마다 원문 어느 문장에서 나왔는지 붙여 주고 `research.html` 까지 나와요 |
@@ -68,10 +68,10 @@ tags: 하나, 둘
 
 원본에 없는 숫자, 원본과 다른 인용, 같은 숫자인데 늘었다 줄었다가 원본이랑 반대인 것, 글자 수, AI 같은 말, 이모지, 꺾쇠 괄호, 긴 줄표, 사진 없는 글, 빈 템플릿은 기본으로 실패예요. 강한 주장, 글 같은 말투, 첫 글에 사진 없음, 만든 사진은 경고예요. 규칙마다 `"fail"`, `"warn"`, `"off"` 로 바꿀 수 있어요.
 
-## post (CONNECT AI Browser 또는 Ego Lite)
+## post (ELDO 또는 Ego Lite)
 
-- 어떤 브라우저: CONNECT AI Browser(`cab`)가 깔려 있으면 그걸 쓰고, 없으면 Ego Lite를 써요. 직접 고르시려면 `~/.connect-ai/connect-ai-writer/writer.config.json` 에 `"browser": "cab"` 이나 `"ego"` 를 넣거나 `CONNECT_AI_BROWSER=cab|ego` 를 주시면 돼요. cab 설치는 한 번만: `npx github:wonseokjung/connect-ai-browser setup`
-- CONNECT AI Browser에서는 `writer` 라는 에이전트 이름으로, 일 이름을 붙인 새 공간(글쓰기 직원 threads 초안 10:30)에서 일해요. 창이 화면에 있으면 계획 패널에 단계가 하나씩 보여요.
+- 어떤 브라우저: ELDO(`cab`)가 깔려 있으면 그걸 쓰고, 없으면 Ego Lite를 써요. 직접 고르시려면 `~/.connect-ai/connect-ai-writer/writer.config.json` 에 `"browser": "cab"` 이나 `"ego"` 를 넣거나 `CONNECT_AI_BROWSER=cab|ego` 를 주시면 돼요. cab 설치는 한 번만: [eldobrowser.com](https://eldobrowser.com) (free macOS / Windows)
+- ELDO에서는 `writer` 라는 에이전트 이름으로, 일 이름을 붙인 새 공간(글쓰기 직원 threads 초안 10:30)에서 일해요. 창이 화면에 있으면 계획 패널에 단계가 하나씩 보여요.
 - 플랫폼마다 그 브라우저에서 직접 로그인해 두세요. 이 도구는 로그인도 안 하고 비밀번호나 인증번호도 절대 안 쳐요.
 - 돌릴 때마다 자기 작업 공간을 새로 만들고 끝나면 닫아요. 다른 공간은 안 건드려요.
 - 넣기 전에 플랫폼, 계정, 제목, 글 수, 사진 수를 먼저 보여 줘요.
